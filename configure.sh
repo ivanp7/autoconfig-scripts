@@ -24,6 +24,9 @@ useradd -m $USERNAME
 echo ] Setting password...
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 
+# Warming up sudo
+sudo -H -u $USERNAME sudo true
+
 cd /home/$USERNAME/
 
 echo
@@ -39,6 +42,13 @@ echo "# User configuration" | EDITOR='tee -a' visudo
 echo "Defaults insults" | EDITOR='tee -a' visudo
 echo "%$USERNAME ALL=(ALL) ALL" | EDITOR='tee -a' visudo
 echo "%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/poweroff,/usr/bin/halt,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep" | EDITOR='tee -a' visudo
+
+echo
+echo "#################################################"
+echo
+
+echo ] Installing base-devel...
+pacman --noconfirm -S base-devel
 
 echo
 echo "#################################################"
@@ -76,6 +86,13 @@ echo
 echo "#################################################"
 echo
 
+echo ] Installing tty-clock, when, htop...
+pacman --noconfirm -S tty-clock when htop
+
+echo
+echo "#################################################"
+echo
+
 echo ] Installing Open VM Tools...
 pacman --noconfirm -S open-vm-tools
 systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
@@ -91,7 +108,23 @@ echo
 echo "#################################################"
 echo
 
-echo ] Installing aurman
+echo ] Installing yay
+sudo -H -u $USERNAME mkdir tmp
+cd tmp
+sudo -H -u $USERNAME git clone https://aur.archlinux.org/yay.git
+cd yay
+sudo -H -u $USERNAME makepkg --noconfirm -si
+
+cd ..
+rm -rf yay
+cd ..
+
+echo
+echo "#################################################"
+echo
+
+echo ] Installing kpcli, todotxt...
+sudo -H -u $USERNAME yay --noconfirm -S kpcli todotxt
 
 echo
 echo "#################################################"
