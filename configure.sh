@@ -12,6 +12,7 @@ if [[ $EUID != 0 ]]; then
 fi
 
 GIT_URL_PREFIX=https://gitlab.com/ivanp7
+
 echo
 echo "#################################################"
 echo
@@ -58,8 +59,8 @@ echo
 echo "#################################################"
 echo
 
-echo ] Installing neofetch, openssh...
-pacman --noconfirm -S neofetch openssh
+echo ] Installing pkgfile, openssh, ranger, neofetch...
+pacman --noconfirm -S pkgfile openssh ranger neofetch
 
 echo
 echo "#################################################"
@@ -75,6 +76,27 @@ echo
 echo "#################################################"
 echo
 
-echo Done.
+echo ] Installing Open VM Tools...
+pacman --noconfirm -S open-vm-tools
+systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
+
+echo ] Configuring automount of host-shared folder
+mkdir HostShared
+echo >> /etc/fstab
+echo "# VMWare Workstation shared folders" >> /etc/fstab
+echo ".host:/VMShared /home/$USERNAME/HostShared fuse.vmhgfs-fuse rw,allow_other,uid=$USERNAME,gid=$USERNAME,umask=0033,auto_unmount,defaults 0 0" >> /etc/fstab
+echo >> /etc/fstab
+
 echo
+echo "#################################################"
+echo
+
+echo ] Installing aurman
+
+echo
+echo "#################################################"
+echo
+
+read -n1 -rsp $'Done. Press any key to reboot computer now (Ctrl+C to cancel)...\n'
+reboot
 
