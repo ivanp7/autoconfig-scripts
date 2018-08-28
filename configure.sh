@@ -23,6 +23,8 @@ useradd -m $USERNAME
 echo ] Setting password...
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 
+cd /home/$USERNAME/
+
 echo
 echo "#################################################"
 echo
@@ -41,17 +43,38 @@ echo
 echo "#################################################"
 echo
 
-cd /home/$USERNAME/
-
 echo ] Installing vim...
 pacman --noconfirm -S vim
 echo ] Installing vim-config
 sudo -H -u $USERNAME git clone $GIT_URL_PREFIX/vim-config.git .vim
-echo ] Now vim is going to update installed plugins. Quit from vim manually when the process is complete.
-# sudo -H -u $USERNAME vim +PlugUpdate
-echo $'\n:PlugUpdate\n:qa\n' | sudo -H -u $USERNAME vim
+
+# echo ] Now vim is going to update installed plugins. Quit from vim manually when the process is complete.
+# read -n1 -rsp $'Press any key to continue...\n'
+# echo $'\n:PlugUpdate\n' | sudo -H -u $USERNAME vim
+
 ln -s /home/$USERNAME/.vim /root/
 
-# echo Please, configure sudoers manually. visudo will be launched now.
-# read -n1 -rsp $'Press any key to continue...\n'
+echo
+echo "#################################################"
+echo
+
+echo ] Installing neofetch, openssh...
+pacman --noconfirm -S neofetch openssh
+
+echo
+echo "#################################################"
+echo
+
+echo ] Installing dotfiles...
+sudo -H -u $USERNAME git clone $GIT_URL_PREFIX/dotfiles.git
+chmod +x dotfiles/install.sh
+sudo -H -u $USERNAME dotfiles/install.sh
+dotfiles/install.sh
+
+echo
+echo "#################################################"
+echo
+
+echo Done.
+echo
 
