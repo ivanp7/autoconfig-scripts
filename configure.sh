@@ -46,7 +46,8 @@ cd /home/$USERNAME/
 echo ] Installing vim...
 pacman --noconfirm -S vim
 echo ] Installing vim-config
-sudo -H -u $USERNAME (git clone $GIT_URL_PREFIX/vim-config.git .vim; vim +PlugUpdate)
+sudo -H -u $USERNAME git clone $GIT_URL_PREFIX/vim-config.git .vim
+sudo -H -u $USERNAME vim +PlugUpdate
 ln -s /home/$USERNAME/.vim /root/
 
 # echo Please, configure sudoers manually. visudo will be launched now.
