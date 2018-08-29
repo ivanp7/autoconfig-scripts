@@ -121,6 +121,13 @@ echo
 echo "---------------------------------------------"
 echo
 
+echo ]]] Setting issue picture...
+echo Personal/Pictures/ASCII/Used/issue_picture | bash bin/issue-picture.sh
+
+echo
+echo "---------------------------------------------"
+echo
+
 echo ]]] Copying SSH keys...
 cp Personal/Keys/SSH/id_rsa Personal/Keys/SSH/id_rsa.pub .ssh/
 chmod 600 .ssh/id_rsa
@@ -146,9 +153,17 @@ echo "---------------------------------------------"
 echo
 
 echo ]]] Installing when, htop...
-pacman --noconfirm -S tty-clock when htop
+pacman --noconfirm -S when htop
 echo ]]] Installing tty-clock, kpcli, todotxt...
 sudo -H -u $USERNAME yay --noconfirm -S tty-clock kpcli perl-capture-tiny perl-clipboard todotxt
+
+echo
+echo "---------------------------------------------"
+echo
+
+echo ]]] Installing octave...
+pacman --noconfirm -S octave
+echo "graphics_toolkit('fltk')" | sudo -H -u $USERNAME tee .octaverc
 
 echo
 echo "---------------------------------------------"
@@ -157,7 +172,7 @@ echo "---------------------------------------------"
 echo
 
 echo ]]] Installing xorg and drivers
-pacman --noconfirm -S xorg xorg-xinit xorg-drivers xclip gtkmm3
+pacman --noconfirm -S xorg xorg-xinit xorg-drivers xclip gtkmm3 compton dex
 
 echo ]]] Installing i3-gaps
 pacman --noconfirm -S i3-gaps i3status
@@ -202,8 +217,8 @@ echo
 echo "---------------------------------------------"
 echo
 
-echo ]]] Installing firefox, keepassxc, feh, vlc
-pacman --noconfirm -S firefox keepassxc feh vlc
+echo ]]] Installing firefox, keepassxc, feh, vlc, telegram-desktop
+pacman --noconfirm -S firefox keepassxc feh vlc telegram-desktop
 echo ]]] Installing dropbox
 sudo -H -u $USERNAME yay --noconfirm -S dropbox
 
