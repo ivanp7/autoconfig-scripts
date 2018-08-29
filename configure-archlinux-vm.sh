@@ -130,6 +130,13 @@ echo
 echo "---------------------------------------------"
 echo
 
+echo ]]] Installing libcaca...
+pacman --noconfirm -S libcaca
+
+echo
+echo "---------------------------------------------"
+echo
+
 echo ]]] Setting issue picture...
 cat Personal/Pictures/ASCII/Used/issue_picture | bash bin/issue-picture.sh
 
