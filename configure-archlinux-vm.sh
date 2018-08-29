@@ -93,6 +93,7 @@ echo
 echo ]]] Installing Open VM Tools...
 pacman --noconfirm -S open-vm-tools
 systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
+systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 echo ]]] Configuring automount of host-shared folder
 mkdir HostShared
@@ -100,6 +101,7 @@ echo >> /etc/fstab
 echo "# VMWare Workstation shared folders" >> /etc/fstab
 echo ".host:/VMShared /home/$USERNAME/HostShared fuse.vmhgfs-fuse rw,allow_other,uid=$USERNAME,gid=$USERNAME,umask=0033,auto_unmount,defaults 0 0" >> /etc/fstab
 echo >> /etc/fstab
+mount -a
 
 echo
 echo "---------------------------------------------"
