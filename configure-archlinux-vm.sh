@@ -107,7 +107,7 @@ sudo -H -u $USERNAME ln -s /home/$USERNAME/HostShared/Workspace/Downloads
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Code/c_cpp
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Code/common-lisp
 
-sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Config/known_ssh_hosts .known_ssh_hosts
+sudo -H -u $USERNAME ln -sf /home/$USERNAME/Personal/Text/Config/known_ssh_hosts .known_ssh_hosts
 
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/calendar .when/
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/todo/todo.txt .todo/
@@ -161,8 +161,9 @@ echo
 echo "---------------------------------------------"
 echo
 
-echo ]]] Installing octave...
-pacman --noconfirm -S octave
+echo ]]] Installing octave, sbcl...
+pacman --noconfirm -S octave sbcl
+
 echo "graphics_toolkit('fltk')" | sudo -H -u $USERNAME tee .octaverc
 
 echo
