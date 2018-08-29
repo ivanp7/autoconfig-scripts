@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo
-echo ------------------------------------------------
-echo Arch Linux environment auto-configuration script
-echo ------------------------------------------------
+echo ---------------------------------------------------
+echo Arch Linux VM environment auto-configuration script
+echo ---------------------------------------------------
 echo
 
 if [[ $EUID != 0 ]]; then
@@ -66,8 +66,8 @@ echo
 echo "---------------------------------------------"
 echo
 
-echo ]]] Installing pkgfile, openssh, ranger, neofetch...
-pacman --noconfirm -S pkgfile openssh ranger neofetch
+echo ]]] Installing pkgfile, openssh, sshfs, fuse3, ranger, neofetch...
+pacman --noconfirm -S pkgfile openssh sshfs fuse3 ranger neofetch
 
 echo
 echo "---------------------------------------------"
@@ -107,6 +107,25 @@ sudo -H -u $USERNAME ln -s /home/$USERNAME/HostShared/Workspace/Downloads
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Code/c_cpp
 sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Code/common-lisp
 
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Config/known_ssh_hosts .known_ssh_hosts
+
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/calendar .when/
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/todo/todo.txt .todo/
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/todo/todo.txt.bak .todo/
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/todo/done.txt .todo/
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Text/Notes/Org/todo/report.txt .todo/
+
+sudo -H -u $USERNAME ln -s /home/$USERNAME/Personal/Pictures/Wallpapers/Used wallpapers
+
+echo
+echo "---------------------------------------------"
+echo
+
+echo ]]] Copying SSH keys...
+cp Personal/Keys/SSH/id_rsa Personal/Keys/SSH/id_rsa.pub .ssh/
+chmod 600 .ssh/id_rsa
+chmod 644 .ssh/id_rsa.pub
+
 echo
 echo "---------------------------------------------"
 echo
@@ -126,15 +145,10 @@ echo
 echo "---------------------------------------------"
 echo
 
-echo ]]] Installing tty-clock, when, htop...
+echo ]]] Installing when, htop...
 pacman --noconfirm -S tty-clock when htop
-
-echo
-echo "---------------------------------------------"
-echo
-
-echo ]]] Installing kpcli, todotxt...
-sudo -H -u $USERNAME yay --noconfirm -S kpcli todotxt
+echo ]]] Installing tty-clock, kpcli, todotxt...
+sudo -H -u $USERNAME yay --noconfirm -S tty-clock kpcli perl-capture-tiny perl-clipboard todotxt
 
 echo
 echo "---------------------------------------------"
@@ -143,10 +157,10 @@ echo "---------------------------------------------"
 echo
 
 echo ]]] Installing xorg and drivers
-pacman --noconfirm -S xorg xorg-drivers gtkmm3
+pacman --noconfirm -S xorg xorg-xinit xorg-drivers xclip gtkmm3
 
 echo ]]] Installing i3-gaps
-pacman --noconfirm -S i3-gaps
+pacman --noconfirm -S i3-gaps i3status
 
 echo
 echo "---------------------------------------------"
@@ -156,6 +170,16 @@ echo ]]] Installing x-dotfiles
 sudo -H -u $USERNAME git clone $GIT_URL_PREFIX/x-dotfiles.git
 chmod +x x-dotfiles/install.sh
 sudo -H -u $USERNAME x-dotfiles/install.sh
+
+echo
+echo "---------------------------------------------"
+echo
+
+echo ]]] Installing fonts...
+sudo -H -u $USERNAME yay --noconfirm -S ttf-input
+pacman --noconfirm -S ttf-roboto
+echo ]]] Installing lxappearance...
+pacman --noconfirm -S lxappearance
 
 echo
 echo "---------------------------------------------"
@@ -171,8 +195,17 @@ echo
 echo "---------------------------------------------"
 echo
 
-echo ]]] Installing termite, dunst
-pacman --noconfirm -S termite dunst
+echo ]]] Installing termite, dunst, conky
+pacman --noconfirm -S termite dunst conky
+
+echo
+echo "---------------------------------------------"
+echo
+
+echo ]]] Installing firefox, keepassxc, feh, vlc
+pacman --noconfirm -S firefox keepassxc feh vlc
+echo ]]] Installing dropbox
+sudo -H -u $USERNAME yay --noconfirm -S dropbox
 
 echo
 echo "---------------------------------------------"
