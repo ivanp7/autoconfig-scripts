@@ -83,6 +83,13 @@ echo
 echo "---------------------------------------------"
 echo
 
+echo ]]] Installing dosfstools, ntfsprogs...
+pacman --noconfirm -S dosfstools ntfsprogs
+
+echo
+echo "---------------------------------------------"
+echo
+
 echo ]]] Installing Open VM Tools...
 pacman --noconfirm -S open-vm-tools
 systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
@@ -122,14 +129,15 @@ echo "---------------------------------------------"
 echo
 
 echo ]]] Setting issue picture...
-echo Personal/Pictures/ASCII/Used/issue_picture | bash bin/issue-picture.sh
+cat Personal/Pictures/ASCII/Used/issue_picture | bash bin/issue-picture.sh
 
 echo
 echo "---------------------------------------------"
 echo
 
 echo ]]] Copying SSH keys...
-cp Personal/Keys/SSH/id_rsa Personal/Keys/SSH/id_rsa.pub .ssh/
+sudo -H -u $USERNAME cp Personal/Keys/SSH/id_rsa .ssh/
+sudo -H -u $USERNAME cp Personal/Keys/SSH/id_rsa.pub .ssh/
 chmod 600 .ssh/id_rsa
 chmod 644 .ssh/id_rsa.pub
 
@@ -165,6 +173,7 @@ echo ]]] Installing octave, sbcl...
 pacman --noconfirm -S octave sbcl
 
 echo "graphics_toolkit('fltk')" | sudo -H -u $USERNAME tee .octaverc
+sudo -H -u $USERNAME ln -s /home/$USERNAME/scripts/bin/octave-gui bin/
 
 echo
 echo "---------------------------------------------"
@@ -173,10 +182,10 @@ echo "---------------------------------------------"
 echo
 
 echo ]]] Installing xorg and drivers
-pacman --noconfirm -S xorg xorg-xinit xorg-drivers xclip gtkmm3 compton dex
+pacman --noconfirm -S xorg xorg-xinit xorg-drivers xclip gtkmm3 compton dex fltk
 
-echo ]]] Installing i3-gaps
-pacman --noconfirm -S i3-gaps i3status
+echo ]]] Installing i3-gaps, i3status, dmenu
+pacman --noconfirm -S i3-gaps i3status dmenu
 
 echo
 echo "---------------------------------------------"
@@ -227,6 +236,8 @@ echo
 echo "---------------------------------------------"
 echo
 
-read -n1 -rsp $'Done. Press any key to reboot computer now (Ctrl+C to cancel)...\n'
+# read -n1 -rsp $'Done. Press any key to reboot computer now (Ctrl+C to cancel)...\n'
+echo "Done. Restarting in 5 seconds. Press Ctrl+C to abort..."
+sleep 5
 reboot
 
