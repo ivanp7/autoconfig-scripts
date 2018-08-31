@@ -44,8 +44,8 @@ x-dotfiles/install.sh
 print_message "Enabling middle mouse click emulation..."
 echo $'
 Section \"InputClass\"
-Identifier \"system-mouse\"
-Option \"MiddleEmulation\" \"true\"
+  Identifier \"system-mouse\"
+  Option \"MiddleEmulation\" \"true\"
 EndSection
 ' | sudo tee /etc/X11/xorg.conf.d/10-evdev.conf
 
