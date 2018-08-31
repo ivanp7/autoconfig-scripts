@@ -13,18 +13,18 @@ initialize
 ####################################################################
 
 install_official_packages open-vm-tools
-systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
-systemctl start vmtoolsd.service vmware-vmblock-fuse.service
+sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
+sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 ####################################################################
 
 print_message "Configurin automount of the host-shared folder..."
-run_as_nonroot mkdir HostShared
-echo >> /etc/fstab
-echo "# VMWare Workstation shared folders" >> /etc/fstab
-echo ".host:/VMShared /home/$USERNAME/HostShared fuse.vmhgfs-fuse rw,allow_other,uid=$USERNAME,gid=$USERNAME,umask=0033,auto_unmount,defaults 0 0" >> /etc/fstab
-echo >> /etc/fstab
-mount -a
+mkdir HostShared
+echo | sudo tee -a /etc/fstab
+echo "# VMWare Workstation shared folder" | sudo tee -a /etc/fstab
+echo ".host:/VMShared /home/$USERNAME/HostShared fuse.vmhgfs-fuse rw,allow_other,uid=$USERNAME,gid=$USERNAME,umask=0033,auto_unmount,defaults 0 0" | sudo tee -a /etc/fstab
+echo | sudo tee -a /etc/fstab
+sudo mount -a
 
 ####################################################################
 

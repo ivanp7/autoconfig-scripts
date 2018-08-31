@@ -23,10 +23,8 @@ check_user ()
 initialize ()
 {
     check_user
-    USERNAME=$(whoami)
     cd ~
-    sudo su
-    pacman -Syu
+    sudo pacman -Syu
 }
 
 print_message ()
@@ -38,19 +36,14 @@ print_message ()
     echo
 }
 
-run_as_nonroot ()
-{
-    sudo -H -u $USERNAME "$@"
-}
-
 install_official_packages ()
 {
-    pacman --noconfirm -S "$@"
+    sudo pacman --noconfirm -S "$@"
 }
 
 install_packages ()
 {
-    run_as_nonroot yay --noconfirm -S "$@"
+    yay --noconfirm -S "$@"
 }
 
 finish ()

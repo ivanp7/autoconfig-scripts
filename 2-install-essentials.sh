@@ -19,8 +19,8 @@ print_message "Installing vim..."
 install_official_packages vim
 
 print_message "Installing vim-config..."
-run_as_nonroot git clone $GIT_URL_PREFIX/vim-config.git .vim
-ln -s /home/$USERNAME/.vim /root/
+git clone $GIT_URL_PREFIX/vim-config.git .vim
+sudo ln -s /home/$USERNAME/.vim /root/
 
 print_message "Installing pkgfile, openssh, sshfs, fuse3, ranger, neofetch, htop, ncdu..."
 install_official_packages pkgfile openssh sshfs fuse3 ranger neofetch htop ncdu
@@ -34,19 +34,19 @@ install_official_packages libcaca
 ####################################################################
 
 print_message "Installing dotfiles..."
-run_as_nonroot git clone $GIT_URL_PREFIX/dotfiles.git
+git clone $GIT_URL_PREFIX/dotfiles.git
 chmod +x dotfiles/install.sh
-run_as_nonroot dotfiles/install.sh
 dotfiles/install.sh
+sudo dotfiles/install.sh
 
 ####################################################################
 
 print_message "Installing yay"
-run_as_nonroot mkdir -p tmp
+mkdir -p tmp
 cd tmp
-run_as_nonroot git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay.git
 cd yay
-run_as_nonroot makepkg --noconfirm -si
+makepkg --noconfirm -si
 
 cd ../..
 rm -rf tmp/yay
