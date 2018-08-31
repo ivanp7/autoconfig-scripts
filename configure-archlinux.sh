@@ -166,6 +166,16 @@ run_as_nonroot x-dotfiles/install.sh
 
 ####################################################################
 
+print_message "Enabling middle mouse click emulation..."
+echo $'
+Section \"InputClass\"
+    Identifier \"system-mouse\"
+    Option \"MiddleEmulation\" \"true\"
+EndSection
+' >> /etc/X11/xorg.conf.d/10-evdev.conf
+
+####################################################################
+
 print_message "Installing ALSA..."
 install_official_packages alsa-utils
 
