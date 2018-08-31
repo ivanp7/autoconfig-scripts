@@ -15,8 +15,8 @@ initialize
 print_message "Installing xorg and drivers..."
 install_official_packages xorg xorg-xinit xorg-drivers
 
-print_message "Installing xclip, gtkmm3, compton, dex, fltk..."
-install_official_packages xclip gtkmm3 compton dex fltk
+print_message "Installing xclip, gvim, gtkmm3, compton, dex, fltk..."
+install_official_packages xclip gvim gtkmm3 compton dex fltk
 
 print_message "Installing i3-gaps, i3status, dmenu, conky, dunst, gnome-screenshot..."
 install_official_packages i3-gaps i3status dmenu conky dunst gnome-screenshot

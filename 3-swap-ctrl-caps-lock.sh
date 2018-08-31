@@ -33,6 +33,15 @@ WantedBy=default.target
 sudo systemctl enable ctrl-caps-swap.service
 sudo systemctl start ctrl-caps-swap.service
 
+echo $'
+clear lock
+clear control
+keycode 37 = Caps_Lock
+keycode 66 = Control_L
+add lock = Caps_Lock
+add control = Control_L Control_R
+' | sudo tee .Xmodmap
+
 ####################################################################
 
 finish
