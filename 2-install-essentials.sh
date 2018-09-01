@@ -24,6 +24,7 @@ sudo ln -s /home/$USERNAME/.vim /root/
 
 print_message "Installing pkgfile, openssh, sshfs, fuse3, ranger, neofetch, htop, ncdu..."
 install_official_packages pkgfile openssh sshfs fuse3 ranger neofetch htop ncdu
+sudo pkgfile --update
 
 print_message "Installing dosfstools, ntfsprogs..."
 install_official_packages dosfstools ntfsprogs

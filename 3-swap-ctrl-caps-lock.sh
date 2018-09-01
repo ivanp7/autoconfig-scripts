@@ -12,19 +12,19 @@ initialize
 
 ####################################################################
 
-echo $'
-keymaps 0-127
-keycode 29 = Caps_Lock
+sudo dumpkeys | head -1 | sudo tee /etc/ctrl-caps-swap.map
+echo $'keycode 29 = Caps_Lock
 keycode 58 = Control
-' | sudo tee /etc/ctrl-caps-swap.map
+' | sudo tee -a /etc/ctrl-caps-swap.map
 
-echo $'
-[Unit]
+echo $'[Unit]
 Description=Swap Ctrl and Caps Lock keys
 
 [Service]
 Type=oneshot
+ExecStartPre=/usr/bin/sleep 1
 ExecStart=/usr/bin/loadkeys /etc/ctrl-caps-swap.map
+After=systemd-vconsole-setup.service
 
 [Install]
 WantedBy=default.target
