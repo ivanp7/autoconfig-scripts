@@ -24,7 +24,7 @@ initialize ()
 {
     check_user
     cd ~
-    sudo pacman -Syu
+    sudo pacman --noconfirm -Syu
 }
 
 print_message ()
