@@ -22,8 +22,8 @@ print_message "Installing vim-config..."
 git clone $GIT_URL_PREFIX/vim-config.git .vim
 sudo ln -s /home/$USERNAME/.vim /root/
 
-print_message "Installing pkgfile, openssh, sshfs, fuse3, ranger, neofetch, htop, ncdu..."
-install_official_packages pkgfile openssh sshfs fuse3 ranger neofetch htop ncdu
+print_message "Installing pkgfile, openssh, sshfs, fuse3, ranger, w3m, neofetch, htop, ncdu..."
+install_official_packages pkgfile openssh sshfs fuse3 ranger w3m neofetch htop ncdu
 sudo pkgfile --update
 
 print_message "Installing dosfstools, ntfsprogs..."
