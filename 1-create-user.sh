@@ -17,6 +17,7 @@ until passwd $USERNAME; do echo "Try again"; sleep 2; done
 ####################################################################
 
 print_message "Installing sudo..."
+pacman --noconfirm -Syu
 pacman --noconfirm -S sudo
 
 print_message "Appending the following lines to sudoers..."
