@@ -46,6 +46,11 @@ install_packages ()
     yay --noconfirm -S "$@"
 }
 
+uninstall_packages ()
+{
+    sudo pacman --noconfirm -R "$@"
+}
+
 finish ()
 {
     # read -n1 -rsp $'Done. Press any key to reboot computer now (Ctrl+C to cancel)...\n'
