@@ -40,7 +40,7 @@ keycode 37 = Caps_Lock
 keycode 66 = Control_L
 add lock = Caps_Lock
 add control = Control_L Control_R
-' | sudo tee .Xmodmap
+' > .Xmodmap
 
 ####################################################################
 

@@ -54,15 +54,15 @@ rm -rf tmp/yay
 
 ####################################################################
 
-print_message "Installing tty-clock, when, todotxt, kpcli, htop, ncdu..."
-install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard htop ncdu
+print_message "Installing tty-clock, when, todotxt, kpcli..."
+install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard
 
 ####################################################################
 
 print_message "Installing octave, sbcl..."
 install_packages octave sbcl
 
-echo "graphics_toolkit('fltk')" | run_as_nonroot tee .octaverc
+echo "graphics_toolkit('fltk')" > .octaverc
 
 ####################################################################
 
