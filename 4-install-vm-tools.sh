@@ -18,14 +18,19 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 ####################################################################
 
-SHARED_DIRECTORY_VMWARE_NAME=VMShared
-SHARED_DIRECTORY=$HOME/HostShared
+print_message "Configuring shared directory..."
 
-print_message "Configuring automount of the host-shared folders..."
-mkdir HostShared
+SHARED_DIRECTORY_LOCATION=/mnt/vmhgfs
+SHARED_DIRECTORY_NAME=shared
+
+sudo mkdir -p $SHARED_DIRECTORY_LOCATION/$SHARED_DIRECTORY_NAME
+
+sudo groupadd vmhgfs
+sudo gpasswd -a $(whoami) vmhgfs
+
 echo | sudo tee -a /etc/fstab
 echo "# VMWare Workstation shared folders" | sudo tee -a /etc/fstab
-echo ".host:/$SHARED_DIRECTORY_VMWARE_NAME $SHARED_DIRECTORY fuse.vmhgfs-fuse rw,allow_other,uid=$(whoami),gid=$(whoami),umask=0033,auto_unmount,defaults 0 0" | sudo tee -a /etc/fstab
+echo ".host:/$SHARED_DIRECTORY_NAME $SHARED_DIRECTORY_LOCATION/$SHARED_DIRECTORY_NAME fuse.vmhgfs-fuse rw,allow_other,uid=root,gid=vmhgfs,umask=0003,auto_unmount,defaults 0 0" | sudo tee -a /etc/fstab
 echo | sudo tee -a /etc/fstab
 sudo mount -a
 
