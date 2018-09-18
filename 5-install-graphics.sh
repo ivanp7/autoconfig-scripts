@@ -38,13 +38,6 @@ install_official_packages lxappearance
 
 ####################################################################
 
-print_message "Installing x-dotfiles..."
-git clone $GIT_URL_PREFIX/x-dotfiles.git
-chmod +x x-dotfiles/install.sh
-x-dotfiles/install.sh
-
-####################################################################
-
 print_message "Enabling middle mouse click emulation..."
 echo $'
 Section \"InputClass\"
@@ -66,6 +59,13 @@ amixer sset Headphone unmute
 
 print_message "Installing firefox, feh, vlc..."
 install_official_packages firefox feh vlc
+
+####################################################################
+
+print_message "Installing x-dotfiles..."
+git clone $GIT_URL_PREFIX/x-dotfiles.git
+chmod +x x-dotfiles/install.sh
+x-dotfiles/install.sh
 
 ####################################################################
 
