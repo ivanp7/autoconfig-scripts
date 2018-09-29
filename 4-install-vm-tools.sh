@@ -36,5 +36,12 @@ sudo mount -a
 
 ####################################################################
 
+print_message "Adding kernel modules..."
+
+sudo sed -i "s/MODULES=()/MODULES=(vmw_balloon vmw_pvscsi vmw_vmci vmwgfx vmxnet3 vsock vmw_vsock_vmci_transport)/" /etc/mkinitcpio.conf
+sudo mkinitcpio -p linux
+
+####################################################################
+
 finish
 
