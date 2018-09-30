@@ -44,7 +44,7 @@ echo "graphics_toolkit('fltk')" > .octaverc
 
 print_message "Installing vim-config..."
 git clone $GIT_URL_PREFIX/vim-config.git .vim
-sudo ln -s /home/$USERNAME/.vim /root/
+sudo ln -s /home/$(whoami)/.vim /root/
 
 print_message "Installing dotfiles..."
 git clone $GIT_URL_PREFIX/dotfiles.git
