@@ -31,7 +31,8 @@ install_official_packages termite
 ####################################################################
 
 print_message "Installing fonts..."
-install_packages ttf-input ttf-roboto
+install_official_packages terminus-font ttf-roboto
+# install_packages ttf-input
 
 print_message "Installing lxappearance..."
 install_official_packages lxappearance
