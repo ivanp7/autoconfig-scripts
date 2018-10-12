@@ -28,6 +28,9 @@ sudo pkgfile --update
 print_message "Installing 7z, atool..."
 install_official_packages p7zip atool
 
+print_message "Installing extundelete..."
+install_official_packages extundelete
+
 print_message "Installing dosfstools, ntfsprogs..."
 install_official_packages dosfstools ntfsprogs
 
