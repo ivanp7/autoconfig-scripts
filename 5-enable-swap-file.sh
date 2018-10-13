@@ -12,7 +12,7 @@ initialize
 
 ####################################################################
 
-sudo fallocate -l $(awk '/MemTotal/ {print $2}' /proc/meminfo)k /swapfile
+sudo fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
