@@ -55,7 +55,7 @@ case $1/$2 in
         ;;
 esac
 ' | sudo tee /usr/lib/systemd/system-sleep/90-reset-ctrl-caps-swap.sh
-chmod +x /usr/lib/systemd/system-sleep/90-reset-ctrl-caps-swap.sh
+sudo chmod +x /usr/lib/systemd/system-sleep/90-reset-ctrl-caps-swap.sh
 
 ####################################################################
 

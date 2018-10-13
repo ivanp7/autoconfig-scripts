@@ -13,11 +13,11 @@ initialize
 ####################################################################
 
 NETWORK_INTERFACE=$(grep 'Interface=' /etc/netctl/network | cut -d'=' -f2)
-echo "ExecUpPost=\'/usr/bin/ethtool -s $NETWORK_INTERFACE wol g\'
+echo "ExecUpPost='/usr/bin/ethtool -s $NETWORK_INTERFACE wol g'
 " | sudo tee -a /etc/netctl/network
 sudo netctl reenable network
 
-echo "!/bin/bash
+echo "#!/bin/bash
 
 case \$1/\$2 in
     pre/*)
@@ -29,7 +29,7 @@ case \$1/\$2 in
         ;;
 esac
 " | sudo tee /usr/lib/systemd/system-sleep/50-reset-wol.sh
-chmod +x /usr/lib/systemd/system-sleep/50-reset-wol.sh
+sudo chmod +x /usr/lib/systemd/system-sleep/50-reset-wol.sh
 
 ####################################################################
 
