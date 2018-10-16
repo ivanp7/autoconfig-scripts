@@ -72,6 +72,11 @@ rm -rf tmp/yay
 
 ####################################################################
 
+print_message "Fixing bash-completion..."
+sudo ln -s /usr/share/bash_completion.d /etc/
+
+####################################################################
+
 print_message "Installing tty-clock, when, todotxt, kpcli..."
 install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard
 
