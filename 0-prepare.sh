@@ -16,7 +16,7 @@ print_message "Creating group 'shared'..."
 groupadd shared
 mkdir /home/shared
 chown root:shared /home/shared
-chmod 775 /home/shared
+chmod 2775 /home/shared
 
 print_message "Installing sudo..."
 pacman --noconfirm -Syu
