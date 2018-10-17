@@ -40,6 +40,7 @@ sudo mount -a
 ####################################################################
 
 print_message "Setting default graphics mode: 1920x1080, 60 Hz, 24 bits depth..."
+sudo mkdir -p /etc/X11/xorg.conf.d
 echo $'
 Section "Monitor"
     Identifier "Virtual1"
