@@ -20,17 +20,20 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 print_message "Configuring shared directory..."
 
-SHARED_DIRECTORY_LOCATION=/mnt/vmhgfs
-SHARED_DIRECTORY_NAME=shared
+SHARED_DIRECTORIES_MOUNT_LOCATION=/mnt/vmhgfs
 
-sudo mkdir -p $SHARED_DIRECTORY_LOCATION/$SHARED_DIRECTORY_NAME
+sudo mkdir -p $SHARED_DIRECTORIES_MOUNT_LOCATION
 
 sudo groupadd vmhgfs
 sudo gpasswd -a $(whoami) vmhgfs
 
 echo | sudo tee -a /etc/fstab
 echo "# VMWare Workstation shared folders" | sudo tee -a /etc/fstab
-echo ".host:/$SHARED_DIRECTORY_NAME $SHARED_DIRECTORY_LOCATION/$SHARED_DIRECTORY_NAME fuse.vmhgfs-fuse rw,allow_other,uid=root,gid=vmhgfs,umask=0003,auto_unmount,defaults 0 0" | sudo tee -a /etc/fstab
+for dir in $(vmware-hgfsclient)
+do
+    sudo mkdir $SHARED_DIRECTORIES_MOUNT_LOCATION/$dir
+    echo ".host:/$dir $SHARED_DIRECTORIES_MOUNT_LOCATION/$dir fuse.vmhgfs-fuse rw,allow_other,uid=root,gid=vmhgfs,umask=0003,auto_unmount,defaults 0 0" | sudo tee -a /etc/fstab
+done
 echo | sudo tee -a /etc/fstab
 sudo mount -a
 

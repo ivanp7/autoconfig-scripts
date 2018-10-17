@@ -45,6 +45,7 @@ print_message "Installing octave, sbcl..."
 install_official_packages octave sbcl
 
 echo "graphics_toolkit('fltk')" > .octaverc
+ln -sf /home/shared/.octaverc $HOME/
 
 ####################################################################
 
@@ -70,6 +71,7 @@ cd /home/shared
 ####################################################################
 
 print_message "Fixing bash-completion..."
+sudo mkdir -p /usr/share/bash_completion.d
 sudo ln -s /usr/share/bash_completion.d /etc/
 
 ####################################################################
