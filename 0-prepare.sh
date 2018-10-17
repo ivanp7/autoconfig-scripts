@@ -4,18 +4,23 @@ source `dirname $0`/functions.sh
 
 ####################################################################
 
-print_message "#### Enabling autosuspending on inactivity ####"
+check_root
 
 ####################################################################
 
-initialize
+print_message "#### Performing initial preparations ####"
 
 ####################################################################
 
-cd /tmp
-git clone $GIT_URL_PREFIX/server-autosuspend.git
-sh server-autosuspend/install.sh
-cd /home/shared
+print_message "Creating group 'shared'..."
+groupadd shared
+mkdir /home/shared
+chown root:shared /home/shared
+chmod 775 /home/shared
+
+print_message "Installing sudo..."
+pacman --noconfirm -Syu
+pacman --noconfirm -S sudo
 
 ####################################################################
 

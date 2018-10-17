@@ -49,26 +49,23 @@ echo "graphics_toolkit('fltk')" > .octaverc
 ####################################################################
 
 print_message "Installing vim-config..."
-git clone $GIT_URL_PREFIX/vim-config.git .vim
-sudo ln -s /home/$(whoami)/.vim /root/
+git clone $GIT_URL_PREFIX/vim-config.git
+sh vim-config/install.sh
+sudo sh vim-config/install.sh
 
 print_message "Installing dotfiles..."
 git clone $GIT_URL_PREFIX/dotfiles.git
-chmod +x dotfiles/install.sh
-dotfiles/install.sh
-sudo dotfiles/install.sh
+sh dotfiles/install.sh
+sudo sh dotfiles/install.sh
 
 ####################################################################
 
 print_message "Installing yay..."
-mkdir -p tmp
-cd tmp
+cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg --noconfirm -si
-
-cd ../..
-rm -rf tmp/yay
+cd /home/shared
 
 ####################################################################
 

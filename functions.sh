@@ -23,7 +23,7 @@ check_user ()
 initialize ()
 {
     check_user
-    cd ~
+    cd /home/shared
     sudo pacman --noconfirm -Syu
 }
 

@@ -41,6 +41,7 @@ keycode 66 = Control_L
 add lock = Caps_Lock
 add control = Control_L Control_R
 ' > .Xmodmap
+ln -sf $(realpath .Xmodmap) $HOME/
 
 echo $'#!/bin/bash
 

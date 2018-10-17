@@ -8,7 +8,7 @@ check_root
 
 ####################################################################
 
-print_message "#### Creating a non-priviledged user ####"
+print_message "#### Creating a maintainer user ####"
 
 read -p '> Enter user name: ' USERNAME
 useradd -m $USERNAME
@@ -16,12 +16,10 @@ until passwd $USERNAME; do echo "Try again"; sleep 2; done
 
 ####################################################################
 
-print_message "Installing sudo..."
-pacman --noconfirm -Syu
-pacman --noconfirm -S sudo
+print_message "Adding user to group 'shared'..."
+gpasswd -a $USERNAME shared
 
 print_message "Appending the following lines to sudoers..."
-
 echo | EDITOR='tee -a' visudo
 echo "# User configuration" | EDITOR='tee -a' visudo
 echo "Defaults insults" | EDITOR='tee -a' visudo

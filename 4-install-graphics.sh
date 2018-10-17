@@ -65,8 +65,7 @@ install_official_packages firefox feh vlc
 
 print_message "Installing x-dotfiles..."
 git clone $GIT_URL_PREFIX/x-dotfiles.git
-chmod +x x-dotfiles/install.sh
-x-dotfiles/install.sh
+sh x-dotfiles/install.sh
 
 ####################################################################
 
