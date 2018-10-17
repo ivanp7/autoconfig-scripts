@@ -18,7 +18,7 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 ####################################################################
 
-print_message "Configuring shared directory..."
+print_message "Configuring shared directories..."
 
 SHARED_DIRECTORIES_MOUNT_LOCATION=/mnt/vmhgfs
 
