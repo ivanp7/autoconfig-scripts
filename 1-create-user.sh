@@ -10,8 +10,7 @@ check_root
 
 print_message "#### Creating a maintainer user ####"
 
-read -p '> Enter user name: ' USERNAME
-useradd -m $USERNAME
+until { read -p 'User name: ' USERNAME; useradd -m "$USERNAME"; }; do echo "Try again"; sleep 2; done
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 
 ####################################################################
