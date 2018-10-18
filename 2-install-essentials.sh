@@ -36,6 +36,9 @@ install_official_packages dosfstools ntfsprogs
 
 ####################################################################
 
+print_message "Installing beep..."
+install_official_packages beep
+
 print_message "Installing libcaca..."
 install_official_packages libcaca
 
