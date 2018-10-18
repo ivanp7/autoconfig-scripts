@@ -21,8 +21,8 @@ install_official_packages vim
 print_message "Installing ranger, w3m, neofetch, htop, ncdu..."
 install_official_packages ranger w3m neofetch htop ncdu
 
-print_message "Installing pkgfile, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
-install_official_packages pkgfile openssh sshfs fuse3 gnu-netcat wol rsync ethtool
+print_message "Installing pkgfile, screen, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
+install_official_packages pkgfile screen openssh sshfs fuse3 gnu-netcat wol rsync ethtool
 sudo pkgfile --update
 
 print_message "Installing 7z, atool..."
