@@ -18,6 +18,12 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 
 ####################################################################
 
+print_message "Adding kernel modules..."
+sudo sed -i "s/MODULES=()/MODULES=(vmw_balloon vmw_pvscsi vmw_vmci vmwgfx vmxnet3 vsock vmw_vsock_vmci_transport)/" /etc/mkinitcpio.conf
+sudo mkinitcpio -p linux
+
+####################################################################
+
 print_message "Configuring shared directories..."
 
 SHARED_DIRECTORIES_MOUNT_LOCATION=/mnt/vmhgfs
@@ -36,38 +42,6 @@ do
 done
 echo | sudo tee -a /etc/fstab
 sudo mount -a
-
-####################################################################
-
-print_message "Setting default graphics mode: 1920x1080, 60 Hz, 24 bits depth..."
-sudo mkdir -p /etc/X11/xorg.conf.d
-echo $'
-Section "Monitor"
-    Identifier "Virtual1"
-    ModeLine "1920x1080_60.00" 173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
-    Option "PreferredMode" "1920x1080_60.00"
-EndSection
-
-Section "Screen"
-    Identifier "Screen0"
-    Monitor "Virtual1"
-    DefaultDepth 24
-    SubSection "Display"
-        Modes "1920x1080_60.00"
-    EndSubSection
-EndSection
-
-Section "Device"
-    Identifier "Device0"
-    Driver "vmware"
-EndSection
-' | sudo tee /etc/X11/xorg.conf.d/90-resolution.conf
-
-####################################################################
-
-print_message "Adding kernel modules..."
-sudo sed -i "s/MODULES=()/MODULES=(vmw_balloon vmw_pvscsi vmw_vmci vmwgfx vmxnet3 vsock vmw_vsock_vmci_transport)/" /etc/mkinitcpio.conf
-sudo mkinitcpio -p linux
 
 ####################################################################
 
