@@ -63,6 +63,11 @@ install_official_packages firefox feh vlc
 
 ####################################################################
 
+print_message "Installing russian spell dictionary..."
+install_official_packages aspell-ru
+
+####################################################################
+
 print_message "Installing x-dotfiles..."
 git clone $GIT_URL_PREFIX/x-dotfiles.git
 sh x-dotfiles/install.sh
