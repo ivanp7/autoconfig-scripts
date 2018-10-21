@@ -18,15 +18,18 @@ install_official_packages base-devel
 print_message "Installing vim..."
 install_official_packages vim
 
-print_message "Installing ranger, w3m, neofetch, htop, ncdu..."
-install_official_packages ranger w3m neofetch htop ncdu
+print_message "Installing ranger, w3m, neofetch, htop, ncdu, pkgfile..."
+install_official_packages ranger w3m neofetch htop ncdu pkgfile
 
-print_message "Installing pkgfile, screen, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
-install_official_packages pkgfile screen openssh sshfs fuse3 gnu-netcat wol rsync ethtool
-sudo pkgfile --update
+print_message "Installing inotify-tools..."
+install_official_packages inotify-tools
 
 print_message "Installing 7z, atool..."
 install_official_packages p7zip atool
+
+print_message "Installing screen, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
+install_official_packages screen openssh sshfs fuse3 gnu-netcat wol rsync ethtool
+sudo pkgfile --update
 
 print_message "Installing extundelete..."
 install_official_packages extundelete
