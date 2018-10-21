@@ -25,6 +25,9 @@ install_official_packages xclip gtkmm3 compton dex fltk
 print_message "Installing i3-gaps, i3status, dmenu, conky, dunst, gnome-screenshot..."
 install_official_packages i3-gaps i3status dmenu conky dunst gnome-screenshot
 
+print_message "Installing wmctrl..."
+install_official_packages wmctrl
+
 print_message "Installing termite..."
 install_official_packages termite
 
