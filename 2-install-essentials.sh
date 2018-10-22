@@ -29,6 +29,9 @@ install_official_packages at
 sudo systemctl enable atd
 sudo systemctl start atd
 
+print_message "Installing jq..."
+install_official_packages jq
+
 print_message "Installing 7z, atool..."
 install_official_packages p7zip atool
 
