@@ -95,5 +95,10 @@ install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard
 
 ####################################################################
 
+print_message "Configuring system..."
+sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
+
+####################################################################
+
 finish
 
