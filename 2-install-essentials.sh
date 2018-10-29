@@ -24,11 +24,6 @@ install_official_packages ranger w3m neofetch htop ncdu pkgfile
 print_message "Installing inotify-tools..."
 install_official_packages inotify-tools
 
-print_message "Installing at..."
-install_official_packages at
-sudo systemctl enable atd
-sudo systemctl start atd
-
 print_message "Installing jq..."
 install_official_packages jq
 
