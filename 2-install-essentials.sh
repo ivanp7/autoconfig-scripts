@@ -35,8 +35,8 @@ install_official_packages jq
 print_message "Installing 7z, atool..."
 install_official_packages p7zip atool
 
-print_message "Installing screen, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
-install_official_packages screen openssh sshfs fuse3 gnu-netcat wol rsync ethtool
+print_message "Installing tmux, openssh, sshfs, fuse3, gnu-netcat, wol, rsync, ethtool..."
+install_official_packages tmux openssh sshfs fuse3 gnu-netcat wol rsync ethtool
 sudo pkgfile --update
 
 print_message "Installing extundelete..."
