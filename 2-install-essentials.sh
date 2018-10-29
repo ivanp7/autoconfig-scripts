@@ -24,6 +24,11 @@ install_official_packages ranger w3m neofetch htop ncdu pkgfile
 print_message "Installing inotify-tools..."
 install_official_packages inotify-tools
 
+print_message "Installing at, cron..."
+install_official_packages at cronie
+sudo systemctl enable atd cronie
+sudo systemctl start atd cronie
+
 print_message "Installing jq..."
 install_official_packages jq
 
