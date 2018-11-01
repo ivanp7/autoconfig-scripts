@@ -88,6 +88,9 @@ print_message "Fixing bash-completion..."
 sudo mkdir -p /usr/share/bash_completion.d
 sudo ln -s /usr/share/bash_completion.d /etc/
 
+print_message "Installing tmux-bash-completion..."
+install_packages tmux-bash-completion
+
 ####################################################################
 
 print_message "Installing tty-clock, when, todotxt, kpcli..."
