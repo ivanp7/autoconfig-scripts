@@ -65,8 +65,8 @@ install_packages tmux-bash-completion
 
 ####################################################################
 
-print_message "Installing tty-clock, when, todotxt, kpcli..."
-install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard
+print_message "Installing when, todotxt..."
+install_packages when todotxt
 
 ####################################################################
 
