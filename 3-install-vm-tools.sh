@@ -50,7 +50,7 @@ print_message "Configuring framebuffer resolution..."
 
 # Mode 0x0342: 1152x864 (+4608), 24 bits
 sudo sed -i 's/^GRUB_GFXMODE=auto$/GRUB_GFXMODE=1152x864x24/' /etc/default/grub
-sudo sed -i 's/^GRUB_GFXPAYLOAD_LINUX=auto$/GRUB_GFXPAYLOAD_LINUX=1152x864/' /etc/default/grub
+sudo sed -i 's/^GRUB_GFXPAYLOAD_LINUX=keep$/GRUB_GFXPAYLOAD_LINUX=1152x864/' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ####################################################################
