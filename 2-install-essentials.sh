@@ -96,6 +96,11 @@ install_packages tty-clock when todotxt kpcli perl-capture-tiny perl-clipboard
 print_message "Configuring system..."
 sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
 
+print_message "Setting grub wallpaper..."
+sudo cp $SCRIPT_DIR/aux/archlinux.png /boot/grub/
+sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"' /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
 ####################################################################
 
 finish
