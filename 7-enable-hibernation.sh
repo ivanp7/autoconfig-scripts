@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source `dirname $0`/functions.sh
+SCRIPT_DIR=$(realpath `dirname $0`)
+source $SCRIPT_DIR/functions.sh
 
 ####################################################################
 

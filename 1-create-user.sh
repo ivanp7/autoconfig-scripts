@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source `dirname $0`/functions.sh
+SCRIPT_DIR=$(realpath `dirname $0`)
+source $SCRIPT_DIR/functions.sh
 
 ####################################################################
 
@@ -10,7 +11,8 @@ check_root
 
 print_message "#### Creating a maintainer user ####"
 
-until { read -p 'User name: ' USERNAME; useradd -m "$USERNAME"; }; do echo "Try again"; sleep 2; done
+until { read -p 'User name: ' USERNAME; useradd -m "$USERNAME"; }
+do echo "Try again"; sleep 2; done
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 
 ####################################################################
@@ -18,12 +20,9 @@ until passwd $USERNAME; do echo "Try again"; sleep 2; done
 print_message "Adding user to group 'shared'..."
 gpasswd -a $USERNAME shared
 
-print_message "Appending the following lines to sudoers..."
-echo | EDITOR='tee -a' visudo
-echo "# User configuration" | EDITOR='tee -a' visudo
-echo "Defaults insults" | EDITOR='tee -a' visudo
-echo "%$USERNAME ALL=(ALL) ALL" | EDITOR='tee -a' visudo
-echo "%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/poweroff,/usr/bin/halt,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep" | EDITOR='tee -a' visudo
+print_message "Configuring sudoers..."
+cat $SCRIPT_DIR/aux/sudoers_tail | sed "s/\$USERNAME/$USERNAME/g" | \
+    EDITOR='tee -a' visudo
 
 ####################################################################
 

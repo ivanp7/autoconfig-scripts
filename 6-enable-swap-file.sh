@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source `dirname $0`/functions.sh
+SCRIPT_DIR=$(realpath `dirname $0`)
+source $SCRIPT_DIR/functions.sh
 
 ####################################################################
 
@@ -16,9 +17,7 @@ sudo fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfi
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
-echo '# swap file
-/swapfile none swap defaults 0 0
-' | sudo tee -a /etc/fstab
+cat $SCRIPT_DIR/aux/fstab_swap | sudo tee -a /etc/fstab
 
 ####################################################################
 
