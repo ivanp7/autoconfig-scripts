@@ -37,6 +37,8 @@ sh glyph_builder.sh terminus $YAFT_TERMINUS_FONT_VARIATION
 cd ../..
 makepkg --noconfirm -ei
 
+sudo gpasswd -a $(whoami) video
+
 ####################################################################
 
 finish
