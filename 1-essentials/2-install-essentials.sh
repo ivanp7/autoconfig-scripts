@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(realpath `dirname $0`)
-source $SCRIPT_DIR/functions.sh
+. $(realpath $SCRIPT_DIR/..)/functions.sh
 
 ####################################################################
 
@@ -29,7 +29,7 @@ install_official_packages beep libcaca fbv mplayer
 ####################################################################
 
 install_official_packages octave sbcl
-cp $SCRIPT_DIR/aux/.octaverc ./
+cp $SCRIPT_DIR/aux/2/.octaverc ./
 ln -sf $(realpath .octaverc) $HOME/
 
 ####################################################################
@@ -74,7 +74,7 @@ print_message "Configuring system..."
 sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
 
 print_message "Setting grub wallpaper..."
-sudo cp $SCRIPT_DIR/aux/archlinux.png /boot/grub/
+sudo cp $SCRIPT_DIR/aux/2/archlinux.png /boot/grub/
 sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"@' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 

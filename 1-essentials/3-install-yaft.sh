@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(realpath `dirname $0`)
-source $SCRIPT_DIR/functions.sh
+. $(realpath $SCRIPT_DIR/..)/functions.sh
 
 ####################################################################
 
@@ -31,7 +31,7 @@ sed -i "/^[[:blank:]]*TABSTOP[[:blank:]]*=/ s/8/$YAFT_TABSTOP/" conf.h
 sed -i '/^[[:blank:]]*.\/mkfont_bdf/ s/.\/mkfont_bdf/# .\/mkfont_bdf/' makefile
 # build Terminus font instead
 make mkfont_bdf
-cp $SCRIPT_DIR/aux/glyph_builder.sh ./
+cp $SCRIPT_DIR/aux/3/glyph_builder.sh ./
 sh glyph_builder.sh terminus $YAFT_TERMINUS_FONT_VARIATION
 
 cd ../..

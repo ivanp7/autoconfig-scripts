@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(realpath `dirname $0`)
-source $SCRIPT_DIR/functions.sh
+. $(realpath $SCRIPT_DIR/..)/functions.sh
 
 ####################################################################
 
@@ -21,7 +21,7 @@ print_message "Adding user to group 'shared'..."
 gpasswd -a $USERNAME shared
 
 print_message "Configuring sudoers..."
-cat $SCRIPT_DIR/aux/sudoers_tail | sed "s/\$USERNAME/$USERNAME/g" | \
+cat $SCRIPT_DIR/aux/1/sudoers_tail | sed "s/\$USERNAME/$USERNAME/g" | \
     EDITOR='tee -a' visudo
 
 ####################################################################

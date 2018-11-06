@@ -1,11 +1,11 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(realpath `dirname $0`)
-source $SCRIPT_DIR/functions.sh
+. $(realpath $SCRIPT_DIR/..)/functions.sh
 
 ####################################################################
 
-print_message "#### Enabling swap file ####"
+print_message "#### Enabling autosuspending on inactivity ####"
 
 ####################################################################
 
@@ -13,11 +13,10 @@ initialize
 
 ####################################################################
 
-sudo fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-cat $SCRIPT_DIR/aux/fstab_swap | sudo tee -a /etc/fstab
+cd /tmp
+git clone $GIT_URL_PREFIX/server-autosuspend.git
+sh server-autosuspend/install.sh
+cd /home/shared
 
 ####################################################################
 

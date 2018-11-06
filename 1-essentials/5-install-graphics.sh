@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(realpath `dirname $0`)
-source $SCRIPT_DIR/functions.sh
+. $(realpath $SCRIPT_DIR/..)/functions.sh
 
 ####################################################################
 
@@ -28,7 +28,7 @@ install_official_packages lxappearance
 ####################################################################
 
 print_message "Enabling middle mouse click emulation..."
-sudo cp $SCRIPT_DIR/aux/10-evdev.conf /etc/X11/xorg.conf.d/
+sudo cp $SCRIPT_DIR/aux/5/10-evdev.conf /etc/X11/xorg.conf.d/
 
 ####################################################################
 
