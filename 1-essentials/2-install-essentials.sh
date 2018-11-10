@@ -71,7 +71,7 @@ install_packages when todotxt
 ####################################################################
 
 print_message "Installing basic game collection..."
-install_packages cgames
+install_packages cgames bs
 
 ####################################################################
 
