@@ -70,6 +70,11 @@ install_packages when todotxt
 
 ####################################################################
 
+print_message "Installing basic game collection..."
+install_packages cgames
+
+####################################################################
+
 print_message "Configuring system..."
 sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
 
