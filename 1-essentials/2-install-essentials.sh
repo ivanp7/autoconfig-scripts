@@ -34,11 +34,6 @@ ln -sf $(realpath .octaverc) $HOME/
 
 ####################################################################
 
-print_message "Installing vim-config..."
-git clone $GIT_URL_PREFIX/vim-config.git
-sh vim-config/install.sh
-sudo sh vim-config/install.sh
-
 print_message "Installing dotfiles..."
 git clone $GIT_URL_PREFIX/dotfiles.git
 sh dotfiles/install.sh
