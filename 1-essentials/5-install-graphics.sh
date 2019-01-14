@@ -17,7 +17,7 @@ install_official_packages xorg xorg-xinit xorg-drivers
 uninstall_packages vim
 install_official_packages gvim
 install_official_packages xclip xsel gtkmm3 compton dex fltk
-install_official_packages i3-gaps i3status dmenu conky dunst gnome-screenshot
+install_official_packages i3-gaps i3status dmenu conky libnotify dunst gnome-screenshot
 install_official_packages termite
 
 install_official_packages wmctrl
