@@ -1,0 +1,10 @@
+[Unit]
+Description=Keyboard repeat rate in tty.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kbdrate -d 500 -r 20
+
+[Install]
+WantedBy=multi-user.target
+
