@@ -24,7 +24,7 @@ install_official_packages jq
 install_official_packages at cronie
 sudo systemctl enable atd cronie
 sudo systemctl start atd cronie
-install_official_packages beep libcaca fbv mplayer
+install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 
 ####################################################################
