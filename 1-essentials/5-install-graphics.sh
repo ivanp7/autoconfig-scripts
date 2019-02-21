@@ -22,7 +22,7 @@ install_official_packages termite
 
 install_official_packages wmctrl
 
-install_official_packages terminus-font ttf-roboto
+install_official_packages terminus-font
 install_official_packages lxappearance
 
 ####################################################################
