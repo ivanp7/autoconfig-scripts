@@ -3,7 +3,7 @@ Description=Keyboard repeat rate in tty.
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/kbdrate -d 400 -r 30
+ExecStart=/usr/bin/kbdrate -d 250 -r 15
 
 [Install]
 WantedBy=multi-user.target
