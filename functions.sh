@@ -22,7 +22,7 @@ initialize ()
 {
     check_user
     cd /home/shared
-    sudo pacman --noconfirm -Syu
+    # sudo pacman --noconfirm -Syu
 }
 
 print_message ()
