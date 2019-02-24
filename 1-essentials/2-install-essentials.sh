@@ -17,7 +17,8 @@ install_official_packages base-devel
 install_official_packages vim powerline powerline-fonts ranger w3m screen tmux
 install_official_packages neofetch htop ncdu pkgfile
 sudo pkgfile --update
-install_official_packages openssh sshfs gnu-netcat wol rsync ethtool wget
+install_official_packages pass
+install_official_packages openssh sshfs gnu-netcat wol rsync ethtool wget git-annex
 install_official_packages p7zip atool
 install_official_packages extundelete dosfstools ntfsprogs inotify-tools
 install_official_packages jq
