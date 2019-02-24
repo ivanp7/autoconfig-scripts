@@ -23,6 +23,7 @@ install_official_packages termite
 install_official_packages wmctrl
 
 install_official_packages terminus-font
+install_packages nerd-fonts-terminus
 install_official_packages lxappearance
 
 ####################################################################
