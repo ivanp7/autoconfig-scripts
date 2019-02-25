@@ -44,6 +44,9 @@ amixer sset Headphone unmute
 print_message "Installing useful software..."
 install_official_packages firefox feh vlc
 
+print_message "Installing games..."
+install_official_packages gnome-mahjongg
+
 ####################################################################
 
 print_message "Installing x-dotfiles..."
