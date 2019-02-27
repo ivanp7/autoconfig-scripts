@@ -37,7 +37,7 @@ sed -i "/^[[:blank:]]*FORCE_TEXT_MODE[[:blank:]]*=/ s/false/true/" conf.h
 sed -i '/^[[:blank:]]*.\/mkfont_bdf/ s/.\/mkfont_bdf/# .\/mkfont_bdf/' makefile
 # build Terminus font instead
 make mkfont_bdf
-cp $SCRIPT_DIR/aux/3/glyph_builder.sh ./
+install -Dm 755 $SCRIPT_DIR/aux/3/glyph_builder.sh ./
 sh glyph_builder.sh terminus $YAFT_TERMINUS_FONT_VARIATION
 
 cd ../..

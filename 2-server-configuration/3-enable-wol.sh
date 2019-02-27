@@ -18,7 +18,7 @@ cat $SCRIPT_DIR/aux/3/network | sed "s/\$NETWORK_INTERFACE/$NETWORK_INTERFACE/g"
     sudo tee -a /etc/netctl/network
 sudo netctl reenable network
 
-sudo cp $SCRIPT_DIR/aux/3/50-reset-wol.sh /usr/lib/systemd/system-sleep/
+sudo install -Dm 755 $SCRIPT_DIR/aux/3/50-reset-wol.sh /usr/lib/systemd/system-sleep/
 
 ####################################################################
 
