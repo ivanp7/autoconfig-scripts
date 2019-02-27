@@ -13,6 +13,7 @@ initialize
 
 ####################################################################
 
+YAFT_ACTIVE_CURSOR_COLOR=7
 YAFT_TABSTOP=4
 YAFT_TERMINUS_FONT_VARIATION=u12n
 
@@ -26,6 +27,8 @@ YAFT_VER=$(cat PKGBUILD | grep ^pkgver= | cut -d'=' -f2)
 
 cd src/yaft-$YAFT_VER/
 
+# change ACTIVE_CURSOR_COLOR
+sed -i "/^[[:blank:]]*ACTIVE_CURSOR_COLOR[[:blank:]]*=/ s/2/$YAFT_ACTIVE_CURSOR_COLOR/" conf.h
 # change TABSTOP
 sed -i "/^[[:blank:]]*TABSTOP[[:blank:]]*=/ s/8/$YAFT_TABSTOP/" conf.h
 # enable FORCE_TEXT_MODE
