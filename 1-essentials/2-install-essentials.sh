@@ -71,8 +71,11 @@ install_packages when todotxt
 print_message "Installing basic game collection..."
 install_packages cgames bs
 
+print_message "Installing terminal media players..."
+install_packages pixterm-git termplay 
+
 print_message "Installing other useful programs..."
-install_packages im2a lolcat fortune-mod sl cmatrix ponysay nyancat
+install_packages lolcat fortune-mod sl cmatrix ponysay nyancat
 
 ####################################################################
 
