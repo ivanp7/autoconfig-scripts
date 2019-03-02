@@ -90,12 +90,6 @@ sudo install -Dm 644 $SCRIPT_DIR/aux/2/archlinux.png /boot/grub/
 sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"@' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-print_message "Setting login issue message..."
-sudo install -Dm 644 $SCRIPT_DIR/aux/2/issue /etc/
-LOGO_HALFWIDTH=18
-LOGO_HALFHEIGHT=10
-sudo sed -i "s/<HORIZONTAL>/$(($(tput cols) / 2 - $LOGO_HALFWIDTH))/; s/<VERTICAL>/$(($(tput lines) / 2 - 5 - $LOGO_HALFHEIGHT))/" /etc/issue
-
 ####################################################################
 
 finish
