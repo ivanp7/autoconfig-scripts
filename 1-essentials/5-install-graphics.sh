@@ -41,8 +41,11 @@ amixer sset Headphone unmute
 
 ####################################################################
 
-print_message "Installing useful software..."
-install_official_packages firefox feh vlc
+print_message "Installing Firefox and addons..."
+install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
+
+print_message "Installing media software..."
+install_official_packages feh vlc
 
 print_message "Installing games..."
 install_official_packages gnome-mahjongg
