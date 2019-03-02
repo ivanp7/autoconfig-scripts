@@ -36,12 +36,12 @@ print_message ()
 
 install_official_packages ()
 {
-    sudo pacman --noconfirm -S "$@"
+    sudo pacman --needed --noconfirm -S "$@"
 }
 
 install_packages ()
 {
-    yay --noconfirm -S "$@"
+    yay --needed --noconfirm -S "$@"
 }
 
 uninstall_packages ()
