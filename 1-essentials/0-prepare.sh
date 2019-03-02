@@ -21,7 +21,7 @@ chmod 2775 /home/shared
 
 print_message "Installing sudo..."
 pacman --noconfirm -Syu
-pacman --noconfirm -S sudo
+install_official_packages sudo
 
 ####################################################################
 
