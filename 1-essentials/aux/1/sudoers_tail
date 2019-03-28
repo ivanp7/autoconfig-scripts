@@ -1,6 +1,0 @@
-
-# User configuration
-Defaults insults
-%$USERNAME ALL=(ALL) ALL
-%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/chvt,/usr/bin/shutdown,/usr/bin/poweroff,/usr/bin/halt,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep,/usr/bin/fdisk -l
-

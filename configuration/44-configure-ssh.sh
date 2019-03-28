@@ -27,9 +27,9 @@ sudo sed -i "s/^#PasswordAuthentication .*/PasswordAuthentication no/" /etc/ssh/
 sudo sed -i "s/^#PermitEmptyPasswords .*/PermitEmptyPasswords no/" /etc/ssh/sshd_config
 sudo sed -i "/^Subsystem.*sftp.*/ s/Subsystem/#Subsystem/" /etc/ssh/sshd_config
 
-cat $SCRIPT_DIR/aux/5/sshd_config_tail | sudo tee -a /etc/ssh/sshd_config
+cat $(aux_dir)/sshd_config_tail | sudo tee -a /etc/ssh/sshd_config
 sudo mkdir /etc/systemd/system/sshd.socket.d/
-sudo install -Dm 644 $SCRIPT_DIR/aux/5/override.conf /etc/systemd/system/sshd.socket.d/
+sudo install -Dm 644 $(aux_dir)/override.conf /etc/systemd/system/sshd.socket.d/
 
 sudo systemctl enable --now sshd.socket
 

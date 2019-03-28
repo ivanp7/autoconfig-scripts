@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Setting console keyboard repeat rate/delay ####"
+print_message "#### Enabling Wake-on-Lan ####"
 
 ####################################################################
 
@@ -13,9 +13,12 @@ initialize
 
 ####################################################################
 
-sudo install -Dm 644 $SCRIPT_DIR/aux/7/set-kbdrate.service /etc/systemd/system/
-sudo systemctl enable set-kbdrate.service
-sudo systemctl start set-kbdrate.service
+NETWORK_INTERFACE=$(grep 'Interface=' /etc/netctl/network | cut -d'=' -f2)
+cat $(aux_dir)/network | sed "s/\$NETWORK_INTERFACE/$NETWORK_INTERFACE/g" | \
+    sudo tee -a /etc/netctl/network
+sudo netctl reenable network
+
+sudo install -Dm 755 $(aux_dir)/50-reset-wol.sh /usr/lib/systemd/system-sleep/
 
 ####################################################################
 

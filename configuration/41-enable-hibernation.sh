@@ -13,7 +13,7 @@ initialize
 
 ####################################################################
 
-sudo sed -i "s/fsck/resume fsck/" /etc/mkinitcpio.conf
+sudo sed -i "/^HOOKS=(/ s/fsck/resume fsck/" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
 
 SWAP_DEVICE=$(df / | sed '2q;d' | awk '{print $1}')

@@ -22,7 +22,13 @@ initialize ()
 {
     check_user
     cd /home/shared
+    NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
     # sudo pacman --noconfirm -Syu
+}
+
+aux_dir ()
+{
+    echo $SCRIPT_DIR/aux/$NUM_PREFIX
 }
 
 print_message ()

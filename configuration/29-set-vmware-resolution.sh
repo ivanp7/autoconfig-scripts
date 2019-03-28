@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling swap file ####"
+print_message "#### Setting VMWare graphics driver custom resolution 1920x1080x24 60 Hz ####"
 
 ####################################################################
 
@@ -13,11 +13,8 @@ initialize
 
 ####################################################################
 
-sudo fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-cat $SCRIPT_DIR/aux/1/fstab_swap | sudo tee -a /etc/fstab
+print_message "Setting graphics resolution..."
+sudo install -Dm 644 $(aux_dir)/90-resolution.conf /etc/X11/xorg.conf.d/
 
 ####################################################################
 

@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling Wake-on-Lan ####"
+print_message "#### Set issue picture ####"
 
 ####################################################################
 
@@ -13,12 +13,11 @@ initialize
 
 ####################################################################
 
-NETWORK_INTERFACE=$(grep 'Interface=' /etc/netctl/network | cut -d'=' -f2)
-cat $SCRIPT_DIR/aux/3/network | sed "s/\$NETWORK_INTERFACE/$NETWORK_INTERFACE/g" | \
-    sudo tee -a /etc/netctl/network
-sudo netctl reenable network
-
-sudo install -Dm 755 $SCRIPT_DIR/aux/3/50-reset-wol.sh /usr/lib/systemd/system-sleep/
+print_message "Setting login issue message..."
+sudo install -Dm 644 $(aux_dir)/issue /etc/
+LOGO_HALFWIDTH=18
+LOGO_HALFHEIGHT=10
+sudo sed -i "s/<HORIZONTAL>/$(($(tput cols) / 2 - $LOGO_HALFWIDTH))/; s/<VERTICAL>/$(($(tput lines) / 2 - 5 - $LOGO_HALFHEIGHT))/" /etc/issue
 
 ####################################################################
 

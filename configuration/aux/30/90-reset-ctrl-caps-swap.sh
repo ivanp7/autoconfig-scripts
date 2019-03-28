@@ -6,7 +6,7 @@ case $1/$2 in
         ;;
     post/*)
         # echo "Waking up from $2..."
-        /usr/bin/sleep 3
+        /usr/bin/sleep 5
         /usr/bin/systemctl start ctrl-caps-swap.service
         ;;
 esac

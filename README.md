@@ -1,3 +1,3 @@
-Arch Linux postinstall configuration scripts
+Arch Linux auto configuration scripts
 --------------------------------------------
 

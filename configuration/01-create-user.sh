@@ -21,7 +21,7 @@ print_message "Adding user to group 'shared'..."
 gpasswd -a $USERNAME shared
 
 print_message "Configuring sudoers..."
-cat $SCRIPT_DIR/aux/1/sudoers_tail | sed "s/\$USERNAME/$USERNAME/g" | \
+cat $(aux_dir)/sudoers_tail | sed "s/\$USERNAME/$USERNAME/g" | \
     EDITOR='tee -a' visudo
 
 ####################################################################

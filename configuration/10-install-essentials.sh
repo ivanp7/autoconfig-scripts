@@ -14,14 +14,14 @@ initialize
 ####################################################################
 
 install_official_packages base-devel
-install_official_packages vim powerline powerline-fonts ranger w3m screen tmux
-install_official_packages neofetch htop ncdu pkgfile
+install_official_packages vim powerline powerline-fonts ranger w3m screen tmux neofetch htop
+install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages pass
 install_official_packages openssh sshfs gnu-netcat wol rsync ethtool wget git-annex
-install_official_packages moreutils
+install_official_packages moreutils dialog
 install_official_packages p7zip atool
-install_official_packages extundelete dosfstools ntfsprogs inotify-tools
+install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools
 install_official_packages jq
 install_official_packages at cronie
 sudo systemctl enable atd cronie
@@ -32,7 +32,7 @@ install_official_packages ffmpegthumbnailer
 ####################################################################
 
 install_official_packages octave sbcl
-install -Dm 644 $SCRIPT_DIR/aux/2/.octaverc ./
+install -Dm 644 $(aux_dir)/.octaverc ./
 ln -sf $(realpath .octaverc) $HOME/
 
 ####################################################################
@@ -71,8 +71,8 @@ install_packages when todotxt
 print_message "Installing basic game collection..."
 install_packages cgames bs
 
-print_message "Installing terminal media players..."
-install_packages pixterm-git terminalimageviewer-git termplay 
+print_message "Installing terminal picture viewer and media player..."
+install_packages pixterm-git termplay 
 
 print_message "Installing other useful programs..."
 install_packages lolcat fortune-mod sl cmatrix ponysay nyancat
@@ -83,7 +83,7 @@ print_message "Configuring system..."
 sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
 
 print_message "Setting grub wallpaper..."
-sudo install -Dm 644 $SCRIPT_DIR/aux/2/archlinux.png /boot/grub/
+sudo install -Dm 644 $(aux_dir)/archlinux.png /boot/grub/
 sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"@' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 

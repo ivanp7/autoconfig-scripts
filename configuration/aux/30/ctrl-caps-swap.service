@@ -1,0 +1,10 @@
+[Unit]
+Description=Swap Ctrl and Caps Lock keys
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/loadkeys /usr/local/share/kbd/keymaps/ctrl-caps-swap.map
+
+[Install]
+WantedBy=default.target
+
