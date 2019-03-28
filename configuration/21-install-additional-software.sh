@@ -13,7 +13,6 @@ initialize
 
 ####################################################################
 
-print_message "Installing telegram-desktop, qbittorrent, libreoffice, mtpaint..."
 install_packages telegram-desktop qbittorrent libreoffice-still aspell-ru mtpaint
 
 ####################################################################

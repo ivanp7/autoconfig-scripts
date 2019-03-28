@@ -13,7 +13,6 @@ initialize
 
 ####################################################################
 
-print_message "Setting graphics resolution..."
 sudo install -Dm 644 $(aux_dir)/90-resolution.conf /etc/X11/xorg.conf.d/
 
 ####################################################################

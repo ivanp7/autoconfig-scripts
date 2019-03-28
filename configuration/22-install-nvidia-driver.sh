@@ -13,7 +13,6 @@ initialize
 
 ####################################################################
 
-print_message "Installing graphics driver..."
 install_packages nvidia nvidia-xrun
 
 ####################################################################
