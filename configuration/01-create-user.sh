@@ -11,11 +11,11 @@ check_root
 
 print_message "#### Creating a maintainer user ####"
 
+####################################################################
+
 until { read -p 'User name: ' USERNAME; useradd -m "$USERNAME"; }
 do echo "Try again"; sleep 2; done
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
-
-####################################################################
 
 print_message "Adding user to group 'shared'..."
 gpasswd -a $USERNAME shared

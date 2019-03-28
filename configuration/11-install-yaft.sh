@@ -17,8 +17,6 @@ YAFT_ACTIVE_CURSOR_COLOR=7
 YAFT_TABSTOP=4
 YAFT_TERMINUS_FONT_VARIATION=u12n
 
-print_message "Installing yaft..."
-
 cd /tmp
 git clone https://aur.archlinux.org/yaft.git
 cd yaft

@@ -13,7 +13,6 @@ initialize
 
 ####################################################################
 
-print_message "Setting login issue message..."
 sudo install -Dm 644 $(aux_dir)/issue /etc/
 LOGO_HALFWIDTH=18
 LOGO_HALFHEIGHT=10
