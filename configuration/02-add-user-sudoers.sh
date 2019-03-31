@@ -20,7 +20,7 @@ else
     do echo "Try again"; sleep 2; done
 fi
 
-cp $(aux_dir)/user_sudoers /etc/sudoers.d/${USERNAME}_sudoers
+install -Dm 0440 $(aux_dir)/user_sudoers /etc/sudoers.d/${USERNAME}_sudoers
 sed -i "s/\$USERNAME/$USERNAME/g" /etc/sudoers.d/${USERNAME}_sudoers
 
 ####################################################################
