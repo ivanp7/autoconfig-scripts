@@ -21,6 +21,7 @@ else
 fi
 
 cp $(aux_dir)/user_sudoers /etc/sudoers.d/${USERNAME}_sudoers
+sed -i "s/\$USERNAME/$USERNAME/g" /etc/sudoers.d/${USERNAME}_sudoers
 
 ####################################################################
 
