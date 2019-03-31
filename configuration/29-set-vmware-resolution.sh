@@ -9,7 +9,7 @@ print_message "#### Setting VMWare graphics driver custom resolution 1920x1080x2
 
 ####################################################################
 
-initialize
+check_user
 
 ####################################################################
 

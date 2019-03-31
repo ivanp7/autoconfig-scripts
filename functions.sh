@@ -16,18 +16,13 @@ check_user ()
         echo This script must be run under a non-priviledged user. Terminating...
         exit 1
     fi
-}
 
-initialize ()
-{
-    check_user
     cd /home/shared
-    NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
-    # sudo pacman --noconfirm -Syu
 }
 
 aux_dir ()
 {
+    NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
     echo $SCRIPT_DIR/aux/$NUM_PREFIX
 }
 
