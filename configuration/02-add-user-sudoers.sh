@@ -5,11 +5,11 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-check_root
+print_message "#### Adding user sudoers configuration ####"
 
 ####################################################################
 
-print_message "#### Adding user sudoers configuration ####"
+check_root
 
 ####################################################################
 

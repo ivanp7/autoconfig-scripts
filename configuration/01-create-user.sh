@@ -5,11 +5,11 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-check_root
+print_message "#### Creating a maintainer user ####"
 
 ####################################################################
 
-print_message "#### Creating a maintainer user ####"
+check_root
 
 ####################################################################
 

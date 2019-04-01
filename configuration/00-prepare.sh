@@ -5,11 +5,11 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-check_root
+print_message "#### Performing initial preparations ####"
 
 ####################################################################
 
-print_message "#### Performing initial preparations ####"
+check_root
 
 ####################################################################
 
