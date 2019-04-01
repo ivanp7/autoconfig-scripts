@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing terminal essentials ####"
+print_message "#### Installing essentials ####"
 
 ####################################################################
 
@@ -29,11 +29,7 @@ sudo systemctl start atd cronie
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 
-####################################################################
-
 install_official_packages octave sbcl
-install -Dm 644 $(aux_dir)/.octaverc ./
-ln -sf $(realpath .octaverc) $HOME/
 
 ####################################################################
 
@@ -52,6 +48,9 @@ makepkg --noconfirm -si
 cd /home/shared
 
 ####################################################################
+
+print_message "Installing quicklisp..."
+install_packages quicklisp
 
 print_message "Installing bash-completion..."
 install_official_packages bash-completion
@@ -76,16 +75,6 @@ install_packages pixterm-git termplay
 
 print_message "Installing other useful programs..."
 install_packages lolcat fortune-mod sl cmatrix ponysay nyancat
-
-####################################################################
-
-print_message "Configuring system..."
-sudo sed -i "s/#NAutoVTs=6/NAutoVTs=12/" /etc/systemd/logind.conf
-
-print_message "Setting grub wallpaper..."
-sudo install -Dm 644 $(aux_dir)/archlinux.png /boot/grub/
-sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"@' /etc/default/grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ####################################################################
 
