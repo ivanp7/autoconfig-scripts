@@ -26,6 +26,11 @@ aux_dir ()
     echo $SCRIPT_DIR/aux/$NUM_PREFIX
 }
 
+initcpio_preset ()
+{
+    basename $(find /etc/mkinitcpio.d/ -type f -name "*.preset" | head -n1) | cut -d'.' -f1
+}
+
 print_message ()
 {
     echo

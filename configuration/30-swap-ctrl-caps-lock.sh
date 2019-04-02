@@ -14,7 +14,8 @@ check_user
 ####################################################################
 
 sudo sed -i "/^HOOKS=(/ s/keyboard/keyboard keymap/" /etc/mkinitcpio.conf
-sudo mkinitcpio -p linux
+sudo sed -i "/^HOOKS=(/ s/keymap keymap/keymap/" /etc/mkinitcpio.conf
+sudo mkinitcpio -p $(initcpio_preset)
 
 sudo mkdir -p /usr/local/share/kbd/keymaps
 sudo dumpkeys | head -1 | sudo tee /usr/local/share/kbd/keymaps/ctrl-caps-swap.map
