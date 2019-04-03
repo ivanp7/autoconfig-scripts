@@ -19,6 +19,7 @@ cat $(aux_dir)/network | sed "s/\$NETWORK_INTERFACE/$NETWORK_INTERFACE/g" | \
 sudo netctl reenable network
 
 sudo install -Dm 755 $(aux_dir)/50-reset-wol.sh /usr/lib/systemd/system-sleep/
+sudo sed -i "s/\$NETWORK_INTERFACE/$NETWORK_INTERFACE/g" /usr/lib/systemd/system-sleep/50-reset-wol.sh
 
 ####################################################################
 
