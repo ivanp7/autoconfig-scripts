@@ -2,5 +2,5 @@
 # User configuration
 Defaults insults
 %$USERNAME ALL=(ALL) ALL
-%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/chvt *,/usr/bin/systemctl halt,/usr/bin/systemctl poweroff,/usr/bin/systemctl reboot,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep,/usr/bin/systemctl suspend-then-hibernate,/usr/bin/fdisk -l,/usr/bin/netctl start *,/usr/bin/netctl stop *,/usr/bin/netctl restart *
+%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/chvt *,/usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/systemctl halt,/usr/bin/systemctl poweroff,/usr/bin/systemctl reboot,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep,/usr/bin/systemctl suspend-then-hibernate,/usr/bin/fdisk -l,/usr/bin/netctl start *,/usr/bin/netctl stop *,/usr/bin/netctl stop-all,/usr/bin/netctl restart *
 
