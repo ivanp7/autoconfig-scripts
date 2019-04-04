@@ -14,15 +14,18 @@ check_user
 ####################################################################
 
 install_official_packages base-devel
-install_official_packages vim powerline powerline-fonts ranger w3m screen tmux neofetch htop
+install_official_packages powerline powerline-fonts
+install_official_packages vim ranger w3m screen tmux 
+install_official_packages neofetch htop cpupower
 install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages pass
-install_official_packages openssh sshfs gnu-netcat wol rsync ethtool wget git-annex
-install_official_packages moreutils dialog expect
+install_official_packages openssh sshfs 
+install_official_packages wget rsync git-annex
+install_official_packages gnu-netcat wol ethtool ifplugd 
+install_official_packages moreutils jq dialog expect
+install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools
 install_official_packages p7zip atool
-install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools cpupower
-install_official_packages jq
 install_official_packages at cronie
 sudo systemctl enable atd cronie
 sudo systemctl start atd cronie
