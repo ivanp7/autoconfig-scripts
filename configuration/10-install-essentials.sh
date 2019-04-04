@@ -19,7 +19,7 @@ install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages pass
 install_official_packages openssh sshfs gnu-netcat wol rsync ethtool wget git-annex
-install_official_packages moreutils dialog
+install_official_packages moreutils dialog expect
 install_official_packages p7zip atool
 install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools cpupower
 install_official_packages jq
