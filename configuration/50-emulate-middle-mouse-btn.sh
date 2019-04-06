@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Set issue picture ####"
+print_message "#### Enabling middle mouse click emulation ####"
 
 ####################################################################
 
@@ -13,10 +13,7 @@ check_user
 
 ####################################################################
 
-sudo install -Dm 644 $(aux_dir)/issue /etc/
-LOGO_HALFWIDTH=18
-LOGO_HALFHEIGHT=10
-sudo sed -i "s/<HORIZONTAL>/$(($(tput cols) / 2 - $LOGO_HALFWIDTH))/; s/<VERTICAL>/$(($(tput lines) / 2 - 5 - $LOGO_HALFHEIGHT))/" /etc/issue
+sudo install -Dm 644 $(aux_dir)/10-evdev.conf /etc/X11/xorg.conf.d/
 
 ####################################################################
 

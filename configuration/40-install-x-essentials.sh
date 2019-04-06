@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing graphics ####"
+print_message "#### Installing X essentials ####"
 
 ####################################################################
 
@@ -29,27 +29,11 @@ install_official_packages lxappearance
 
 ####################################################################
 
-print_message "Enabling middle mouse click emulation..."
-sudo install -Dm 644 $(aux_dir)/10-evdev.conf /etc/X11/xorg.conf.d/
-
-####################################################################
-
-print_message "Installing ALSA..."
-install_official_packages alsa-utils
-amixer sset Master unmute
-amixer sset Speaker unmute
-amixer sset Headphone unmute
-
-####################################################################
-
 print_message "Installing Firefox and addons..."
 install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
 
 print_message "Installing media software..."
 install_official_packages feh vlc
-
-print_message "Installing games..."
-install_official_packages gnome-mahjongg
 
 ####################################################################
 

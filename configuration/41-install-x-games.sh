@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing NVIDIA graphics driver ####"
+print_message "#### Installing X games ####"
 
 ####################################################################
 
@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-install_packages nvidia nvidia-xrun
+install_official_packages gnome-mahjongg
 
 ####################################################################
 
