@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=$(realpath `dirname $0`)
 . $(realpath $SCRIPT_DIR/..)/functions.sh
@@ -16,7 +16,7 @@ check_root
 if [ -f /tmp/archlinux-autoconfig-username ]
 then USERNAME=$(cat /tmp/archlinux-autoconfig-username)
 else
-    until read -p 'User name: ' USERNAME
+    until { echo -n 'User name: '; read USERNAME; }
     do echo "Try again"; sleep 2; done
 fi
 

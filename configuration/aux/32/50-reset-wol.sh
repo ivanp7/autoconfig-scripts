@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 case $1/$2 in
     pre/*)

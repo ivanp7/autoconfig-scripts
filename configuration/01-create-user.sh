@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=$(realpath `dirname $0`)
 . $(realpath $SCRIPT_DIR/..)/functions.sh
@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-until { read -p 'User name: ' USERNAME; useradd -m "$USERNAME"; }
+until { echo -n 'User name: '; read USERNAME; useradd -m "$USERNAME"; }
 do echo "Try again"; sleep 2; done
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 

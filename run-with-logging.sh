@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd $(dirname $1)
 SCRIPT=$(basename $1)

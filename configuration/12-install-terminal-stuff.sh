@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=$(realpath `dirname $0`)
 . $(realpath $SCRIPT_DIR/..)/functions.sh
@@ -10,11 +10,6 @@ print_message "#### Installing terminal stuff ####"
 ####################################################################
 
 check_user
-
-####################################################################
-
-print_message "Installing when, todotxt..."
-install_packages when todotxt
 
 ####################################################################
 

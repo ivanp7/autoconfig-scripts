@@ -4,7 +4,7 @@ GIT_URL_PREFIX=https://gitlab.com/ivanp7
 
 check_root ()
 {
-    if [[ $EUID != 0 ]]; then
+    if [ "$(id -u)" != "0" ]; then
         echo This script must be run under root. Terminating...
         exit 1
     fi
@@ -12,7 +12,7 @@ check_root ()
 
 check_user ()
 {
-    if [[ $EUID == 0 ]]; then
+    if [ "$(id -u)" = "0" ]; then
         echo This script must be run under a non-priviledged user. Terminating...
         exit 1
     fi
@@ -34,9 +34,9 @@ initcpio_preset ()
 print_message ()
 {
     echo
-    echo $(printf '%0.s-' $(seq 1 $(wc -c <<< $*)))
+    echo $(printf '%0.s-' $(seq 1 $(echo $* | wc -c)))
     echo $*
-    echo $(printf '%0.s-' $(seq 1 $(wc -c <<< $*)))
+    echo $(printf '%0.s-' $(seq 1 $(echo $* | wc -c)))
     echo
 }
 

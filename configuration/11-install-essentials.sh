@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=$(realpath `dirname $0`)
 . $(realpath $SCRIPT_DIR/..)/functions.sh
@@ -32,7 +32,21 @@ sudo systemctl start atd cronie
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 
-install_official_packages octave sbcl
+####################################################################
+
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg --noconfirm -si
+cd /home/shared
+
+####################################################################
+
+install_official_packages octave
+install_packages when todotxt
+
+install_official_packages sbcl
+install_packages quicklisp
 
 ####################################################################
 
@@ -42,18 +56,6 @@ sh dotfiles/install.sh
 sudo sh dotfiles/install.sh
 
 ####################################################################
-
-print_message "Installing yay..."
-cd /tmp
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg --noconfirm -si
-cd /home/shared
-
-####################################################################
-
-print_message "Installing quicklisp..."
-install_packages quicklisp
 
 print_message "Installing bash-completion..."
 install_official_packages bash-completion
