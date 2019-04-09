@@ -34,6 +34,14 @@ install_official_packages ffmpegthumbnailer
 
 ####################################################################
 
+install_official_packages zsh zsh-completions zsh-syntax-highlighting
+
+print_message "Changing shell to zsh..."
+chsh -s /usr/bin/zsh
+sudo chsh -s /usr/bin/zsh
+
+####################################################################
+
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -54,16 +62,6 @@ print_message "Installing dotfiles..."
 git clone $GIT_URL_PREFIX/dotfiles.git
 sh dotfiles/install.sh
 sudo sh dotfiles/install.sh
-
-####################################################################
-
-print_message "Installing bash-completion..."
-install_official_packages bash-completion
-sudo mkdir -p /usr/share/bash_completion.d
-sudo ln -s /usr/share/bash_completion.d /etc/
-
-print_message "Installing tmux-bash-completion..."
-install_packages tmux-bash-completion
 
 ####################################################################
 
