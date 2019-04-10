@@ -36,6 +36,7 @@ install_official_packages ffmpegthumbnailer
 
 install_official_packages zsh zsh-completions zsh-syntax-highlighting
 
+sudo mkdir -p /var/cache/zsh/
 sudo mkdir -p /etc/pacman.d/hooks/
 sudo install -Dm 644 $(aux_dir)/zsh.hook /etc/pacman.d/hooks/
 
