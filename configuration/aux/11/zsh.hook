@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+[Action]
+Depends = zsh
+When = PostTransaction
+Exec = /usr/bin/env touch /var/cache/zsh/pacman
+

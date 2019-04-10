@@ -20,10 +20,9 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service
 ####################################################################
 
 print_message "Adding kernel modules..."
-VMW_MODULES="vmw_balloon vmw_pvscsi vmw_vmci vmwgfx vmxnet3 vsock vmw_vsock_vmci_transport"
-sudo sed -i "s/^MODULES=(/MODULES=($VMW_MODULES /" /etc/mkinitcpio.conf
-sudo sed -i "s/^MODULES=($VMW_MODULES $VMW_MODULES /MODULES=($VMW_MODULES /" /etc/mkinitcpio.conf
-sudo mkinitcpio -p $(initcpio_preset)
+MODULES="vmw_balloon vmw_pvscsi vmw_vmci vmwgfx vmxnet3 vsock vmw_vsock_vmci_transport"
+sudo sed -i "/^MODULES=/ s/(/($MODULES /" /etc/mkinitcpio.conf
+sudo mkinitcpio -P
 
 ####################################################################
 

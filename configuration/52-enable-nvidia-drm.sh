@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling hibernation ####"
+print_message "#### Enabling Nvidia Direct Rendering Manager ####"
 
 ####################################################################
 
@@ -13,14 +13,14 @@ check_user
 
 ####################################################################
 
-sudo sed -i "/^HOOKS=/ s/fsck/resume fsck/" /etc/mkinitcpio.conf
+MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+sudo sed -i "/^MODULES=/ s/(/($MODULES /" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
-SWAP_DEVICE="$(df / | sed '2q;d' | awk '{print $1}')"
-SWAP_OFFSET="$(sudo filefrag -v /swapfile | sed '4q;d' | awk '{print $4}' | cut -d'.' -f1)"
-SWAP_PARAMETERS="resume=${SWAP_DEVICE} resume_offset=${SWAP_OFFSET}"
-sudo sed -i "@^GRUB_CMDLINE_LINUX_DEFAULT=@ s@\"@\"${SWAP_PARAMETERS} @" /etc/default/grub
+sudo sed -i "@^GRUB_CMDLINE_LINUX_DEFAULT=@ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+sudo install -Dm 644 $(aux_dir)/nvidia.hook /etc/pacman.d/hooks/
 
 ####################################################################
 

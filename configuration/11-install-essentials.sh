@@ -36,6 +36,9 @@ install_official_packages ffmpegthumbnailer
 
 install_official_packages zsh zsh-completions zsh-syntax-highlighting
 
+sudo mkdir -p /etc/pacman.d/hooks/
+sudo install -Dm 644 $(aux_dir)/zsh.hook /etc/pacman.d/hooks/
+
 print_message "Changing shell to zsh..."
 chsh -s /usr/bin/zsh
 sudo chsh -s /usr/bin/zsh
