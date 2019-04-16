@@ -21,7 +21,7 @@ install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages octave sbcl 
 install_official_packages when task pass
-install_official_packages openssh sshfs 
+install_official_packages openssh sshfs encfs
 install_official_packages wget rsync git-annex
 install_official_packages gnu-netcat wol ethtool ifplugd 
 install_official_packages moreutils jq dialog expect
