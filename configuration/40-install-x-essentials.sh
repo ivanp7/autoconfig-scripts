@@ -19,7 +19,6 @@ install_official_packages gvim
 install_official_packages xclip xsel gtkmm3 compton dex fltk
 install_official_packages i3-gaps dmenu libnotify dunst gnome-screenshot
 install_packages polybar
-install_official_packages termite
 
 install_official_packages wmctrl
 
