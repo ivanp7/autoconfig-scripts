@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-install_packages telegram-desktop qbittorrent libreoffice-still aspell-ru mtpaint
+install_packages telegram-desktop qbittorrent libreoffice-still aspell-ru
 
 ####################################################################
 
