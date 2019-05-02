@@ -26,7 +26,7 @@ install_official_packages wget rsync git-annex
 install_official_packages gnu-netcat wol ethtool ifplugd 
 install_official_packages moreutils jq dialog expect
 install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools
-install_official_packages p7zip atool
+install_official_packages unzip p7zip atool
 install_official_packages at cronie
 sudo systemctl enable atd cronie
 sudo systemctl start atd cronie
