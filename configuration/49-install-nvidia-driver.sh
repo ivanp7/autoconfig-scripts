@@ -13,7 +13,12 @@ check_user
 
 ####################################################################
 
-install_packages nvidia nvidia-settings nvidia-xrun
+if pacman -Qs linux-lts > /dev/null && ! pacman -Qs linux > /dev/null
+then install_packages nvidia-lts
+else install_packages nvidia
+fi
+
+install_packages nvidia-settings
 
 ####################################################################
 

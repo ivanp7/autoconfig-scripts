@@ -20,7 +20,12 @@ sudo mkinitcpio -P
 sudo sed -i "@^GRUB_CMDLINE_LINUX_DEFAULT=@ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-sudo install -Dm 644 $(aux_dir)/nvidia.hook /etc/pacman.d/hooks/
+if pacman -Qs linux-lts > /dev/null && ! pacman -Qs linux > /dev/null
+then HOOK=nvidia-lts
+else HOOK=nvidia
+fi
+
+sudo install -Dm 644 $(aux_dir)/${HOOK}.hook /etc/pacman.d/hooks/
 
 ####################################################################
 
