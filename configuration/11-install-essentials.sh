@@ -35,13 +35,19 @@ install_official_packages ffmpegthumbnailer
 
 ####################################################################
 
+print_message "Relinking sh to dash..."
+install_official_packages dash
+
+sudo ln -sfT dash /usr/bin/sh
+sudo mkdir -p /etc/pacman.d/hooks/
+sudo install -Dm 644 $(aux_dir)/dash.hook /etc/pacman.d/hooks/
+
+print_message "Changing shell to zsh..."
 install_official_packages zsh zsh-completions zsh-syntax-highlighting
 
 sudo mkdir -p /var/cache/zsh/
-sudo mkdir -p /etc/pacman.d/hooks/
 sudo install -Dm 644 $(aux_dir)/zsh.hook /etc/pacman.d/hooks/
 
-print_message "Changing shell to zsh..."
 chsh -s /usr/bin/zsh
 sudo chsh -s /usr/bin/zsh
 
