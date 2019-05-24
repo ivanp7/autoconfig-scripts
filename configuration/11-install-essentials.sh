@@ -62,6 +62,8 @@ cd /home/shared
 ####################################################################
 
 install_packages quicklisp
+sudo mkdir -p /usr/lib/quicklisp/tmp
+sudo chmod 777 /usr/lib/quicklisp/tmp
 
 ####################################################################
 
