@@ -19,7 +19,7 @@ install_official_packages vim ranger w3m screen tmux
 install_official_packages neofetch htop cpupower
 install_official_packages pkgfile
 sudo pkgfile --update
-install_official_packages octave sbcl 
+install_official_packages octave
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync git-annex
@@ -61,9 +61,7 @@ cd /home/shared
 
 ####################################################################
 
-install_packages quicklisp
-sudo mkdir -p /usr/lib/quicklisp/tmp
-sudo chmod 777 /usr/lib/quicklisp/tmp
+install_packages roswell
 
 ####################################################################
 
