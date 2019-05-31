@@ -17,7 +17,7 @@ MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 sudo sed -i "/^MODULES=/ s/(/($MODULES /" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
-sudo sed -i "@^GRUB_CMDLINE_LINUX_DEFAULT=@ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
+sudo sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 if pacman -Qs linux-lts > /dev/null && ! pacman -Qs linux > /dev/null
