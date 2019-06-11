@@ -2,7 +2,7 @@
 Description=Server autosuspend daemon
 
 [Service]
-ExecStart=/usr/bin/sh /usr/local/bin/autosuspend.sh
+ExecStart=/usr/bin/sh /usr/local/bin/autosuspend/autosuspend.sh
 Restart=on-failure
 
 [Install]
