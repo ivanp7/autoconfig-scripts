@@ -13,10 +13,11 @@ check_user
 
 ####################################################################
 
-cd /tmp
-git clone $GIT_URL_PREFIX/server-autosuspend.git
-sh server-autosuspend/install.sh
-cd /home/shared
+sudo install -Dm 755 $(aux_dir)/autosuspend.sh /usr/local/bin/
+sudo install -Dm 755 $(aux_dir)/autosuspend_op.sh /usr/local/bin/
+sudo install -Dm 644 $(aux_dir)/autosuspend.service /etc/systemd/system/
+
+sudo systemctl enable --now autosuspend.service
 
 ####################################################################
 
