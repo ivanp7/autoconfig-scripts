@@ -25,9 +25,6 @@ sudo install -Dm 644 $(aux_dir)/ctrl-caps-swap.service /etc/systemd/system/
 sudo systemctl enable ctrl-caps-swap.service
 sudo systemctl start ctrl-caps-swap.service
 
-install -Dm 644 $(aux_dir)/.Xmodmap ./
-ln -sf $(realpath .Xmodmap) $HOME/
-
 sudo install -Dm 755 $(aux_dir)/90-reset-ctrl-caps-swap.sh /usr/lib/systemd/system-sleep/
 
 ####################################################################

@@ -5,23 +5,15 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Performing initial preparations ####"
+print_message "#### Preventing Ctrl/CapsLock key swapping ####"
 
 ####################################################################
 
-check_root
+check_user
 
 ####################################################################
 
-print_message "Creating group 'shared'..."
-groupadd shared
-mkdir $CONFIG_DIRECTORY
-chown root:shared $CONFIG_DIRECTORY
-chmod 2775 $CONFIG_DIRECTORY
-
-print_message "Installing sudo..."
-pacman --noconfirm -Syu
-pacman --noconfirm -S sudo
+touch $HOME/.Xmodmap
 
 ####################################################################
 

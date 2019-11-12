@@ -57,7 +57,7 @@ cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg --noconfirm -si
-cd /home/shared
+cd $CONFIG_DIRECTORY
 
 ####################################################################
 

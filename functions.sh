@@ -1,4 +1,5 @@
 GIT_URL_PREFIX=https://gitlab.com/ivanp7
+CONFIG_DIRECTORY=/usr/local/etc/shared
 
 ####################################################################
 
@@ -17,7 +18,7 @@ check_user ()
         exit 1
     fi
 
-    cd /home/shared
+    cd $CONFIG_DIRECTORY
 }
 
 aux_dir ()
