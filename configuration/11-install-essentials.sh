@@ -15,7 +15,7 @@ check_user
 
 install_official_packages base-devel ctags
 install_official_packages powerline powerline-fonts
-install_official_packages vim ranger w3m screen tmux 
+install_official_packages vim w3m screen tmux 
 install_official_packages neofetch htop cpupower
 install_official_packages pkgfile
 sudo pkgfile --update
@@ -25,7 +25,8 @@ install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
 install_official_packages gnu-netcat wol ethtool ifplugd 
 install_official_packages moreutils jq dialog expect
-install_official_packages ncdu extundelete dosfstools ntfsprogs inotify-tools
+install_official_packages dosfstools ntfsprogs inotify-tools
+install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
 sudo systemctl enable atd cronie
@@ -53,6 +54,7 @@ sudo chsh -s /usr/bin/zsh
 
 ####################################################################
 
+print_message "Installing yay..."
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -61,7 +63,8 @@ cd $CONFIG_DIRECTORY
 
 ####################################################################
 
-install_packages roswell
+print_message "Installing essentials from AUR..."
+install_packages lf archivemount roswell
 
 ####################################################################
 
