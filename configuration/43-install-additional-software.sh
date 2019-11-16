@@ -13,7 +13,9 @@ check_user
 
 ####################################################################
 
-install_packages telegram-desktop qbittorrent libreoffice-still aspell-ru
+install_packages telegram-desktop 
+install_packages qbittorrent 
+install_packages libreoffice-still aspell-ru phototonic
 
 ####################################################################
 
