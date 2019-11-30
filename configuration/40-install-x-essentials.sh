@@ -30,6 +30,7 @@ install_official_packages lxappearance
 
 print_message "Installing media software..."
 install_official_packages feh vlc zathura zathura-pdf-mupdf zathura-djvu
+install_official_packages youtube-dl
 
 print_message "Installing Firefox and addons..."
 install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
