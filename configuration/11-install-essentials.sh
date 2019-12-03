@@ -14,7 +14,6 @@ check_user
 ####################################################################
 
 install_official_packages base-devel ctags
-install_official_packages powerline powerline-fonts
 install_official_packages vim w3m screen tmux 
 install_official_packages neofetch htop cpupower
 install_official_packages pkgfile
