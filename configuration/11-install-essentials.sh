@@ -15,7 +15,7 @@ check_user
 
 install_official_packages base-devel ctags
 install_official_packages vim w3m screen tmux 
-install_official_packages neofetch htop cpupower
+install_official_packages neofetch htop cpupower acpi
 install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages octave
