@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include "X11/XF86keysym.h"
+
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -8,18 +10,19 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "xos4 Terminus:size=10" };
 static const char dmenufont[]       = "xos4 Terminus:size=10";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#666666";
+static const char col_gray2[]       = "#999999";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char col_yellow[]        = "#e7c547";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
-	[SchemeSel]  = { col_gray4, col_gray2,  col_cyan },
+	[SchemeNorm] = { col_gray2, col_gray1, col_gray1 },
+	[SchemeSel]  = { col_yellow, col_gray1,  col_cyan },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -61,6 +64,16 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
     "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", "-t", "Terminal" };
 
+static const char *upvol[]   =   { "volume-notify.sh", "up", NULL };
+static const char *downvol[] =   { "volume-notify.sh", "down", NULL };
+static const char *togglevol[] = { "volume-notify.sh", "toggle", NULL };
+static const char *showvol[] =   { "volume-notify.sh", NULL };
+
+static const char *fullscreen2file[] = { "screen2file.sh", "-u", NULL };
+static const char *areascreen2file[] = { "screen2file.sh", "-u", "-s", NULL };
+static const char *fullscreen2clip[] = { "screen2clip.sh", "-u", NULL };
+static const char *areascreen2clip[] = { "screen2clip.sh", "-u", "-s", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -96,6 +109,16 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
+    { 0,            XF86XK_AudioRaiseVolume,   spawn,          {.v = upvol     } },
+    { 0,            XF86XK_AudioLowerVolume,   spawn,          {.v = downvol   } },
+    { 0,            XF86XK_AudioMute,          spawn,          {.v = togglevol } },
+    { ShiftMask,    XF86XK_AudioMute,          spawn,          {.v = showvol   } },
+
+    { 0,                            XK_Print,  spawn,          {.v = areascreen2clip } },
+    { ShiftMask,                    XK_Print,  spawn,          {.v = fullscreen2clip } },
+    { ControlMask,                  XK_Print,  spawn,          {.v = areascreen2file } },
+    { ControlMask|ShiftMask,        XK_Print,  spawn,          {.v = fullscreen2file } },
 };
 
 /* button definitions */
