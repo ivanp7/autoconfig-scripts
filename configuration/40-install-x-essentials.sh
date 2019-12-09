@@ -18,7 +18,6 @@ uninstall_packages vim
 install_official_packages gvim
 install_official_packages xclip xsel gtkmm3 compton dex fltk
 install_official_packages dmenu libnotify dunst maim
-install_packages polybar
 
 install_official_packages wmctrl
 
