@@ -15,7 +15,7 @@ check_user
 
 install_official_packages base-devel ctags
 install_official_packages vim w3m screen tmux 
-install_official_packages neofetch htop glances python-netifaces
+install_official_packages neofetch htop glances
 install_official_packages pkgfile
 sudo pkgfile --update
 install_official_packages octave
