@@ -25,6 +25,8 @@ install_official_packages terminus-font ttf-roboto
 install_official_packages adapta-gtk-theme
 install_official_packages lxappearance
 
+install_packages shantz-xwinwrap-bzr
+
 ####################################################################
 
 print_message "Installing media software..."
