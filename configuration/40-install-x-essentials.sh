@@ -16,6 +16,7 @@ check_user
 install_official_packages xorg xorg-xinit xorg-drivers
 uninstall_packages vim
 install_official_packages gvim
+install_official_packages bspwm sxhkd
 install_official_packages xclip xsel gtkmm3 compton dex fltk
 install_official_packages dmenu libnotify dunst maim
 
