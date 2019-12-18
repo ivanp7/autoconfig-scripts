@@ -14,25 +14,27 @@ check_user
 ####################################################################
 
 install_official_packages xorg xorg-xinit xorg-drivers
+
 uninstall_packages vim
 install_official_packages gvim
-install_official_packages bspwm sxhkd
-install_official_packages xclip xsel gtkmm3 compton dex fltk
-install_official_packages dmenu libnotify dunst maim
 
-install_official_packages wmctrl
+install_official_packages bspwm picom libnotify dunst maim
+install_packages shantz-xwinwrap-bzr
+install_official_packages sxhkd wmctrl dex
+install_official_packages dmenu
+install_packages polybar
 
+install_official_packages xclip xsel
+
+install_official_packages gtkmm3 fltk
 install_official_packages terminus-font ttf-roboto
 install_official_packages adapta-gtk-theme
 install_official_packages lxappearance
 
-install_packages shantz-xwinwrap-bzr
-
 ####################################################################
 
 print_message "Installing media software..."
-install_official_packages feh vlc zathura zathura-pdf-mupdf zathura-djvu
-install_official_packages youtube-dl
+install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu
 
 print_message "Installing Firefox and addons..."
 install_official_packages firefox firefox-ublock-origin firefox-decentraleyes

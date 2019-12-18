@@ -32,6 +32,7 @@ sudo systemctl enable atd cronie
 sudo systemctl start atd cronie
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
+install_official_packages youtube-dl
 
 ####################################################################
 
