@@ -23,13 +23,13 @@ install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
 install_official_packages gnu-netcat wol ethtool ifplugd 
-install_official_packages moreutils jq dialog expect
+install_official_packages cpupower
 install_official_packages dosfstools ntfsprogs inotify-tools
 install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
-sudo systemctl enable atd cronie
-sudo systemctl start atd cronie
+sudo systemctl enable --now atd cronie
+install_official_packages moreutils jq dialog expect
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 install_official_packages youtube-dl
