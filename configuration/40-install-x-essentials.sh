@@ -20,7 +20,8 @@ install_official_packages gvim
 
 install_official_packages bspwm picom libnotify dunst maim
 install_packages shantz-xwinwrap-bzr
-install_official_packages sxhkd wmctrl dex
+install_official_packages sxhkd wmctrl unclutter
+install_official_packages dex
 install_official_packages dmenu
 install_packages polybar
 
