@@ -40,6 +40,9 @@ install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu
 print_message "Installing Firefox and addons..."
 install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
 
+print_message "Installing basic games..."
+install_official_packages gnome-mahjongg
+
 ####################################################################
 
 print_message "Installing x-dotfiles..."

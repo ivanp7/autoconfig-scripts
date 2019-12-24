@@ -15,7 +15,8 @@ check_user
 
 install_official_packages wpa_supplicant
 sudo install -Dm 644 $(aux_dir)/wpa_supplicant.conf /etc/wpa_supplicant/
-sudo wpa_supplicant -B -i $(ip link | egrep "^[[:digit:]]*:" | cut -d' ' -f2 | tr -d : | egrep "^wl" | head -n1) -c /etc/wpa_supplicant/wpa_supplicant.conf
+ip link | grep -E '^[[:digit:]]*: *wl.*:' | sed -E 's/^(.*): *(.*): (.*)/\2/' | head -n1 | 
+    xargs -I {} sudo wpa_supplicant -B -i {} -c /etc/wpa_supplicant/wpa_supplicant.conf
 
 ####################################################################
 

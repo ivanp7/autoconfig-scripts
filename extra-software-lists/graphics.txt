@@ -1,0 +1,5 @@
+telegram-desktop
+qbittorrent
+phototonic vlc
+libreoffice-still aspell-ru
+
