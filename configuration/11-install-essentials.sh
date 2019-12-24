@@ -33,6 +33,7 @@ install_official_packages moreutils jq dialog expect
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 install_official_packages youtube-dl
+install_official_packages sdcv
 
 ####################################################################
 
@@ -64,7 +65,10 @@ cd $CONFIG_DIRECTORY
 ####################################################################
 
 print_message "Installing essentials from AUR..."
-install_packages lf archivemount roswell
+install_packages lf archivemount 
+install_packages roswell
+install_packages stardict-full-eng-rus stardict-full-rus-eng
+install_packages stardict-slang-eng-rus stardict-computer-ru
 
 ####################################################################
 
