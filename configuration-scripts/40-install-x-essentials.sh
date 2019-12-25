@@ -37,6 +37,13 @@ install_official_packages lxappearance
 print_message "Installing media software..."
 install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu
 
+print_message "Installing surf..."
+cd /tmp
+git clone $GIT_URL_PREFIX/surf-ivanp7.git
+cd surf-ivanp7
+makepkg --noconfirm -si
+cd $CONFIG_DIRECTORY
+
 print_message "Installing Firefox and addons..."
 install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
 
