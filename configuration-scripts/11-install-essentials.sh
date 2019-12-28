@@ -18,7 +18,7 @@ install_official_packages vim w3m screen tmux
 install_official_packages neofetch htop glances
 install_official_packages pkgfile
 sudo pkgfile --update
-install_official_packages octave
+sudo systemctl enable pkgfile-update.timer
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
@@ -34,6 +34,7 @@ install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
 install_official_packages youtube-dl
 install_official_packages sdcv
+install_official_packages octave
 
 ####################################################################
 
