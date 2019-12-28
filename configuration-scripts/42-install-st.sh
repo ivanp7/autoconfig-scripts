@@ -28,7 +28,7 @@ cd src/st-luke/
 install -Dm 644 $(aux_dir)/config.h ./
 cd ../..
 
-makepkg --noconfirm -ei
+makepkg --noconfirm -esi
 
 ####################################################################
 
