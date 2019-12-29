@@ -45,13 +45,5 @@ sudo gpasswd -a $(whoami) video
 
 ####################################################################
 
-sudo install -Dm 755 $(aux_dir)/tmux-refresh-clients.sh /usr/local/bin/
-sudo install -Dm 755 $(aux_dir)/tmux-refresh_op.sh /usr/local/bin/
-sudo install -Dm 644 $(aux_dir)/yaft-tmux-refreshing.service /etc/systemd/system/
-
-sudo systemctl enable --now yaft-tmux-refreshing.service
-
-####################################################################
-
 finish
 
