@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing long term support kernel ####"
+print_message "#### Creating necessary directories ####"
 
 ####################################################################
 
@@ -13,9 +13,7 @@ check_user
 
 ####################################################################
 
-install_official_packages linux-lts
-uninstall_packages linux
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+mkdir -p $HOME/.cache/zsh
 
 ####################################################################
 
