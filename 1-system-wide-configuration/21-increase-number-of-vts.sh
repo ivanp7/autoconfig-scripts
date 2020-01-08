@@ -5,18 +5,15 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing long term support kernel ####"
+print_message "#### Increasing number of virtual terminals ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-install_official_packages linux-lts
-uninstall_packages linux
-sudo mkinitcpio -P
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+sed -i "s/^#NAutoVTs=.*$/NAutoVTs=12/" /etc/systemd/logind.conf
 
 ####################################################################
 

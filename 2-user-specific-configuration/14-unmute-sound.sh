@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling swap file ####"
+print_message "#### Unmuting sound  ####"
 
 ####################################################################
 
@@ -13,11 +13,9 @@ check_user
 
 ####################################################################
 
-sudo fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-cat $(aux_dir)/fstab_swap | sudo tee -a /etc/fstab
+amixer sset Master unmute
+amixer sset Speaker unmute
+amixer sset Headphone unmute
 
 ####################################################################
 

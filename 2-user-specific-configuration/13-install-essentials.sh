@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Decrease swappiness ####"
+print_message "#### Installing essentials ####"
 
 ####################################################################
 
@@ -13,8 +13,14 @@ check_user
 
 ####################################################################
 
-echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-sudo sysctl vm.swappiness=10
+print_message "Changing shell to zsh..."
+mkdir -p $HOME/.cache/zsh
+chsh -s /usr/bin/zsh
+
+####################################################################
+
+print_message "Installing dotfiles..."
+sh dotfiles/install.sh
 
 ####################################################################
 

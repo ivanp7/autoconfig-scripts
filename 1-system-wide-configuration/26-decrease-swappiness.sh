@@ -5,15 +5,16 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Creating necessary directories ####"
+print_message "#### Decrease swappiness ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-mkdir -p $HOME/.cache/zsh
+echo "vm.swappiness=10" | tee -a /etc/sysctl.d/99-sysctl.conf
+sysctl vm.swappiness=10
 
 ####################################################################
 

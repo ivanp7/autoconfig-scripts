@@ -5,15 +5,18 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling middle mouse click emulation ####"
+print_message "#### Installing WPA supplicant ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sudo install -Dm 644 $(aux_dir)/10-evdev.conf /etc/X11/xorg.conf.d/
+install_official_packages wpa_supplicant
+install -Dm 644 $(aux_dir)/wpa_supplicant.conf /etc/wpa_supplicant/
+ip link | grep -E '^[[:digit:]]*: *wl.*:' | sed -E 's/^(.*): *(.*): (.*)/\2/' | head -n1 | 
+    xargs -I {} wpa_supplicant -B -i {} -c /etc/wpa_supplicant/wpa_supplicant.conf
 
 ####################################################################
 

@@ -9,7 +9,7 @@ print_message "#### Installing X essentials ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
@@ -19,11 +19,9 @@ uninstall_packages vim
 install_official_packages gvim
 
 install_official_packages bspwm picom unclutter libnotify dunst maim
-install_packages shantz-xwinwrap-bzr
 install_official_packages sxhkd wmctrl xdotool
 install_official_packages dex
 install_official_packages dmenu
-install_packages polybar
 
 install_official_packages xclip xsel
 
@@ -42,12 +40,6 @@ install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
 
 print_message "Installing basic games..."
 install_official_packages gnome-mahjongg
-
-####################################################################
-
-print_message "Installing x-dotfiles..."
-git clone $GIT_URL_PREFIX/x-dotfiles.git
-sh x-dotfiles/install.sh
 
 ####################################################################
 

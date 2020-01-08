@@ -5,18 +5,18 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing WPA supplicant ####"
+print_message "#### Installing long term support kernel ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-install_official_packages wpa_supplicant
-sudo install -Dm 644 $(aux_dir)/wpa_supplicant.conf /etc/wpa_supplicant/
-ip link | grep -E '^[[:digit:]]*: *wl.*:' | sed -E 's/^(.*): *(.*): (.*)/\2/' | head -n1 | 
-    xargs -I {} sudo wpa_supplicant -B -i {} -c /etc/wpa_supplicant/wpa_supplicant.conf
+install_official_packages linux-lts
+uninstall_packages linux
+mkinitcpio -P
+grub-mkconfig -o /boot/grub/grub.cfg
 
 ####################################################################
 

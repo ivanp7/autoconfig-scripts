@@ -5,18 +5,19 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing ALSA  ####"
+print_message "#### Enabling swap file ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-install_official_packages alsa-utils
-amixer sset Master unmute
-amixer sset Speaker unmute
-amixer sset Headphone unmute
+fallocate -l $(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))k /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+cat $(aux_dir)/fstab_swap | tee -a /etc/fstab
 
 ####################################################################
 

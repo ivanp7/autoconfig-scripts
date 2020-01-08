@@ -5,17 +5,16 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Setting grub wallpaper ####"
+print_message "#### Setting console keyboard repeat rate/delay ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sudo install -Dm 644 $(aux_dir)/archlinux.png /boot/grub/
-sudo sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/archlinux.png"@' /etc/default/grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+install -Dm 644 $(aux_dir)/set-kbdrate.service /etc/systemd/system/
+systemctl enable --now set-kbdrate.service
 
 ####################################################################
 

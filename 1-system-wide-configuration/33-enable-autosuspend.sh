@@ -5,15 +5,19 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Setting VMWare graphics driver custom resolution 1920x1080x24 60 Hz ####"
+print_message "#### Enabling autosuspending on inactivity ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sudo install -Dm 644 $(aux_dir)/90-resolution.conf /etc/X11/xorg.conf.d/
+install -Dm 755 $(aux_dir)/autosuspend.sh /usr/local/bin/autosuspend/
+install -Dm 755 $(aux_dir)/autosuspend_op.sh /usr/local/bin/
+install -Dm 644 $(aux_dir)/autosuspend.service /etc/systemd/system/
+
+systemctl enable --now autosuspend.service
 
 ####################################################################
 
