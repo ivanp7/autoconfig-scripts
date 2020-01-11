@@ -23,6 +23,9 @@ print_message "Installing sudo..."
 pacman --noconfirm -Syu
 pacman --noconfirm -S sudo
 
+print_message "Configuring pacman..."
+sed -i "s/^#Color/Color/" /etc/pacman.conf
+
 ####################################################################
 
 finish
