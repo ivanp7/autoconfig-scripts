@@ -1,4 +1,5 @@
 telegram-desktop
+gmapcatcher
 qbittorrent
 phototonic vlc
 libreoffice-still aspell-ru
