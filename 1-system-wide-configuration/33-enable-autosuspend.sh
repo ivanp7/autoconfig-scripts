@@ -13,9 +13,8 @@ check_root
 
 ####################################################################
 
-install -Dm 755 $(aux_dir)/autosuspend.sh /usr/local/bin/autosuspend/
-install -Dm 755 $(aux_dir)/autosuspend_op.sh /usr/local/bin/
-install -Dm 644 $(aux_dir)/autosuspend.service /etc/systemd/system/
+install -Dm 755 -t /usr/local/bin/autosuspend/ $(aux_dir)/autosuspend.sh $(aux_dir)/autosuspend_op.sh
+install -Dm 644 -t /etc/systemd/system/ $(aux_dir)/autosuspend.service 
 
 systemctl enable --now autosuspend.service
 
