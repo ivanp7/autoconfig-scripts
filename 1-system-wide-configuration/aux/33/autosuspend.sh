@@ -14,7 +14,7 @@ connections_on_port ()
 
 process_active ()
 {
-    [ "$(pgrep "$1" | wc -l)" -gt "0" ]
+    [ "$(pgrep -x "$1" | wc -l)" -gt "0" ]
     return
 }
 
@@ -24,7 +24,7 @@ process_active ()
 check_if_active ()
 {
     local SSH_PORT=62222
-    users_logged_in || connections_on_port $SSH_PORT || process_active "^tmux"
+    users_logged_in || connections_on_port $SSH_PORT || process_active "tmux: server"
     return
 }
 
