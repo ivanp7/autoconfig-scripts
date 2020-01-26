@@ -24,7 +24,7 @@ install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
 install_official_packages gnu-netcat wol ethtool ifplugd 
 install_official_packages cpupower
-install_official_packages dosfstools ntfsprogs inotify-tools
+install_official_packages dosfstools ntfsprogs inotify-tools entr
 install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
