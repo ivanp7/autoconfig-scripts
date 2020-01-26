@@ -36,7 +36,8 @@ print_message "Installing media software..."
 install_official_packages sxiv feh zathura zathura-pdf-mupdf zathura-djvu
 
 print_message "Installing Firefox and addons..."
-install_official_packages firefox firefox-ublock-origin firefox-decentraleyes
+install_official_packages firefox firefox-extension-https-everywhere 
+install_official_packages firefox-ublock-origin firefox-decentraleyes
 
 print_message "Installing basic games..."
 install_official_packages gnome-mahjongg
