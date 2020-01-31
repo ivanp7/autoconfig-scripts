@@ -13,8 +13,10 @@ check_root
 
 ####################################################################
 
-install_official_packages base-devel ctags
-install_official_packages vim w3m screen tmux 
+install_official_packages base-devel
+install_official_packages vim ctags
+install_official_packages gdb strace
+install_official_packages screen tmux 
 install_official_packages neofetch htop glances
 install_official_packages pkgfile
 pkgfile --update
@@ -22,7 +24,8 @@ systemctl enable pkgfile-update.timer
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
-install_official_packages gnu-netcat wol ethtool ifplugd 
+install_official_packages gnu-netcat ngrep tcpdump 
+install_official_packages wol ethtool ifplugd 
 install_official_packages cpupower
 install_official_packages dosfstools ntfsprogs inotify-tools entr
 install_official_packages ncdu extundelete trash-cli
@@ -33,7 +36,7 @@ install_official_packages moreutils jq dialog expect
 install_official_packages alsa-utils
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer
-install_official_packages youtube-dl
+install_official_packages w3m youtube-dl
 install_official_packages sdcv
 install_official_packages octave
 
