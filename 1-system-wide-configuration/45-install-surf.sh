@@ -17,7 +17,7 @@ DIR=surf-ivanp7
 
 cd /tmp
 if [ -d "$DIR" ]
-then rm -rf $DIR/*.pkg.tar.xz
+then rm -rf $DIR/*.pkg.tar.*
 else git clone $GIT_URL_PREFIX/surf-ivanp7.git
 fi
 cd $DIR
