@@ -125,10 +125,10 @@ and all the remaining arguments are used as a command
 even without it.
 .SH SHORTCUTS
 .TP
-.B Alt-Shift-j/k or Alt-Up/Down or Alt-Mouse Wheel
+.B Alt-Ctrl-j/k or Alt-Up/Down or Alt-Mouse Wheel
 Scroll up/down one line at a time.
 .TP
-.B Alt-Shift-u/d or Alt-Page Up/Page Down
+.B Alt-Ctrl-u/d or Alt-Page Up/Page Down
 Scroll up/down one screen at a time.
 .TP
 .B Alt-Shift-Page Up/Page Down or Alt-Shift-Mouse Wheel
@@ -137,19 +137,19 @@ Increase or decrease font size.
 .B Alt-Home
 Reset to default font size.
 .TP
-.B Shift-Insert or Alt-v
+.B Shift-Insert or Alt-Ctrl-v
 Paste from clipboard.
 .TP
-.B Alt-c
+.B Alt-Ctrl-c
 Copy to clipboard.
 .TP
-.B Alt-p
+.B Alt-Ctrl-p
 Paste/input primary selection.
 .TP
-.B Alt-y
+.B Alt-Ctrl-y
 Show dmenu menu of all URLs on screen and choose one to copy.
 .TP
-.B Alt-o
+.B Alt-Ctrl-o
 Show dmenu menu of all recently run commands and copy the output of the chosen command to the clipboard.
 .I xclip
 required.
@@ -159,24 +159,20 @@ Send a break in the serial line.
 Break key is obtained in PC keyboards
 pressing at the same time control and pause.
 .TP
-.B Ctrl-Print Screen
+.B Ctrl-Scroll Lock
 Toggle if st should print to the
 .I iofile.
 .TP
-.B Shift-Print Screen
+.B Shift-Scroll Lock
 Print the full screen to the
 .I iofile.
 .TP
-.B Print Screen
+.B Scroll Lock
 Print the selection to the
 .I iofile.
 .TP
-.B Alt-Ctrl
-Launch dmenu to enter a unicode codepoint and send the corresponding glyph
-to st.
-.TP
-.B Alt-a/s/d/f/g/h/j/k/l/;
-Type 1/2/3/4/5/6/7/8/9/0, accordingly.
+.B Alt-[Shift]-q/a/s/d/f/g/h/j/k/l/;/'/</>/p/i/o
+Emulate typing of [Shift+] `/1/2/3/4/5/6/7/8/9/0/-/\\/=/[/], accordingly.
 .SH CUSTOMIZATION
 .B st
 can be customized by creating a custom config.h and (re)compiling the source
