@@ -84,7 +84,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.80;
+float alpha = 0.85;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -224,11 +224,55 @@ static char *copyurlcmd[] = { "/bin/sh", "-c",
 
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
+/******************************************************************************/
+
 void
 write_char(const Arg *arg)
 {
     ttywrite((char*)&arg->i, 1, 1);
 }
+
+static int language = 0; // 0 -- english QWERTY, 1 -- russian JCUKEN
+
+void
+switch_language(const Arg *arg)
+{
+    language = 1 - language;
+}
+
+void 
+write_char2(const Arg *arg)
+{
+    char *ch = (char*)arg->v + language; // quick hack
+    size_t len = ch[0] >= 0 ? 1 : 2; // quick hack
+    ttywrite(ch, len, 1);
+}
+
+#define DEF_ALT_BUTTON(mod, keysym, chr) \
+    { mod, keysym, write_char, {.i = chr} }
+
+#define DEF_ALT_BUTTONS(key_en_low, key_ru_low, chr_low, key_en_up, key_ru_up, chr_up) \
+    DEF_ALT_BUTTON(MODKEY, key_en_low, chr_low), \
+    DEF_ALT_BUTTON(MODKEY, key_ru_low, chr_low), \
+    DEF_ALT_BUTTON(MODKEY|ShiftMask, key_en_up, chr_up), \
+    DEF_ALT_BUTTON(MODKEY|ShiftMask, key_ru_up, chr_up)
+
+#define DEF_ALT_CTRL_BUTTONS(key_en_low, key_ru_low, chr_low, key_en_up, key_ru_up, chr_up) \
+    DEF_ALT_BUTTON(MODKEY|ControlMask, key_en_low, chr_low), \
+    DEF_ALT_BUTTON(MODKEY|ControlMask, key_ru_low, chr_low), \
+    DEF_ALT_BUTTON(MODKEY|ControlMask|ShiftMask, key_en_up, chr_up), \
+    DEF_ALT_BUTTON(MODKEY|ControlMask|ShiftMask, key_ru_up, chr_up)
+
+#define DEF_BUTTON(mod, keysym, chars) \
+    { mod, keysym, write_char2, {.v = chars} }
+
+#define DEF_BUTTONS(key_en_low, key_ru_low, chars_low, key_en_up, key_ru_up, chars_up)     \
+    DEF_BUTTON(0, key_en_low, chars_low), \
+    DEF_BUTTON(0, key_ru_low, chars_low), \
+    DEF_BUTTON(ShiftMask, key_en_up, chars_up), \
+    DEF_BUTTON(ShiftMask, key_ru_up, chars_up)
+
+/******************************************************************************/
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -262,75 +306,76 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ControlMask,   XK_y,           externalpipe,   {.v = copyurlcmd } },
 	{ MODKEY|ControlMask,   XK_o,           externalpipe,   {.v = copyoutput } },
 
-    /* Easy characters */
-	{ MODKEY,               XK_q,           write_char,     {.i = '`'} },
-	{ MODKEY,               XK_a,           write_char,     {.i = '1'} },
-	{ MODKEY,               XK_s,           write_char,     {.i = '2'} },
-	{ MODKEY,               XK_d,           write_char,     {.i = '3'} },
-	{ MODKEY,               XK_f,           write_char,     {.i = '4'} },
-	{ MODKEY,               XK_g,           write_char,     {.i = '5'} },
-	{ MODKEY,               XK_h,           write_char,     {.i = '6'} },
-	{ MODKEY,               XK_j,           write_char,     {.i = '7'} },
-	{ MODKEY,               XK_k,           write_char,     {.i = '8'} },
-	{ MODKEY,               XK_l,           write_char,     {.i = '9'} },
-	{ MODKEY,               XK_semicolon,   write_char,     {.i = '0'} },
-	{ MODKEY,               XK_apostrophe,  write_char,     {.i = '-'} },
-	{ MODKEY,               XK_slash,       write_char,     {.i = '\\'} },
-	{ MODKEY,               XK_p,           write_char,     {.i = '='} },
-	{ MODKEY,               XK_i,           write_char,     {.i = '['} },
-	{ MODKEY,               XK_o,           write_char,     {.i = ']'} },
+    /* Input */
+    { MODKEY,               XK_space,       switch_language, {} },
 
-	{ MODKEY|ShiftMask,     XK_Q,           write_char,     {.i = '~'} },
-	{ MODKEY|ShiftMask,     XK_A,           write_char,     {.i = '!'} },
-	{ MODKEY|ShiftMask,     XK_S,           write_char,     {.i = '@'} },
-	{ MODKEY|ShiftMask,     XK_D,           write_char,     {.i = '#'} },
-	{ MODKEY|ShiftMask,     XK_F,           write_char,     {.i = '$'} },
-	{ MODKEY|ShiftMask,     XK_G,           write_char,     {.i = '%'} },
-	{ MODKEY|ShiftMask,     XK_H,           write_char,     {.i = '^'} },
-	{ MODKEY|ShiftMask,     XK_J,           write_char,     {.i = '&'} },
-	{ MODKEY|ShiftMask,     XK_K,           write_char,     {.i = '*'} },
-	{ MODKEY|ShiftMask,     XK_L,           write_char,     {.i = '('} },
-	{ MODKEY|ShiftMask,     XK_colon,       write_char,     {.i = ')'} },
-	{ MODKEY|ShiftMask,     XK_quotedbl,    write_char,     {.i = '_'} },
-	{ MODKEY|ShiftMask,     XK_question,    write_char,     {.i = '|'} },
-	{ MODKEY|ShiftMask,     XK_P,           write_char,     {.i = '+'} },
-	{ MODKEY|ShiftMask,     XK_I,           write_char,     {.i = '{'} },
-	{ MODKEY|ShiftMask,     XK_O,           write_char,     {.i = '}'} },
+    DEF_BUTTONS( XK_grave,        XK_Cyrillic_io,       "`ё", XK_asciitilde, XK_Cyrillic_IO,       "~Ё"),
+    DEF_BUTTON( ShiftMask, XK_at,          "@\""),
+    DEF_BUTTON( ShiftMask, XK_dollar,      "$;"),
+    DEF_BUTTON( ShiftMask, XK_asciicircum, "^:"),
+    DEF_BUTTON( ShiftMask, XK_ampersand,   "&?"),
 
-    /* Easy characters -- cyrillic */
-	{ MODKEY,               XK_Cyrillic_shorti, write_char,     {.i = '`'} },
-	{ MODKEY,               XK_Cyrillic_ef,     write_char,     {.i = '1'} },
-	{ MODKEY,               XK_Cyrillic_yeru,   write_char,     {.i = '2'} },
-	{ MODKEY,               XK_Cyrillic_ve,     write_char,     {.i = '3'} },
-	{ MODKEY,               XK_Cyrillic_a,      write_char,     {.i = '4'} },
-	{ MODKEY,               XK_Cyrillic_pe,     write_char,     {.i = '5'} },
-	{ MODKEY,               XK_Cyrillic_er,     write_char,     {.i = '6'} },
-	{ MODKEY,               XK_Cyrillic_o,      write_char,     {.i = '7'} },
-	{ MODKEY,               XK_Cyrillic_el,     write_char,     {.i = '8'} },
-	{ MODKEY,               XK_Cyrillic_de,     write_char,     {.i = '9'} },
-	{ MODKEY,               XK_Cyrillic_zhe,    write_char,     {.i = '0'} },
-	{ MODKEY,               XK_Cyrillic_e,      write_char,     {.i = '-'} },
-	{ MODKEY,               XK_period,          write_char,     {.i = '\\'} },
-	{ MODKEY,               XK_Cyrillic_ze,     write_char,     {.i = '='} },
-	{ MODKEY,               XK_Cyrillic_sha,    write_char,     {.i = '['} },
-	{ MODKEY,               XK_Cyrillic_shcha,  write_char,     {.i = ']'} },
+    DEF_BUTTONS( XK_q,            XK_Cyrillic_shorti,   "qй", XK_Q,          XK_Cyrillic_SHORTI,   "QЙ"),
+    DEF_BUTTONS( XK_w,            XK_Cyrillic_tse,      "wц", XK_W,          XK_Cyrillic_TSE,      "WЦ"),
+    DEF_BUTTONS( XK_e,            XK_Cyrillic_u,        "eу", XK_E,          XK_Cyrillic_U,        "EУ"),
+    DEF_BUTTONS( XK_r,            XK_Cyrillic_ka,       "rк", XK_R,          XK_Cyrillic_KA,       "RК"),
+    DEF_BUTTONS( XK_t,            XK_Cyrillic_ie,       "tе", XK_T,          XK_Cyrillic_IE,       "TЕ"),
+    DEF_BUTTONS( XK_y,            XK_Cyrillic_en,       "yн", XK_Y,          XK_Cyrillic_EN,       "YН"),
+    DEF_BUTTONS( XK_u,            XK_Cyrillic_ghe,      "uг", XK_U,          XK_Cyrillic_GHE,      "UГ"),
+    DEF_BUTTONS( XK_i,            XK_Cyrillic_sha,      "iш", XK_I,          XK_Cyrillic_SHA,      "IШ"),
+    DEF_BUTTONS( XK_o,            XK_Cyrillic_shcha,    "oщ", XK_O,          XK_Cyrillic_SHCHA,    "OЩ"),
+    DEF_BUTTONS( XK_p,            XK_Cyrillic_ze,       "pз", XK_P,          XK_Cyrillic_ZE,       "PЗ"),
+    DEF_BUTTONS( XK_bracketleft,  XK_Cyrillic_ha,       "[х", XK_braceleft,  XK_Cyrillic_HA,       "{Х"),
+    DEF_BUTTONS( XK_bracketright, XK_Cyrillic_hardsign, "]ъ", XK_braceright, XK_Cyrillic_HARDSIGN, "}Ъ"),
 
-	{ MODKEY|ShiftMask,     XK_Cyrillic_SHORTI, write_char,     {.i = '~'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_EF,     write_char,     {.i = '!'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_YERU,   write_char,     {.i = '@'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_VE,     write_char,     {.i = '#'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_A,      write_char,     {.i = '$'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_PE,     write_char,     {.i = '%'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_ER,     write_char,     {.i = '^'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_O,      write_char,     {.i = '&'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_EL,     write_char,     {.i = '*'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_DE,     write_char,     {.i = '('} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_ZHE,    write_char,     {.i = ')'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_E,      write_char,     {.i = '_'} },
-	{ MODKEY|ShiftMask,     XK_comma,           write_char,     {.i = '|'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_ZE,     write_char,     {.i = '+'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_SHA,    write_char,     {.i = '{'} },
-	{ MODKEY|ShiftMask,     XK_Cyrillic_SHCHA,  write_char,     {.i = '}'} },
+    DEF_BUTTONS( XK_a,            XK_Cyrillic_ef,       "aф", XK_A,          XK_Cyrillic_EF,       "AФ"),
+    DEF_BUTTONS( XK_s,            XK_Cyrillic_yeru,     "sы", XK_S,          XK_Cyrillic_YERU,     "SЫ"),
+    DEF_BUTTONS( XK_d,            XK_Cyrillic_ve,       "dв", XK_D,          XK_Cyrillic_VE,       "DВ"),
+    DEF_BUTTONS( XK_f,            XK_Cyrillic_a,        "fа", XK_F,          XK_Cyrillic_A,        "FА"),
+    DEF_BUTTONS( XK_g,            XK_Cyrillic_pe,       "gп", XK_G,          XK_Cyrillic_PE,       "GП"),
+    DEF_BUTTONS( XK_h,            XK_Cyrillic_er,       "hр", XK_H,          XK_Cyrillic_ER,       "HР"),
+    DEF_BUTTONS( XK_j,            XK_Cyrillic_o,        "jо", XK_J,          XK_Cyrillic_O,        "JО"),
+    DEF_BUTTONS( XK_k,            XK_Cyrillic_el,       "kл", XK_K,          XK_Cyrillic_EL,       "KЛ"),
+    DEF_BUTTONS( XK_l,            XK_Cyrillic_de,       "lд", XK_L,          XK_Cyrillic_DE,       "LД"),
+    DEF_BUTTONS( XK_semicolon,    XK_Cyrillic_zhe,      ";ж", XK_colon,      XK_Cyrillic_ZHE,      ":Ж"),
+    DEF_BUTTONS( XK_apostrophe,   XK_Cyrillic_e,        "'э", XK_quotedbl,   XK_Cyrillic_E,        "\"Э"),
+
+    DEF_BUTTONS( XK_z,            XK_Cyrillic_ya,       "zя", XK_Z,          XK_Cyrillic_YA,       "ZЯ"),
+    DEF_BUTTONS( XK_x,            XK_Cyrillic_che,      "xч", XK_X,          XK_Cyrillic_CHE,      "XЧ"),
+    DEF_BUTTONS( XK_c,            XK_Cyrillic_es,       "cс", XK_C,          XK_Cyrillic_ES,       "CС"),
+    DEF_BUTTONS( XK_v,            XK_Cyrillic_em,       "vм", XK_V,          XK_Cyrillic_EM,       "VМ"),
+    DEF_BUTTONS( XK_b,            XK_Cyrillic_i,        "bи", XK_B,          XK_Cyrillic_I,        "BИ"),
+    DEF_BUTTONS( XK_n,            XK_Cyrillic_te,       "nт", XK_N,          XK_Cyrillic_TE,       "NТ"),
+    DEF_BUTTONS( XK_m,            XK_Cyrillic_softsign, "mь", XK_M,          XK_Cyrillic_SOFTSIGN, "MЬ"),
+    DEF_BUTTONS( XK_comma,        XK_Cyrillic_be,       ",б", XK_less,       XK_Cyrillic_BE,       "<Б"),
+    DEF_BUTTONS( XK_period,       XK_Cyrillic_yu,       ".ю", XK_greater,    XK_Cyrillic_YU,       ">Ю"),
+    DEF_BUTTONS( XK_slash,        XK_period,            "/.", XK_question,   XK_comma,             "?,"),
+
+    /* Language-independent characters */
+    DEF_ALT_BUTTONS( XK_q,            XK_Cyrillic_shorti,   '`',  XK_Q,          XK_Cyrillic_SHORTI,   '~'),
+
+    DEF_ALT_BUTTONS( XK_a,            XK_Cyrillic_ef,       '1',  XK_A,          XK_Cyrillic_EF,       '!'),
+    DEF_ALT_BUTTONS( XK_s,            XK_Cyrillic_yeru,     '2',  XK_S,          XK_Cyrillic_YERU,     '@'),
+    DEF_ALT_BUTTONS( XK_d,            XK_Cyrillic_ve,       '3',  XK_D,          XK_Cyrillic_VE,       '#'),
+    DEF_ALT_BUTTONS( XK_f,            XK_Cyrillic_a,        '4',  XK_F,          XK_Cyrillic_A,        '$'),
+    DEF_ALT_BUTTONS( XK_g,            XK_Cyrillic_pe,       '5',  XK_G,          XK_Cyrillic_PE,       '%'),
+    DEF_ALT_BUTTONS( XK_h,            XK_Cyrillic_er,       '6',  XK_H,          XK_Cyrillic_ER,       '^'),
+    DEF_ALT_BUTTONS( XK_j,            XK_Cyrillic_o,        '7',  XK_J,          XK_Cyrillic_O,        '&'),
+    DEF_ALT_BUTTONS( XK_k,            XK_Cyrillic_el,       '8',  XK_K,          XK_Cyrillic_EL,       '*'),
+    DEF_ALT_BUTTONS( XK_l,            XK_Cyrillic_de,       '9',  XK_L,          XK_Cyrillic_DE,       '('),
+    DEF_ALT_BUTTONS( XK_semicolon,    XK_Cyrillic_zhe,      '0',  XK_colon,      XK_Cyrillic_ZHE,      ')'),
+    DEF_ALT_BUTTONS( XK_apostrophe,   XK_Cyrillic_e,        '\'', XK_quotedbl,   XK_Cyrillic_E,        '"'),
+
+    DEF_ALT_CTRL_BUTTONS( XK_comma,        XK_Cyrillic_be,       ',',  XK_less,       XK_Cyrillic_BE,       '<'),
+    DEF_ALT_CTRL_BUTTONS( XK_period,       XK_Cyrillic_yu,       '.',  XK_greater,    XK_Cyrillic_YU,       '>'),
+    DEF_ALT_BUTTONS( XK_slash,        XK_period,            '/',  XK_question,   XK_comma,             '?'),
+
+    DEF_ALT_BUTTONS( XK_i,            XK_Cyrillic_sha,      '\\', XK_I,          XK_Cyrillic_SHA,      '|'),
+    DEF_ALT_BUTTONS( XK_o,            XK_Cyrillic_shcha,    '[',  XK_O,          XK_Cyrillic_SHCHA,    '{'),
+    DEF_ALT_BUTTONS( XK_p,            XK_Cyrillic_ze,       ']',  XK_P,          XK_Cyrillic_ZE,       '}'),
+
+    DEF_ALT_BUTTONS( XK_bracketleft,  XK_Cyrillic_ha,       '-',  XK_braceleft,  XK_Cyrillic_HA,       '_'),
+    DEF_ALT_BUTTONS( XK_bracketright, XK_Cyrillic_hardsign, '=',  XK_braceright, XK_Cyrillic_HARDSIGN, '+'),
 };
 
 /*
