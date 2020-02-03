@@ -22,6 +22,9 @@ else git clone $GIT_URL_PREFIX/tabbed-ivanp7.git
 fi
 cd $DIR
 
+HARDCODED_FONT="xos4 Terminus:size=10"
+sed -i "s/$HARDCODED_FONT/$DEFAULT_FONT/" config.h
+
 makepkg --noconfirm -si
 
 ####################################################################

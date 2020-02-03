@@ -1,4 +1,4 @@
-GIT_URL_PREFIX=https://gitlab.com/ivanp7
+GIT_URL_PREFIX=https://github.com/ivanp7
 CONFIG_DIRECTORY=/usr/local/etc/shared
 
 ####################################################################
