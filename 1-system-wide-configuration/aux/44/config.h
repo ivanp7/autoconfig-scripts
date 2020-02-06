@@ -290,15 +290,13 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ControlMask,   XK_v,           clippaste,      {.i =  0} },
 	{ MODKEY|ControlMask,   XK_p,           selpaste,       {.i =  0} },
 
-	{ MODKEY|ControlMask,   XK_k,           kscrollup,      {.i =  1} },
-	{ MODKEY|ControlMask,   XK_j,           kscrolldown,    {.i =  1} },
-	{ MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
-	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
+	{ MODKEY,               XK_Up,          kscrollup,      {.i =  10} },
+	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  10} },
 
-	{ MODKEY|ControlMask,   XK_u,           kscrollup,      {.i = -1} },
-	{ MODKEY|ControlMask,   XK_d,           kscrolldown,    {.i = -1} },
-	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ MODKEY|ControlMask,   XK_u,           kscrollup,      {.i = -10} },
+	{ MODKEY|ControlMask,   XK_d,           kscrolldown,    {.i = -10} },
+	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -10} },
+	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -10} },
 
 	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
