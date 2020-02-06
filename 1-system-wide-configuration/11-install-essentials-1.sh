@@ -52,7 +52,6 @@ install -Dm 644 $(aux_dir)/dash.hook /etc/pacman.d/hooks/
 print_message "Changing shell to zsh..."
 install_official_packages zsh zsh-completions zsh-syntax-highlighting
 
-mkdir -p /root/.cache/zsh
 mkdir -p /var/cache/zsh/
 install -Dm 644 $(aux_dir)/zsh.hook /etc/pacman.d/hooks/
 
