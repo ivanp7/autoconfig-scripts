@@ -112,6 +112,7 @@ static const char *colorname[] = {
     "#282828",   /* 256 -> bg */
     "#ebdbb2",   /* 257 -> fg */
     "#add8e6", /* 258 -> cursor */
+    "#ffc7d5", /* 259 -> cursor, alternative language */
 };
 
 
@@ -121,6 +122,7 @@ static const char *colorname[] = {
  */
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
+static unsigned int defaultcs_lang[] = {258, 259};
 static unsigned int defaultcs = 258;
 static unsigned int defaultrcs = 0;
 
@@ -238,6 +240,8 @@ void
 switch_language(const Arg *arg)
 {
     language = 1 - language;
+    defaultcs = defaultcs_lang[language];
+    redraw();
 }
 
 void 
