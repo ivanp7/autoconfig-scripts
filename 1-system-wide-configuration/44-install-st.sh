@@ -13,14 +13,7 @@ check_user
 
 ####################################################################
 
-DIR=st-luke-git
-
-cd /tmp
-if [ -d "$DIR" ]
-then rm -rf $DIR/*.pkg.tar.*
-else git clone https://aur.archlinux.org/st-luke-git.git
-fi
-cd $DIR
+clone_git_repo_and_cd st-luke-git https://aur.archlinux.org/st-luke-git.git
 
 makepkg --noconfirm -o
 cd src/st-luke/

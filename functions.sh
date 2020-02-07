@@ -23,7 +23,7 @@ check_user ()
 
 aux_dir ()
 {
-    NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
+    local NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
     echo $SCRIPT_DIR/aux/$NUM_PREFIX
 }
 
@@ -49,6 +49,23 @@ install_packages ()
 uninstall_packages ()
 {
     sudo pacman --noconfirm -R "$@"
+}
+
+clone_git_repo_and_cd ()
+{
+    local DIR=$1
+    local URL=$2
+
+    cd /tmp
+    if [ -d "$DIR" ]
+    then 
+        cd "$DIR"
+        rm -f *.pkg.tar.*
+        git pull
+    else 
+        git clone $URL
+        cd "$DIR"
+    fi
 }
 
 finish ()
