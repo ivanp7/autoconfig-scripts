@@ -1,0 +1,30 @@
+diff --git a/x.c b/x.c
+index c09392b..8787040 100644
+--- a/x.c
++++ b/x.c
+@@ -24,7 +24,7 @@ static char *argv0;
+ /* types used in config.h */
+ typedef struct {
+ 	uint mod;
+-	KeySym keysym;
++	KeyCode keycode;
+ 	void (*func)(const Arg *);
+ 	const Arg arg;
+ } Shortcut;
+@@ -1869,6 +1869,7 @@ void
+ kpress(XEvent *ev)
+ {
+ 	XKeyEvent *e = &ev->xkey;
++	KeyCode kcode = e->keycode;
+ 	KeySym ksym;
+ 	char buf[32], *customkey;
+ 	int len;
+@@ -1882,7 +1883,7 @@ kpress(XEvent *ev)
+ 	len = XmbLookupString(xw.xic, e, buf, sizeof buf, &ksym, &status);
+ 	/* 1. shortcuts */
+ 	for (bp = shortcuts; bp < shortcuts + LEN(shortcuts); bp++) {
+-		if (ksym == bp->keysym && match(bp->mod, e->state)) {
++		if (kcode == bp->keycode && match(bp->mod, e->state)) {
+ 			bp->func(&(bp->arg));
+ 			return;
+ 		}

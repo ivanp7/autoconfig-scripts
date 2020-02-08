@@ -111,8 +111,11 @@ static const char *colorname[] = {
     /* more colors can be added after 255 to use with DefaultXX */
     "#282828",   /* 256 -> bg */
     "#ebdbb2",   /* 257 -> fg */
+
     "#add8e6", /* 258 -> cursor */
     "#ffc7d5", /* 259 -> cursor, alternative language */
+    "#3333ff", /* 260 -> cursor, caps lock */
+    "#ff3333", /* 261 -> cursor, alternative language, caps lock */
 };
 
 
@@ -122,7 +125,7 @@ static const char *colorname[] = {
  */
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
-static unsigned int defaultcs_lang[] = {258, 259};
+static unsigned int defaultcs_lang[] = {258, 259, 260, 261};
 static unsigned int defaultcs = 258;
 static unsigned int defaultrcs = 0;
 
@@ -235,149 +238,210 @@ write_char(const Arg *arg)
 }
 
 static int language = 0; // 0 -- english QWERTY, 1 -- russian JCUKEN
+static int capslock = 0; // 0 -- english QWERTY, 1 -- russian JCUKEN
+
+void
+update_cursor()
+{
+    defaultcs = defaultcs_lang[language + 2*capslock];
+    redraw();
+}
 
 void
 switch_language(const Arg *arg)
 {
     language = 1 - language;
-    defaultcs = defaultcs_lang[language];
-    redraw();
+    update_cursor();
+}
+
+void
+switch_capslock(const Arg *arg)
+{
+    capslock = 1 - capslock;
+    update_cursor();
 }
 
 void 
 write_char2(const Arg *arg)
 {
-    char *ch = (char*)arg->v + language; // quick hack
-    size_t len = ch[0] >= 0 ? 1 : 2; // quick hack
-    ttywrite(ch, len, 1);
+    int index = language + 2*capslock;
+    size_t i = 0, len;
+    char *ch = (char*)arg->v;
+    unsigned char c;
+
+    for (size_t ind = 0; ind < index; ind++)
+    {
+        c = (unsigned char)ch[i];
+        if (c >> 7 == 0)
+            i++;
+        else if (c >> 5 == 6)
+            i+=2;
+        else if (c >> 4 == 14)
+            i+=3;
+        else if (c >> 3 == 30)
+            i+=4;
+        else if (c >> 2 == 62)
+            i+=5;
+        else if (c >> 1 == 126)
+            i+=6;
+    }
+
+    c = (unsigned char)ch[i];
+    if (c >> 7 == 0)
+        len = 1;
+    else if (c >> 5 == 6)
+        len = 2;
+    else if (c >> 4 == 14)
+        len = 3;
+    else if (c >> 3 == 30)
+        len = 4;
+    else if (c >> 2 == 62)
+        len = 5;
+    else if (c >> 1 == 126)
+        len = 6;
+
+    ttywrite(ch+i, len, 1);
 }
 
-#define DEF_ALT_BUTTON(mod, keysym, chr) \
-    { mod, keysym, write_char, {.i = chr} }
+#define DEF_FUNCTION(mod, keycode, fun, arg) \
+    { mod, keycode, fun, arg }, \
+    { mod|LockMask, keycode, fun, arg }
 
-#define DEF_ALT_BUTTONS(key_en_low, key_ru_low, chr_low, key_en_up, key_ru_up, chr_up) \
-    DEF_ALT_BUTTON(MODKEY, key_en_low, chr_low), \
-    DEF_ALT_BUTTON(MODKEY, key_ru_low, chr_low), \
-    DEF_ALT_BUTTON(MODKEY|ShiftMask, key_en_up, chr_up), \
-    DEF_ALT_BUTTON(MODKEY|ShiftMask, key_ru_up, chr_up)
+#define DEF_BUTTON_1(mod, keycode, chr) \
+    { mod, keycode, write_char, {.i = chr} }
 
-#define DEF_ALT_CTRL_BUTTONS(key_en_low, key_ru_low, chr_low, key_en_up, key_ru_up, chr_up) \
-    DEF_ALT_BUTTON(MODKEY|ControlMask, key_en_low, chr_low), \
-    DEF_ALT_BUTTON(MODKEY|ControlMask, key_ru_low, chr_low), \
-    DEF_ALT_BUTTON(MODKEY|ControlMask|ShiftMask, key_en_up, chr_up), \
-    DEF_ALT_BUTTON(MODKEY|ControlMask|ShiftMask, key_ru_up, chr_up)
+#define DEF_CHAR(mod, keycode, chr_low, chr_up) \
+    DEF_BUTTON_1(mod|0, keycode, chr_low), \
+    DEF_BUTTON_1(mod|LockMask, keycode, chr_low), \
+    DEF_BUTTON_1(mod|ShiftMask, keycode, chr_up), \
+    DEF_BUTTON_1(mod|LockMask|ShiftMask, keycode, chr_up)
 
-#define DEF_BUTTON(mod, keysym, chars) \
-    { mod, keysym, write_char2, {.v = chars} }
+#define DEF_BUTTON_2(mod, keycode, chars) \
+    { mod, keycode, write_char2, {.v = chars} }
 
-#define DEF_BUTTONS(key_en_low, key_ru_low, chars_low, key_en_up, key_ru_up, chars_up)     \
-    DEF_BUTTON(0, key_en_low, chars_low), \
-    DEF_BUTTON(0, key_ru_low, chars_low), \
-    DEF_BUTTON(ShiftMask, key_en_up, chars_up), \
-    DEF_BUTTON(ShiftMask, key_ru_up, chars_up)
+#define DEF_LETTER(mod, keycode, chars_low, chars_up) \
+    DEF_BUTTON_2(mod|0, keycode, chars_low chars_up), \
+    DEF_BUTTON_2(mod|LockMask, keycode, chars_low chars_up), \
+    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_up chars_low), \
+    DEF_BUTTON_2(mod|LockMask|ShiftMask, keycode, chars_up chars_low)
+
+#define DEF_LETTER_SHIFT(mod, keycode, chars, chars_s) \
+    DEF_BUTTON_2(mod|0, keycode, chars), \
+    DEF_BUTTON_2(mod|LockMask, keycode, chars), \
+    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_s), \
+    DEF_BUTTON_2(mod|LockMask|ShiftMask, keycode, chars_s)
 
 /******************************************************************************/
 
 static Shortcut shortcuts[] = {
-	/* mask                 keysym          function        argument */
-	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Scroll_Lock, toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Scroll_Lock, printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Scroll_Lock, printsel,       {.i =  0} },
+	/*            mask                  keycode                 function        argument */
+	DEF_FUNCTION( XK_ANY_MOD,           127 /*XK_Break*/,       sendbreak,      {.i =  0} ),
+	DEF_FUNCTION( ControlMask,          78 /*XK_Scroll_Lock*/,  toggleprinter,  {.i =  0} ),
+	DEF_FUNCTION( ShiftMask,            78 /*XK_Scroll_Lock*/,  printscreen,    {.i =  0} ),
+	DEF_FUNCTION( XK_ANY_MOD,           78 /*XK_Scroll_Lock*/,  printsel,       {.i =  0} ),
 
-	{ ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
-	{ MODKEY|ControlMask,   XK_c,           clipcopy,       {.i =  0} },
-	{ MODKEY|ControlMask,   XK_v,           clippaste,      {.i =  0} },
-	{ MODKEY|ControlMask,   XK_p,           selpaste,       {.i =  0} },
+	DEF_FUNCTION( ShiftMask,            118 /*XK_Insert*/,      clippaste,      {.i =  0} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   54 /*XK_c*/,            clipcopy,       {.i =  0} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   55 /*XK_v*/,            clippaste,      {.i =  0} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   33 /*XK_p*/,            selpaste,       {.i =  0} ),
 
-	{ MODKEY,               XK_Up,          kscrollup,      {.i =  10} },
-	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  10} },
+	DEF_FUNCTION( MODKEY,               111 /*XK_Up*/,          kscrollup,      {.i =  10} ),
+	DEF_FUNCTION( MODKEY,               116 /*XK_Down*/,        kscrolldown,    {.i =  10} ),
 
-	{ MODKEY|ControlMask,   XK_u,           kscrollup,      {.i = -10} },
-	{ MODKEY|ControlMask,   XK_d,           kscrolldown,    {.i = -10} },
-	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -10} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -10} },
+	DEF_FUNCTION( MODKEY|ControlMask,   30 /*XK_u*/,            kscrollup,      {.i = -10} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   40 /*XK_d*/,            kscrolldown,    {.i = -10} ),
+	DEF_FUNCTION( MODKEY,               112 /*XK_Page_Up*/,     kscrollup,      {.i = -10} ),
+	DEF_FUNCTION( MODKEY,               117 /*XK_Page_Down*/,   kscrolldown,    {.i = -10} ),
 
-	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Up,          zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Down,        zoom,           {.f = -1} },
+	DEF_FUNCTION( MODKEY,               110 /*XK_Home*/,        zoomreset,      {.f =  0} ),
+	DEF_FUNCTION( TERMMOD,              112 /*XK_Prior*/,       zoom,           {.f = +1} ),
+	DEF_FUNCTION( TERMMOD,              117 /*XK_Next*/,        zoom,           {.f = -1} ),
+	DEF_FUNCTION( TERMMOD,              111 /*XK_Up*/,          zoom,           {.f = +1} ),
+	DEF_FUNCTION( TERMMOD,              116 /*XK_Down*/,        zoom,           {.f = -1} ),
 
 	/* { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } }, */
-	{ MODKEY|ControlMask,   XK_y,           externalpipe,   {.v = copyurlcmd } },
-	{ MODKEY|ControlMask,   XK_o,           externalpipe,   {.v = copyoutput } },
+	DEF_FUNCTION( MODKEY|ControlMask,   29 /*XK_y*/,            externalpipe,   {.v = copyurlcmd } ),
+	DEF_FUNCTION( MODKEY|ControlMask,   32 /*XK_o*/,            externalpipe,   {.v = copyoutput } ),
 
     /* Input */
-    { MODKEY,               XK_space,       switch_language, {} },
+    DEF_FUNCTION( MODKEY,               65 /*XK_space*/,        switch_language, {} ),
+    DEF_FUNCTION( MODKEY,               135 /*XK_Menu*/,        switch_capslock, {} ),
 
-    DEF_BUTTONS( XK_grave,        XK_Cyrillic_io,       "`ё", XK_asciitilde, XK_Cyrillic_IO,       "~Ё"),
-    DEF_BUTTON( ShiftMask, XK_at,          "@\""),
-    DEF_BUTTON( ShiftMask, XK_dollar,      "$;"),
-    DEF_BUTTON( ShiftMask, XK_asciicircum, "^:"),
-    DEF_BUTTON( ShiftMask, XK_ampersand,   "&?"),
+    DEF_CHAR(0, 49, '`', '~'),
+    DEF_CHAR(0, 10, '1', '!'),
+    DEF_CHAR(0, 11, '2', '@'),
+    DEF_CHAR(0, 12, '3', '#'),
+    DEF_CHAR(0, 13, '4', '$'),
+    DEF_CHAR(0, 14, '5', '%'),
+    DEF_CHAR(0, 15, '6', '^'),
+    DEF_CHAR(0, 16, '7', '&'),
+    DEF_CHAR(0, 17, '8', '*'),
+    DEF_CHAR(0, 18, '9', '('),
+    DEF_CHAR(0, 19, '0', ')'),
+    DEF_CHAR(0, 20, '-', '_'),
+    DEF_CHAR(0, 21, '=', '+'),
 
-    DEF_BUTTONS( XK_q,            XK_Cyrillic_shorti,   "qй", XK_Q,          XK_Cyrillic_SHORTI,   "QЙ"),
-    DEF_BUTTONS( XK_w,            XK_Cyrillic_tse,      "wц", XK_W,          XK_Cyrillic_TSE,      "WЦ"),
-    DEF_BUTTONS( XK_e,            XK_Cyrillic_u,        "eу", XK_E,          XK_Cyrillic_U,        "EУ"),
-    DEF_BUTTONS( XK_r,            XK_Cyrillic_ka,       "rк", XK_R,          XK_Cyrillic_KA,       "RК"),
-    DEF_BUTTONS( XK_t,            XK_Cyrillic_ie,       "tе", XK_T,          XK_Cyrillic_IE,       "TЕ"),
-    DEF_BUTTONS( XK_y,            XK_Cyrillic_en,       "yн", XK_Y,          XK_Cyrillic_EN,       "YН"),
-    DEF_BUTTONS( XK_u,            XK_Cyrillic_ghe,      "uг", XK_U,          XK_Cyrillic_GHE,      "UГ"),
-    DEF_BUTTONS( XK_i,            XK_Cyrillic_sha,      "iш", XK_I,          XK_Cyrillic_SHA,      "IШ"),
-    DEF_BUTTONS( XK_o,            XK_Cyrillic_shcha,    "oщ", XK_O,          XK_Cyrillic_SHCHA,    "OЩ"),
-    DEF_BUTTONS( XK_p,            XK_Cyrillic_ze,       "pз", XK_P,          XK_Cyrillic_ZE,       "PЗ"),
-    DEF_BUTTONS( XK_bracketleft,  XK_Cyrillic_ha,       "[х", XK_braceleft,  XK_Cyrillic_HA,       "{Х"),
-    DEF_BUTTONS( XK_bracketright, XK_Cyrillic_hardsign, "]ъ", XK_braceright, XK_Cyrillic_HARDSIGN, "}Ъ"),
+    DEF_LETTER(0, 24, "qй", "QЙ"),
+    DEF_LETTER(0, 25, "wц", "WЦ"),
+    DEF_LETTER(0, 26, "eу", "EУ"),
+    DEF_LETTER(0, 27, "rк", "RК"),
+    DEF_LETTER(0, 28, "tе", "TЕ"),
+    DEF_LETTER(0, 29, "yн", "YН"),
+    DEF_LETTER(0, 30, "uг", "UГ"),
+    DEF_LETTER(0, 31, "iш", "IШ"),
+    DEF_LETTER(0, 32, "oщ", "OЩ"),
+    DEF_LETTER(0, 33, "pз", "PЗ"),
+    DEF_LETTER_SHIFT(0, 34, "[х[Х", "{Х{х"),
+    DEF_LETTER_SHIFT(0, 35, "]ъ]Ъ", "}Ъ}ъ"),
 
-    DEF_BUTTONS( XK_a,            XK_Cyrillic_ef,       "aф", XK_A,          XK_Cyrillic_EF,       "AФ"),
-    DEF_BUTTONS( XK_s,            XK_Cyrillic_yeru,     "sы", XK_S,          XK_Cyrillic_YERU,     "SЫ"),
-    DEF_BUTTONS( XK_d,            XK_Cyrillic_ve,       "dв", XK_D,          XK_Cyrillic_VE,       "DВ"),
-    DEF_BUTTONS( XK_f,            XK_Cyrillic_a,        "fа", XK_F,          XK_Cyrillic_A,        "FА"),
-    DEF_BUTTONS( XK_g,            XK_Cyrillic_pe,       "gп", XK_G,          XK_Cyrillic_PE,       "GП"),
-    DEF_BUTTONS( XK_h,            XK_Cyrillic_er,       "hр", XK_H,          XK_Cyrillic_ER,       "HР"),
-    DEF_BUTTONS( XK_j,            XK_Cyrillic_o,        "jо", XK_J,          XK_Cyrillic_O,        "JО"),
-    DEF_BUTTONS( XK_k,            XK_Cyrillic_el,       "kл", XK_K,          XK_Cyrillic_EL,       "KЛ"),
-    DEF_BUTTONS( XK_l,            XK_Cyrillic_de,       "lд", XK_L,          XK_Cyrillic_DE,       "LД"),
-    DEF_BUTTONS( XK_semicolon,    XK_Cyrillic_zhe,      ";ж", XK_colon,      XK_Cyrillic_ZHE,      ":Ж"),
-    DEF_BUTTONS( XK_apostrophe,   XK_Cyrillic_e,        "'э", XK_quotedbl,   XK_Cyrillic_E,        "\"Э"),
+    DEF_LETTER(0, 38, "aф", "AФ"),
+    DEF_LETTER(0, 39, "sы", "SЫ"),
+    DEF_LETTER(0, 40, "dв", "DВ"),
+    DEF_LETTER(0, 41, "fа", "FА"),
+    DEF_LETTER(0, 42, "gп", "GП"),
+    DEF_LETTER(0, 43, "hр", "HР"),
+    DEF_LETTER(0, 44, "jо", "JО"),
+    DEF_LETTER(0, 45, "kл", "KЛ"),
+    DEF_LETTER(0, 46, "lд", "LД"),
+    DEF_LETTER_SHIFT(0, 47, ";ж;Ж", ":Ж:ж"),
+    DEF_LETTER_SHIFT(0, 48, "'э'Э", "\"Э\"э"),
 
-    DEF_BUTTONS( XK_z,            XK_Cyrillic_ya,       "zя", XK_Z,          XK_Cyrillic_YA,       "ZЯ"),
-    DEF_BUTTONS( XK_x,            XK_Cyrillic_che,      "xч", XK_X,          XK_Cyrillic_CHE,      "XЧ"),
-    DEF_BUTTONS( XK_c,            XK_Cyrillic_es,       "cс", XK_C,          XK_Cyrillic_ES,       "CС"),
-    DEF_BUTTONS( XK_v,            XK_Cyrillic_em,       "vм", XK_V,          XK_Cyrillic_EM,       "VМ"),
-    DEF_BUTTONS( XK_b,            XK_Cyrillic_i,        "bи", XK_B,          XK_Cyrillic_I,        "BИ"),
-    DEF_BUTTONS( XK_n,            XK_Cyrillic_te,       "nт", XK_N,          XK_Cyrillic_TE,       "NТ"),
-    DEF_BUTTONS( XK_m,            XK_Cyrillic_softsign, "mь", XK_M,          XK_Cyrillic_SOFTSIGN, "MЬ"),
-    DEF_BUTTONS( XK_comma,        XK_Cyrillic_be,       ",б", XK_less,       XK_Cyrillic_BE,       "<Б"),
-    DEF_BUTTONS( XK_period,       XK_Cyrillic_yu,       ".ю", XK_greater,    XK_Cyrillic_YU,       ">Ю"),
-    DEF_BUTTONS( XK_slash,        XK_period,            "/.", XK_question,   XK_comma,             "?,"),
+    DEF_LETTER(0, 52, "zя", "ZЯ"),
+    DEF_LETTER(0, 53, "xч", "XЧ"),
+    DEF_LETTER(0, 54, "cс", "CС"),
+    DEF_LETTER(0, 55, "vм", "VМ"),
+    DEF_LETTER(0, 56, "bи", "BИ"),
+    DEF_LETTER(0, 57, "nт", "NТ"),
+    DEF_LETTER(0, 58, "mь", "MЬ"),
 
-    /* Language-independent characters */
-    DEF_ALT_BUTTONS( XK_q,            XK_Cyrillic_shorti,   '`',  XK_Q,          XK_Cyrillic_SHORTI,   '~'),
+    DEF_LETTER_SHIFT(0, 59, ",б,Б", "<Б<б"),
+    DEF_LETTER_SHIFT(0, 60, ".ю.Ю", ">Ю>ю"),
+    DEF_CHAR(0, 61, '/', '?'),
+    DEF_CHAR(0, 51, '\\', '|'),
 
-    DEF_ALT_BUTTONS( XK_a,            XK_Cyrillic_ef,       '1',  XK_A,          XK_Cyrillic_EF,       '!'),
-    DEF_ALT_BUTTONS( XK_s,            XK_Cyrillic_yeru,     '2',  XK_S,          XK_Cyrillic_YERU,     '@'),
-    DEF_ALT_BUTTONS( XK_d,            XK_Cyrillic_ve,       '3',  XK_D,          XK_Cyrillic_VE,       '#'),
-    DEF_ALT_BUTTONS( XK_f,            XK_Cyrillic_a,        '4',  XK_F,          XK_Cyrillic_A,        '$'),
-    DEF_ALT_BUTTONS( XK_g,            XK_Cyrillic_pe,       '5',  XK_G,          XK_Cyrillic_PE,       '%'),
-    DEF_ALT_BUTTONS( XK_h,            XK_Cyrillic_er,       '6',  XK_H,          XK_Cyrillic_ER,       '^'),
-    DEF_ALT_BUTTONS( XK_j,            XK_Cyrillic_o,        '7',  XK_J,          XK_Cyrillic_O,        '&'),
-    DEF_ALT_BUTTONS( XK_k,            XK_Cyrillic_el,       '8',  XK_K,          XK_Cyrillic_EL,       '*'),
-    DEF_ALT_BUTTONS( XK_l,            XK_Cyrillic_de,       '9',  XK_L,          XK_Cyrillic_DE,       '('),
-    DEF_ALT_BUTTONS( XK_semicolon,    XK_Cyrillic_zhe,      '0',  XK_colon,      XK_Cyrillic_ZHE,      ')'),
-    DEF_ALT_BUTTONS( XK_apostrophe,   XK_Cyrillic_e,        '\'', XK_quotedbl,   XK_Cyrillic_E,        '"'),
+    DEF_CHAR(MODKEY, 24, '`', '~'),
+    DEF_CHAR(MODKEY, 31, '\\', '|'),
+    DEF_CHAR(MODKEY, 32, '-', '_'),
+    DEF_CHAR(MODKEY, 33, '=', '+'),
+    DEF_CHAR(MODKEY, 34, '[', '{'),
+    DEF_CHAR(MODKEY, 35, ']', '}'),
 
-    DEF_ALT_CTRL_BUTTONS( XK_comma,        XK_Cyrillic_be,       ',',  XK_less,       XK_Cyrillic_BE,       '<'),
-    DEF_ALT_CTRL_BUTTONS( XK_period,       XK_Cyrillic_yu,       '.',  XK_greater,    XK_Cyrillic_YU,       '>'),
-    DEF_ALT_BUTTONS( XK_slash,        XK_period,            '/',  XK_question,   XK_comma,             '?'),
+    DEF_CHAR(MODKEY, 38, '1', '!'),
+    DEF_CHAR(MODKEY, 39, '2', '@'),
+    DEF_CHAR(MODKEY, 40, '3', '#'),
+    DEF_CHAR(MODKEY, 41, '4', '$'),
+    DEF_CHAR(MODKEY, 42, '5', '%'),
+    DEF_CHAR(MODKEY, 43, '6', '^'),
+    DEF_CHAR(MODKEY, 44, '7', '&'),
+    DEF_CHAR(MODKEY, 45, '8', '*'),
+    DEF_CHAR(MODKEY, 46, '9', '('),
+    DEF_CHAR(MODKEY, 47, '0', ')'),
+    DEF_CHAR(MODKEY, 48, '\'', '"'),
+    DEF_CHAR(MODKEY, 58, ';', ':'),
 
-    DEF_ALT_BUTTONS( XK_i,            XK_Cyrillic_sha,      '\\', XK_I,          XK_Cyrillic_SHA,      '|'),
-    DEF_ALT_BUTTONS( XK_o,            XK_Cyrillic_shcha,    '[',  XK_O,          XK_Cyrillic_SHCHA,    '{'),
-    DEF_ALT_BUTTONS( XK_p,            XK_Cyrillic_ze,       ']',  XK_P,          XK_Cyrillic_ZE,       '}'),
-
-    DEF_ALT_BUTTONS( XK_bracketleft,  XK_Cyrillic_ha,       '-',  XK_braceleft,  XK_Cyrillic_HA,       '_'),
-    DEF_ALT_BUTTONS( XK_bracketright, XK_Cyrillic_hardsign, '=',  XK_braceright, XK_Cyrillic_HARDSIGN, '+'),
+    DEF_CHAR(MODKEY, 59, ',', '<'),
+    DEF_CHAR(MODKEY, 60, '.', '>'),
+    DEF_CHAR(MODKEY, 61, '/', '?'),
 };
 
 /*
