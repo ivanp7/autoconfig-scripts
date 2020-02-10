@@ -234,7 +234,24 @@ static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NUL
 void
 write_char(const Arg *arg)
 {
-    ttywrite((char*)&arg->i, 1, 1);
+    unsigned char *ch = (unsigned char*)arg->v;
+    unsigned char c = ch[0];
+    size_t len;
+
+    if (c >> 7 == 0)
+        len = 1;
+    else if (c >> 5 == 6)
+        len = 2;
+    else if (c >> 4 == 14)
+        len = 3;
+    else if (c >> 3 == 30)
+        len = 4;
+    else if (c >> 2 == 62)
+        len = 5;
+    else if (c >> 1 == 126)
+        len = 6;
+
+    ttywrite(ch, len, 1);
 }
 
 static int language = 0; // 0 -- english QWERTY, 1 -- russian JCUKEN
@@ -266,12 +283,12 @@ write_char2(const Arg *arg)
 {
     int index = language + 2*capslock;
     size_t i = 0, len;
-    char *ch = (char*)arg->v;
+    unsigned char *ch = (unsigned char*)arg->v;
     unsigned char c;
 
     for (size_t ind = 0; ind < index; ind++)
     {
-        c = (unsigned char)ch[i];
+        c = ch[i];
         if (c >> 7 == 0)
             i++;
         else if (c >> 5 == 6)
@@ -286,7 +303,7 @@ write_char2(const Arg *arg)
             i+=6;
     }
 
-    c = (unsigned char)ch[i];
+    c = ch[i];
     if (c >> 7 == 0)
         len = 1;
     else if (c >> 5 == 6)
@@ -308,7 +325,7 @@ write_char2(const Arg *arg)
     { mod|LockMask, keycode, fun, arg }
 
 #define DEF_BUTTON_1(mod, keycode, chr) \
-    { mod, keycode, write_char, {.i = chr} }
+    { mod, keycode, write_char, {.v = chr} }
 
 #define DEF_CHAR(mod, keycode, chr_low, chr_up) \
     DEF_BUTTON_1(mod|0, keycode, chr_low), \
@@ -345,8 +362,8 @@ static Shortcut shortcuts[] = {
 	DEF_FUNCTION( MODKEY|ControlMask,   55 /*XK_v*/,            clippaste,      {.i =  0} ),
 	DEF_FUNCTION( MODKEY|ControlMask,   33 /*XK_p*/,            selpaste,       {.i =  0} ),
 
-	DEF_FUNCTION( MODKEY,               111 /*XK_Up*/,          kscrollup,      {.i =  10} ),
-	DEF_FUNCTION( MODKEY,               116 /*XK_Down*/,        kscrolldown,    {.i =  10} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   111 /*XK_Up*/,          kscrollup,      {.i =  10} ),
+	DEF_FUNCTION( MODKEY|ControlMask,   116 /*XK_Down*/,        kscrolldown,    {.i =  10} ),
 
 	DEF_FUNCTION( MODKEY|ControlMask,   30 /*XK_u*/,            kscrollup,      {.i = -10} ),
 	DEF_FUNCTION( MODKEY|ControlMask,   40 /*XK_d*/,            kscrolldown,    {.i = -10} ),
@@ -356,8 +373,8 @@ static Shortcut shortcuts[] = {
 	DEF_FUNCTION( MODKEY,               110 /*XK_Home*/,        zoomreset,      {.f =  0} ),
 	DEF_FUNCTION( TERMMOD,              112 /*XK_Prior*/,       zoom,           {.f = +1} ),
 	DEF_FUNCTION( TERMMOD,              117 /*XK_Next*/,        zoom,           {.f = -1} ),
-	DEF_FUNCTION( TERMMOD,              111 /*XK_Up*/,          zoom,           {.f = +1} ),
-	DEF_FUNCTION( TERMMOD,              116 /*XK_Down*/,        zoom,           {.f = -1} ),
+	DEF_FUNCTION( TERMMOD|ControlMask,  111 /*XK_Up*/,          zoom,           {.f = +1} ),
+	DEF_FUNCTION( TERMMOD|ControlMask,  116 /*XK_Down*/,        zoom,           {.f = -1} ),
 
 	/* { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } }, */
 	DEF_FUNCTION( MODKEY|ControlMask,   29 /*XK_y*/,            externalpipe,   {.v = copyurlcmd } ),
@@ -367,19 +384,19 @@ static Shortcut shortcuts[] = {
     DEF_FUNCTION( MODKEY,               65 /*XK_space*/,        switch_language, {} ),
     DEF_FUNCTION( MODKEY,               135 /*XK_Menu*/,        switch_capslock, {} ),
 
-    DEF_CHAR(0, 49, '`', '~'),
-    DEF_CHAR(0, 10, '1', '!'),
-    DEF_CHAR(0, 11, '2', '@'),
-    DEF_CHAR(0, 12, '3', '#'),
-    DEF_CHAR(0, 13, '4', '$'),
-    DEF_CHAR(0, 14, '5', '%'),
-    DEF_CHAR(0, 15, '6', '^'),
-    DEF_CHAR(0, 16, '7', '&'),
-    DEF_CHAR(0, 17, '8', '*'),
-    DEF_CHAR(0, 18, '9', '('),
-    DEF_CHAR(0, 19, '0', ')'),
-    DEF_CHAR(0, 20, '-', '_'),
-    DEF_CHAR(0, 21, '=', '+'),
+    DEF_CHAR(0, 49, "`", "~"),
+    DEF_CHAR(0, 10, "1", "!"),
+    DEF_CHAR(0, 11, "2", "@"),
+    DEF_CHAR(0, 12, "3", "#"),
+    DEF_CHAR(0, 13, "4", "$"),
+    DEF_CHAR(0, 14, "5", "%"),
+    DEF_CHAR(0, 15, "6", "^"),
+    DEF_CHAR(0, 16, "7", "&"),
+    DEF_CHAR(0, 17, "8", "*"),
+    DEF_CHAR(0, 18, "9", "("),
+    DEF_CHAR(0, 19, "0", ")"),
+    DEF_CHAR(0, 20, "-", "_"),
+    DEF_CHAR(0, 21, "=", "+"),
 
     DEF_LETTER(0, 24, "qй", "QЙ"),
     DEF_LETTER(0, 25, "wц", "WЦ"),
@@ -416,32 +433,37 @@ static Shortcut shortcuts[] = {
 
     DEF_LETTER_SHIFT(0, 59, ",б,Б", "<Б<б"),
     DEF_LETTER_SHIFT(0, 60, ".ю.Ю", ">Ю>ю"),
-    DEF_CHAR(0, 61, '/', '?'),
-    DEF_CHAR(0, 51, '\\', '|'),
+    DEF_CHAR(0, 61, "/", "?"),
+    DEF_CHAR(0, 51, "\\", "|"),
 
-    DEF_CHAR(MODKEY, 24, '`', '~'),
-    DEF_CHAR(MODKEY, 31, '\\', '|'),
-    DEF_CHAR(MODKEY, 32, '-', '_'),
-    DEF_CHAR(MODKEY, 33, '=', '+'),
-    DEF_CHAR(MODKEY, 34, '[', '{'),
-    DEF_CHAR(MODKEY, 35, ']', '}'),
+    DEF_CHAR(MODKEY, 24, "`", "~"),
+    DEF_CHAR(MODKEY, 31, "\\", "|"),
+    DEF_CHAR(MODKEY, 32, "-", "_"),
+    DEF_CHAR(MODKEY, 33, "=", "+"),
+    DEF_CHAR(MODKEY, 34, "[", "{"),
+    DEF_CHAR(MODKEY, 35, "]", "}"),
 
-    DEF_CHAR(MODKEY, 38, '1', '!'),
-    DEF_CHAR(MODKEY, 39, '2', '@'),
-    DEF_CHAR(MODKEY, 40, '3', '#'),
-    DEF_CHAR(MODKEY, 41, '4', '$'),
-    DEF_CHAR(MODKEY, 42, '5', '%'),
-    DEF_CHAR(MODKEY, 43, '6', '^'),
-    DEF_CHAR(MODKEY, 44, '7', '&'),
-    DEF_CHAR(MODKEY, 45, '8', '*'),
-    DEF_CHAR(MODKEY, 46, '9', '('),
-    DEF_CHAR(MODKEY, 47, '0', ')'),
-    DEF_CHAR(MODKEY, 48, '\'', '"'),
-    DEF_CHAR(MODKEY, 58, ';', ':'),
+    DEF_CHAR(MODKEY, 38, "1", "!"),
+    DEF_CHAR(MODKEY, 39, "2", "@"),
+    DEF_CHAR(MODKEY, 40, "3", "#"),
+    DEF_CHAR(MODKEY, 41, "4", "$"),
+    DEF_CHAR(MODKEY, 42, "5", "%"),
+    DEF_CHAR(MODKEY, 43, "6", "^"),
+    DEF_CHAR(MODKEY, 44, "7", "&"),
+    DEF_CHAR(MODKEY, 45, "8", "*"),
+    DEF_CHAR(MODKEY, 46, "9", "("),
+    DEF_CHAR(MODKEY, 47, "0", ")"),
+    DEF_CHAR(MODKEY, 48, "'", "\""),
+    DEF_CHAR(MODKEY, 58, ";", ":"),
 
-    DEF_CHAR(MODKEY, 59, ',', '<'),
-    DEF_CHAR(MODKEY, 60, '.', '>'),
-    DEF_CHAR(MODKEY, 61, '/', '?'),
+    DEF_CHAR(MODKEY, 59, ",", "<"),
+    DEF_CHAR(MODKEY, 60, ".", ">"),
+    DEF_CHAR(MODKEY, 61, "/", "?"),
+
+    DEF_CHAR(MODKEY, 111, "↑", "⇑"),
+    DEF_CHAR(MODKEY, 116, "↓", "⇓"),
+    DEF_CHAR(MODKEY, 113, "←", "⇐"),
+    DEF_CHAR(MODKEY, 114, "→", "⇒"),
 };
 
 /*
