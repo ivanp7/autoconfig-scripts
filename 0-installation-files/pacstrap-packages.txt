@@ -1,1 +1,1 @@
-base dhcpcd dialog diffutils dosfstools ethtool gnu-netcat grub linux linux-firmware man-db man-pages netctl ntfs-3g openssh ppp rsync sudo terminus-font usb_modeswitch usbutils vi vim-minimal wget wpa_supplicant
+base dhcpcd dialog diffutils dosfstools ethtool gnu-netcat grub linux inetutils linux-firmware man-db man-pages netctl ntfs-3g openssh ppp rsync sudo terminus-font usb_modeswitch usbutils vi vim-minimal wget wpa_supplicant

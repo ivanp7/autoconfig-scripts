@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing tabbed ####"
+print_message "#### Adding user to the vmhgfs group ####"
 
 ####################################################################
 
@@ -13,14 +13,7 @@ check_user
 
 ####################################################################
 
-clone_git_repo_and_cd tabbed-ivanp7 $GIT_URL_PREFIX/tabbed-ivanp7.git
-
-HARDCODED_FONT="xos4 Terminus:size=10"
-if [ -n "$DEFAULT_FONT" ]
-then sed -i "s/$HARDCODED_FONT/$DEFAULT_FONT/" config.h
-fi
-
-makepkg --noconfirm -si
+gpasswd -a $(whoami) vmhgfs
 
 ####################################################################
 
