@@ -384,7 +384,6 @@ static Shortcut shortcuts[] = {
     DEF_FUNCTION( MODKEY,               65 /*XK_space*/,        switch_language, {} ),
     DEF_FUNCTION( MODKEY,               135 /*XK_Menu*/,        switch_capslock, {} ),
 
-    DEF_CHAR(0, 49, "`", "~"),
     DEF_CHAR(0, 10, "1", "!"),
     DEF_CHAR(0, 11, "2", "@"),
     DEF_CHAR(0, 12, "3", "#"),
@@ -412,6 +411,7 @@ static Shortcut shortcuts[] = {
     DEF_CHAR(MODKEY, 20, "-", "_"),
     DEF_CHAR(MODKEY, 21, "=", "+"),
 
+    DEF_LETTER(0, 49, "`ё", "~Ё"),
     DEF_LETTER(0, 24, "qй", "QЙ"),
     DEF_LETTER(0, 25, "wц", "WЦ"),
     DEF_LETTER(0, 26, "eу", "EУ"),
