@@ -35,7 +35,7 @@ systemctl enable --now atd cronie
 install_official_packages moreutils jq dialog expect
 install_official_packages alsa-utils
 install_official_packages beep libcaca fbv mpv
-install_official_packages ffmpegthumbnailer
+install_official_packages ffmpegthumbnailer poppler
 install_official_packages w3m youtube-dl
 install_official_packages sdcv
 install_official_packages octave
