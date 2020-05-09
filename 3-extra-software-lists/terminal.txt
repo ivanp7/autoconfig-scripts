@@ -1,2 +1,3 @@
 pixterm-git termplay
+mutt-wizard-git
 
