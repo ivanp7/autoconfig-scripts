@@ -13,10 +13,10 @@ check_root
 
 ####################################################################
 
-install -Dm 755 -t /usr/local/bin/autosuspend/ $(aux_dir)/autosuspend.sh $(aux_dir)/autosuspend_op.sh
-install -Dm 644 -t /etc/systemd/system/ $(aux_dir)/autosuspend.service 
+cd /tmp
+git clone $GIT_URL_PREFIX/server-autosuspend.git
 
-systemctl enable --now autosuspend.service
+server-autosuspend/install.sh
 
 ####################################################################
 
