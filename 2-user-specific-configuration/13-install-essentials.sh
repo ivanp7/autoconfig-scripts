@@ -24,5 +24,10 @@ sh dotfiles/install.sh
 
 ####################################################################
 
+print_message "Adding Roswell binaries to PATH..."
+ln -sT $HOME/.roswell/bin $HOME/bin/roswell
+
+####################################################################
+
 finish
 
