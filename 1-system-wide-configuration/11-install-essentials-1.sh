@@ -24,7 +24,7 @@ systemctl enable pkgfile-update.timer
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
-install_official_packages gnu-netcat ngrep tcpdump 
+install_official_packages inetutils gnu-netcat ngrep tcpdump 
 install_official_packages wol ethtool ifplugd 
 install_official_packages cpupower
 install_official_packages dosfstools ntfsprogs inotify-tools entr

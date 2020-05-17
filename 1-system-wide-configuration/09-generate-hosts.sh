@@ -21,7 +21,7 @@ then git clone http://git.r-36.net/hosts-gen
 fi
 cd $DIR
 
-HOSTNAME=$(hostname)
+HOSTNAME=$(cat /etc/hostname)
 
 mkdir -p /etc/hosts.d/
 install -Dm 644 $(aux_dir)/00-hosts.header /etc/hosts.d/
