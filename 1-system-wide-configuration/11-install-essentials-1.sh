@@ -13,8 +13,8 @@ check_root
 
 ####################################################################
 
-install_official_packages base-devel
-install_official_packages vim ctags
+install_official_packages base-devel ctags
+install_official_packages nvim
 install_official_packages gdb strace
 install_official_packages screen tmux 
 install_official_packages neofetch htop glances

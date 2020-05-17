@@ -15,9 +15,6 @@ check_root
 
 install_official_packages xorg xorg-xinit xorg-drivers
 
-uninstall_packages vim
-install_official_packages gvim
-
 install_official_packages bspwm picom unclutter libnotify dunst maim
 install_official_packages sxhkd wmctrl xdotool
 install_official_packages dex
