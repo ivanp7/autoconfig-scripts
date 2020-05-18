@@ -13,10 +13,11 @@ check_root
 
 ####################################################################
 
+install_official_packages man-db man-pages
 install_official_packages base-devel ctags
 install_official_packages neovim
 install_official_packages gdb strace
-install_official_packages screen tmux 
+install_official_packages screen tmux
 install_official_packages neofetch htop glances
 install_official_packages pkgfile
 pkgfile --update
@@ -24,10 +25,10 @@ systemctl enable pkgfile-update.timer
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
-install_official_packages inetutils gnu-netcat ngrep tcpdump 
-install_official_packages wol ethtool ifplugd 
-install_official_packages cpupower
-install_official_packages dosfstools ntfsprogs inotify-tools entr
+install_official_packages inetutils gnu-netcat ngrep tcpdump
+install_official_packages wol ethtool ifplugd
+install_official_packages cpupower usbutils usb_modeswitch
+install_official_packages dosfstools ntfs-3g inotify-tools entr
 install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
