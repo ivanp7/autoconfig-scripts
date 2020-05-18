@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Preventing Ctrl/CapsLock key swapping ####"
+print_message "#### Preventing Ctrl/CapsLock key swapping in X ####"
 
 ####################################################################
 
@@ -13,8 +13,8 @@ check_user
 
 ####################################################################
 
-mkdir -p $XDG_CONFIG_HOME/X11
-touch $XDG_CONFIG_HOME/X11/xmodmap
+mkdir -p $HOME/.config/X11
+touch $HOME/.config/X11/xmodmap
 
 ####################################################################
 
