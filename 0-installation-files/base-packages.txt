@@ -1,0 +1,3 @@
+base grub linux-lts linux-firmware vi moreutils
+terminus-font
+dhcpcd connman wpa_supplicant

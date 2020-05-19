@@ -33,7 +33,7 @@ install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
 systemctl enable --now atd cronie
-install_official_packages moreutils jq dialog expect
+install_official_packages jq dialog expect
 install_official_packages alsa-utils
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer poppler

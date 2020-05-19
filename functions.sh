@@ -1,7 +1,16 @@
 GIT_URL_PREFIX=https://github.com/ivanp7
 CONFIG_DIRECTORY=/usr/local/etc/shared
 
-####################################################################
+###############################################################################
+
+# enable self-logging
+[ -z "$LOGGING" ] && { 
+    export LOGGING=yes
+    mispipe "$0" "tee \"$(basename "$0").log\""
+    exit $?
+}
+
+###############################################################################
 
 check_root ()
 {
@@ -9,6 +18,8 @@ check_root ()
         echo This script must be run under root. Terminating...
         exit 1
     fi
+
+    cd /
 }
 
 check_user ()

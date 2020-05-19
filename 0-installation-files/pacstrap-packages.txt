@@ -1,1 +1,0 @@
-base dhcpcd grub linux linux-firmware netctl ppp terminus-font vi wpa_supplicant
