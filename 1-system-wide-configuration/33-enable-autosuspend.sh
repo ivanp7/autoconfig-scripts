@@ -13,10 +13,10 @@ check_root
 
 ####################################################################
 
-cd /tmp
-git clone $GIT_URL_PREFIX/server-autosuspend.git
-
-server-autosuspend/install.sh
+install -Dm 754 -o root -g root -T $(aux_dir)/autosuspend.service $SERVICES_DIRECTORY/autosuspend/run
+install -Dm 755 -o root -g root -t $SERVICES_DIRECTORY/autosuspend/ \
+    $(aux_dir)/activity-check.sh $(aux_dir)/suspend.sh
+enable_service autosuspend
 
 ####################################################################
 

@@ -13,8 +13,8 @@ check_root
 
 ####################################################################
 
-install -Dm 644 $(aux_dir)/set-kbdrate.service /etc/systemd/system/
-systemctl enable --now set-kbdrate.service
+install -Dm 754 -o root -g root -T $(aux_dir)/set-kbdrate.service $SERVICES_DIRECTORY/set-kbdrate/run
+enable_service set-kbdrate
 
 ####################################################################
 

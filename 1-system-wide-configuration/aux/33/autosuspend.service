@@ -1,0 +1,39 @@
+#!/bin/sh
+
+exec 2>&1
+
+CHECK_INTERVAL=10
+CHECKS_BEFORE_SUSPEND=60
+WAIT_FILE="/tmp/server-autosuspend-wait"
+
+cd "$(dirname "$0")"
+
+while true
+do
+    touch "$WAIT_FILE"
+    CHECKS_COUNTER=$CHECKS_BEFORE_SUSPEND
+
+    while true
+    do
+        DO_SUSPEND=""; ./activity-check.sh || DO_SUSPEND="yes"
+        WAIT_ENABLED=""; [ -f "$WAIT_FILE" ] && WAIT_ENABLED="yes"
+
+        if [ -z "$DO_SUSPEND" ]
+        then
+            CHECKS_COUNTER=$CHECKS_BEFORE_SUSPEND
+            sleep $CHECK_INTERVAL
+        else
+            if [ -z "$WAIT_ENABLED" ] || [ "$CHECKS_COUNTER" -eq 0 ]
+            then
+                break
+            else
+                CHECKS_COUNTER=$(($CHECKS_COUNTER - 1))
+                sleep $CHECK_INTERVAL
+            fi
+        fi
+    done
+
+    echo "$(date)"
+    ./suspend.sh
+done
+

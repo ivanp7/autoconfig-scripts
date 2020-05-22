@@ -21,15 +21,14 @@ mkdir -p $MOUNT_LOCATION
 groupadd vmhgfs
 gpasswd -a $(whoami) vmhgfs
 
-echo | tee -a /etc/fstab
-echo "# VMWare Workstation shared folders" | tee -a /etc/fstab
+echo >> /etc/fstab
+echo "# VMWare Workstation shared folders" >> /etc/fstab
 for dir in $(vmware-hgfsclient)
 do
     mkdir $MOUNT_LOCATION/$dir
-    echo ".host:/$dir $MOUNT_LOCATION/$dir fuse.vmhgfs-fuse $MOUNT_OPTIONS 0 0" | 
-        tee -a /etc/fstab
+    echo ".host:/$dir $MOUNT_LOCATION/$dir fuse.vmhgfs-fuse $MOUNT_OPTIONS 0 0" >> /etc/fstab
 done
-echo | tee -a /etc/fstab
+echo >> /etc/fstab
 mount -a
 
 ####################################################################

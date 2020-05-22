@@ -30,12 +30,10 @@ sed -i "s/^#PermitEmptyPasswords .*/PermitEmptyPasswords no/" /etc/ssh/sshd_conf
 sed -i "s/^#X11Forwarding .*/X11Forwarding yes/" /etc/ssh/sshd_config
 sed -i "s/^#X11UseLocalhost .*/X11UseLocalhost yes/" /etc/ssh/sshd_config
 sed -i "/^Subsystem.*sftp.*/ s/Subsystem/#Subsystem/" /etc/ssh/sshd_config
-
 cat $(aux_dir)/sshd_config_tail | tee -a /etc/ssh/sshd_config
-mkdir /etc/systemd/system/sshd.socket.d/
-install -Dm 644 $(aux_dir)/override.conf /etc/systemd/system/sshd.socket.d/
 
-systemctl enable --now sshd.socket
+install -Dm 754 -o root -g root -T $(aux_dir)/sshd.service $SERVICES_DIRECTORY/sshd/run
+enable_service sshd
 
 ####################################################################
 

@@ -20,8 +20,6 @@ install_official_packages gdb strace
 install_official_packages screen tmux
 install_official_packages neofetch htop glances
 install_official_packages pkgfile
-pkgfile --update
-systemctl enable pkgfile-update.timer
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
@@ -32,7 +30,6 @@ install_official_packages dosfstools ntfs-3g inotify-tools entr
 install_official_packages ncdu extundelete trash-cli
 install_official_packages unzip p7zip atool
 install_official_packages at cronie
-systemctl enable --now atd cronie
 install_official_packages jq dialog expect
 install_official_packages alsa-utils
 install_official_packages beep libcaca fbv mpv
@@ -40,6 +37,23 @@ install_official_packages ffmpegthumbnailer poppler
 install_official_packages w3m youtube-dl
 install_official_packages sdcv
 install_official_packages octave
+
+####################################################################
+
+print_message "#### Enabling services ####"
+
+install -Dm 754 -o root -g root -T $(aux_dir)/cronie.service $SERVICES_DIRECTORY/cronie/run
+enable_service cronie
+
+install -Dm 754 -o root -g root -T $(aux_dir)/atd.service $SERVICES_DIRECTORY/atd/run
+enable_service atd
+
+####################################################################
+
+print_message "#### Adding pkgfile cronjob ####"
+
+pkgfile --update
+crontab -l | { cat; echo '0 15 * * * /usr/bin/pkgfile --update'; } | crontab -
 
 ####################################################################
 

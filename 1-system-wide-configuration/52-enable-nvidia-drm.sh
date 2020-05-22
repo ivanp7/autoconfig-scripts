@@ -13,18 +13,18 @@ check_root
 
 ####################################################################
 
-MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
-sed -i "/^MODULES=/ s/(/($MODULES /" /etc/mkinitcpio.conf
-mkinitcpio -P
+grep -q '^MODULES=[^#]*nvidia' /etc/mkinitcpio.conf || {
+    MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+    sed -i "/^MODULES=/ s/(/($MODULES /" /etc/mkinitcpio.conf
+    mkinitcpio -P
+}
 
-sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
-grub-mkconfig -o /boot/grub/grub.cfg
+grep -q '^GRUB_CMDLINE_LINUX_DEFAULT=[^#]*nvidia' /etc/default/grub || {
+    sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/ s@\"@\"nvidia-drm.modeset=1 @" /etc/default/grub
+    grub-mkconfig -o /boot/grub/grub.cfg
+}
 
-if pacman -Qs linux-lts > /dev/null && ! pacman -Qs linux > /dev/null
-then HOOK=nvidia-lts
-else HOOK=nvidia
-fi
-
+pacman -Qi linux-lts > /dev/null 2>&1 && HOOK=nvidia-lts || HOOK=nvidia
 install -Dm 644 $(aux_dir)/${HOOK}.hook /etc/pacman.d/hooks/
 
 ####################################################################

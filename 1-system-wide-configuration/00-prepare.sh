@@ -15,9 +15,9 @@ check_root
 
 print_message "Creating group 'shared'..."
 groupadd shared
-mkdir $CONFIG_DIRECTORY
-chown root:shared $CONFIG_DIRECTORY
-chmod 2775 $CONFIG_DIRECTORY
+mkdir $SHARED_DIRECTORY
+chown root:shared $SHARED_DIRECTORY
+chmod 2775 $SHARED_DIRECTORY
 
 print_message "Installing sudo..."
 pacman --noconfirm -Syu

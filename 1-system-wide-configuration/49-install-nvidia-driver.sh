@@ -13,12 +13,8 @@ check_user
 
 ####################################################################
 
-if pacman -Qs linux-lts > /dev/null && ! pacman -Qs linux > /dev/null
-then install_packages nvidia-lts
-else install_packages nvidia
-fi
-
-install_packages nvidia-settings
+pacman -Qi linux-lts > /dev/null 2>&1 && PKG=nvidia-lts || PKG=nvidia
+install_packages $PKG nvidia-settings
 
 ####################################################################
 

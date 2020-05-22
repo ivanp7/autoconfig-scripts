@@ -1,5 +1,7 @@
 GIT_URL_PREFIX=https://github.com/ivanp7
-CONFIG_DIRECTORY=/usr/local/etc/shared
+SHARED_DIRECTORY=/usr/local/etc/shared
+SERVICES_DIRECTORY=/etc/runit/sv
+SERVICES_RUN_DIRECTORY=/var/service
 
 ###############################################################################
 
@@ -29,7 +31,7 @@ check_user ()
         exit 1
     fi
 
-    cd $CONFIG_DIRECTORY
+    cd $SHARED_DIRECTORY
 }
 
 aux_dir ()
@@ -60,6 +62,11 @@ install_packages ()
 uninstall_packages ()
 {
     sudo pacman --noconfirm -R "$@"
+}
+
+enable_service ()
+{
+    sudo ln -s -t $SERVICES_RUN_DIRECTORY $SERVICES_DIRECTORY/$1
 }
 
 clone_git_repo_and_cd ()

@@ -1,25 +1,26 @@
 [<VERTICAL>B
 [0;36;1;40m
-[<HORIZONTAL>C                   -`
-[<HORIZONTAL>C                  .o+`
-[<HORIZONTAL>C                 `ooo/
-[<HORIZONTAL>C                `+oooo:
-[<HORIZONTAL>C               `+oooooo:
-[<HORIZONTAL>C               -+oooooo+:
-[<HORIZONTAL>C             `/:-:++oooo+:
-[<HORIZONTAL>C            `/++++/+++++++:
-[<HORIZONTAL>C           `/++++++++++++++:
-[<HORIZONTAL>C          `/+++ooooooooooooo/`
-[<HORIZONTAL>C         ./ooosssso++osssssso+`
-[<HORIZONTAL>C        .oossssso-````/ossssss+`
-[<HORIZONTAL>C       -osssssso.      :ssssssso.
-[<HORIZONTAL>C      :osssssss/        osssso+++.
-[<HORIZONTAL>C     /ossssssss/        +ssssooo/-
-[<HORIZONTAL>C   `/ossssso+/:-        -:/+osssso+-
-[<HORIZONTAL>C  `+sso+:-`                 `.-/+oso:
-[<HORIZONTAL>C `++:.                           `-/+/
-[<HORIZONTAL>C .`                                 `
+[<HORIZONTAL>C                   'o'
+[<HORIZONTAL>C                  'ooo'
+[<HORIZONTAL>C                 'ooxoo'
+[<HORIZONTAL>C                'ooxxxoo'
+[<HORIZONTAL>C               'oookkxxoo'
+[<HORIZONTAL>C              'oiioxkkxxoo'
+[<HORIZONTAL>C             ':;:iiiioxxxoo'
+[<HORIZONTAL>C                `'.;::ioxxoo'
+[<HORIZONTAL>C           '-.      `':;jiooo'
+[<HORIZONTAL>C          'oooio-..     `'i:io'
+[<HORIZONTAL>C         'ooooxxxxoio:,.   `'-;'
+[<HORIZONTAL>C        'ooooxxxxxkkxoooIi:-.  `'
+[<HORIZONTAL>C       'ooooxxxxxkkkkxoiiiiiji'
+[<HORIZONTAL>C      'ooooxxxxxkxxoiiii:'`     .i'
+[<HORIZONTAL>C     'ooooxxxxxoi:::'`       .;ioxo'
+[<HORIZONTAL>C    'ooooxooi::'`         .:iiixkxxo'
+[<HORIZONTAL>C   'ooooi:'`                `'';ioxxo'
+[<HORIZONTAL>C  'i:'`                          '':io'
+[<HORIZONTAL>C '`                                   `'
 [0m
 [<VERTICAL>B
-  [0;36;1;40mArch Linux[0m [0;37;1;40m\r[0m (\l)
+  [0;36;1;40mArtix Linux[0m [0;37;1;40m\r[0m (\l)
+
 

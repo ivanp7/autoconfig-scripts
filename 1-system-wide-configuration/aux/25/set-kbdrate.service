@@ -1,10 +1,5 @@
-[Unit]
-Description=Keyboard repeat rate in tty.
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/kbdrate -d 250 -r 15
-
-[Install]
-WantedBy=multi-user.target
+#!/bin/sh
+exec 2>&1
+sv once set-kbdrate
+exec kbdrate -d 250 -r 15
 
