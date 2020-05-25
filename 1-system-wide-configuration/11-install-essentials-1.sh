@@ -42,11 +42,8 @@ install_official_packages octave
 
 print_message "#### Enabling services ####"
 
-install -Dm 754 -o root -g root -T $(aux_dir)/cronie.service $SERVICES_DIRECTORY/cronie/run
-enable_service cronie
-
-install -Dm 754 -o root -g root -T $(aux_dir)/atd.service $SERVICES_DIRECTORY/atd/run
-enable_service atd
+install_and_enable_service cronie
+install_and_enable_service atd
 
 ####################################################################
 

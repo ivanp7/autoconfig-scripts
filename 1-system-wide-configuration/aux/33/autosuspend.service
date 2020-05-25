@@ -6,7 +6,7 @@ CHECK_INTERVAL=10
 CHECKS_BEFORE_SUSPEND=60
 WAIT_FILE="/tmp/server-autosuspend-wait"
 
-cd "$(dirname "$0")"
+cd /usr/local/bin/autosuspend
 
 while true
 do
@@ -33,7 +33,7 @@ do
         fi
     done
 
-    echo "$(date)"
+    date
     ./suspend.sh
 done
 

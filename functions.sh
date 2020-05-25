@@ -2,6 +2,7 @@ GIT_URL_PREFIX=https://github.com/ivanp7
 SHARED_DIRECTORY=/usr/local/etc/shared
 SERVICES_DIRECTORY=/etc/runit/sv
 SERVICES_RUN_DIRECTORY=/var/service
+SERVICES_LOG_DIRECTORY=/var/log/runit
 
 ###############################################################################
 
@@ -64,8 +65,13 @@ uninstall_packages ()
     sudo pacman --noconfirm -R "$@"
 }
 
-enable_service ()
+install_and_enable_service ()
 {
+    install -Dm 754 -o root -g root -T $(aux_dir)/$1.service $SERVICES_DIRECTORY/$1/run
+    [ -n "$2" ] && touch $SERVICES_DIRECTORY/$1/down
+    mkdir -p $SERVICES_DIRECTORY/$1/log
+    echo -e "#!/bin/sh\nsvlogd -tt $SERVICES_LOG_DIRECTORY/$1\n" > $SERVICES_DIRECTORY/$1/log/run
+    mkdir -p $SERVICES_LOG_DIRECTORY/$1
     sudo ln -s -t $SERVICES_RUN_DIRECTORY $SERVICES_DIRECTORY/$1
 }
 

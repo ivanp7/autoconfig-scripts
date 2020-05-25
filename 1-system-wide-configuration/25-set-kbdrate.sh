@@ -13,8 +13,7 @@ check_root
 
 ####################################################################
 
-install -Dm 754 -o root -g root -T $(aux_dir)/set-kbdrate.service $SERVICES_DIRECTORY/set-kbdrate/run
-enable_service set-kbdrate
+install_and_enable_service set-kbdrate
 
 ####################################################################
 

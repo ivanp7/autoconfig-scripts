@@ -15,11 +15,8 @@ check_root
 
 install_official_packages open-vm-tools
 
-install -Dm 754 -o root -g root -T $(aux_dir)/vmtoolsd.service $SERVICES_DIRECTORY/vmtoolsd/run
-enable_service vmtoolsd
-
-install -Dm 754 -o root -g root -T $(aux_dir)/vmware-vmblock-fuse.service $SERVICES_DIRECTORY/vmware-vmblock-fuse/run
-enable_service vmware-vmblock-fuse
+install_and_enable_service vmtoolsd
+install_and_enable_service vmware-vmblock-fuse
 
 ####################################################################
 

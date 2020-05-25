@@ -23,8 +23,7 @@ mkdir -p $(dirname $MAP_FILE)
 { dumpkeys | head -n 1; cat $(aux_dir)/ctrl-caps-swap.map; } > $MAP_FILE
 chmod 644 $MAP_FILE
 
-install -Dm 754 -o root -g root -T $(aux_dir)/ctrl-caps-swap.service $SERVICES_DIRECTORY/ctrl-caps-swap/run
-enable_service ctrl-caps-swap
+install_and_enable_service ctrl-caps-swap
 
 ####################################################################
 
