@@ -1,3 +1,0 @@
-
-ExecUpPost='/usr/bin/ethtool -s $NETWORK_INTERFACE wol g'
-

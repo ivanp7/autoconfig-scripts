@@ -50,7 +50,7 @@ install_and_enable_service atd
 print_message "#### Adding pkgfile cronjob ####"
 
 pkgfile --update
-crontab -l | { cat; echo '0 15 * * * /usr/bin/pkgfile --update'; } | crontab -
+crontab -l | { cat; echo '@daily /usr/bin/pkgfile --update'; } | crontab -
 
 ####################################################################
 
