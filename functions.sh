@@ -1,7 +1,7 @@
 GIT_URL_PREFIX=https://github.com/ivanp7
 SHARED_DIRECTORY=/usr/local/etc/shared
 SERVICES_DIRECTORY=/etc/runit/sv
-SERVICES_RUN_DIRECTORY=/var/service
+SERVICES_RUN_DIRECTORY=/run/runit/service
 SERVICES_LOG_DIRECTORY=/var/log/runit
 
 ###############################################################################
