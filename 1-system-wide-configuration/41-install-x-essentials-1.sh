@@ -13,7 +13,9 @@ check_root
 
 ####################################################################
 
-install_official_packages xorg xorg-xinit xorg-drivers
+install_official_packages xorg 
+install_official_packages xorg-xinit 
+install_official_packages xorg-drivers
 
 install_official_packages bspwm picom unclutter libnotify dunst maim
 install_official_packages sxhkd wmctrl xdotool
