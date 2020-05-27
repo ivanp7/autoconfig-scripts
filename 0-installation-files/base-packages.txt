@@ -1,3 +1,7 @@
-base grub linux-lts linux-firmware vi git moreutils
+base base-devel runit elogind-runit vi
+linux-lts linux-firmware
+grub
+git moreutils
 terminus-font
-dhcpcd connman wpa_supplicant
+dhcpcd connman-runit wpa_supplicant
+
