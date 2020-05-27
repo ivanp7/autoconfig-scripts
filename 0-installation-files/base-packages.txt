@@ -1,7 +1,9 @@
 base base-devel runit elogind-runit vi
 linux-lts linux-firmware
+
 grub
 git moreutils
 terminus-font
 dhcpcd connman-runit wpa_supplicant
+intel-ucode amd-ucode
 
