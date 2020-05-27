@@ -1,5 +1,7 @@
 #!/bin/sh
 exec 2>&1
 sv once ctrl-caps-swap
-exec loadkeys /usr/local/share/kbd/keymaps/ctrl-caps-swap.map
+sleep 1
+loadkeys /usr/local/share/kbd/keymaps/ctrl-caps-swap.map
+sleep 1
 
