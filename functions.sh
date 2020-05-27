@@ -62,7 +62,7 @@ install_packages ()
 
 uninstall_packages ()
 {
-    sudo pacman --noconfirm -R "$@"
+    sudo pacman --noconfirm -Rns "$@"
 }
 
 install_and_enable_service ()

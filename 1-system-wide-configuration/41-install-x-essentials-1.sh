@@ -13,9 +13,10 @@ check_root
 
 ####################################################################
 
-install_official_packages xorg 
-install_official_packages xorg-xinit 
-install_official_packages xorg-drivers
+uninstall_packages terminus-font
+install_official_packages xorg xorg-xinit
+install_official_packages xf86-video-fbdev
+install_official_packages terminus-font
 
 install_official_packages bspwm picom unclutter libnotify dunst maim
 install_official_packages sxhkd wmctrl xdotool
