@@ -1,4 +1,4 @@
 #!/bin/sh -e
 exec 2>&1
-exec atd -f
+exec /usr/bin/atd -f
 
