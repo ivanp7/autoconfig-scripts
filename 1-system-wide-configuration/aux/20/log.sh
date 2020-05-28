@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILENAME=/var/log/usage-log/$(date +%F)
+FILENAME=/var/log/usage-log/$(date +'%F:%u')
 
 [ -f "$FILENAME" ] ||
     { dd if=/dev/zero bs=1 count=$((24*60)) | tr '\0' '.' | fold -w 60; echo; } > $FILENAME
