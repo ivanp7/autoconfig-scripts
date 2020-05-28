@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Adding user to the vmhgfs group ####"
+print_message "#### Adding user to the ssh groups ####"
 
 ####################################################################
 
@@ -13,7 +13,8 @@ check_user
 
 ####################################################################
 
-sudo gpasswd -a $(whoami) vmhgfs
+sudo gpasswd -a $(whoami) ssh-users
+sudo gpasswd -a $(whoami) sftp-users
 
 ####################################################################
 
