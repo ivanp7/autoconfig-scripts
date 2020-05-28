@@ -71,7 +71,8 @@ install_and_enable_service ()
     [ -n "$2" ] && touch $SERVICES_DIRECTORY/$1/down
 
     mkdir -p $SERVICES_DIRECTORY/$1/log
-    printf "#\!/bin/sh\nsvlogd -tt $SERVICES_LOG_DIRECTORY/$1\n" > $SERVICES_DIRECTORY/$1/log/run
+    echo '#!/bin/sh' > $SERVICES_DIRECTORY/$1/log/run
+    echo "svlogd -tt $SERVICES_LOG_DIRECTORY/$1" >> $SERVICES_DIRECTORY/$1/log/run
     chmod 754 $SERVICES_DIRECTORY/$1/log/run
     mkdir -p $SERVICES_LOG_DIRECTORY/$1
 
