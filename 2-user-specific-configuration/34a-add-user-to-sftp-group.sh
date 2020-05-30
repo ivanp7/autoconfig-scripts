@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Adding user to the ssh groups ####"
+print_message "#### Adding user to the sftp group ####"
 
 ####################################################################
 
@@ -13,7 +13,6 @@ check_user
 
 ####################################################################
 
-sudo gpasswd -a $(whoami) ssh-users
 sudo gpasswd -a $(whoami) sftp-users
 
 ####################################################################
