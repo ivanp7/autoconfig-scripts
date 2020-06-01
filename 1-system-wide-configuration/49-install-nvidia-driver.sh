@@ -14,7 +14,7 @@ check_user
 ####################################################################
 
 pacman -Qi linux-lts > /dev/null 2>&1 && PKG=nvidia-lts || PKG=nvidia
-install_packages $PKG nvidia-settings
+install_official_packages $PKG nvidia-settings libvdpau-va-gl
 
 ####################################################################
 
