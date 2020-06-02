@@ -5,18 +5,15 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing libvirt ####"
+print_message "#### Adding user to the libvirt group ####"
 
 ####################################################################
 
-check_root
+check_user
 
 ####################################################################
 
-print_message "Installing libvirt and services..."
-install_official_packages libvirt
-install_and_enable_service virtlogd
-install_and_enable_service libvirtd log
+sudo gpasswd -a $(whoami) libvirt
 
 ####################################################################
 
