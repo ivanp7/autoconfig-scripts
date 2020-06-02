@@ -4,3 +4,5 @@ qbittorrent
 phototonic vlc
 libreoffice-still aspell-ru
 
+virt-manager
+

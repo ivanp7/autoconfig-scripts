@@ -15,8 +15,8 @@ check_root
 
 install_official_packages open-vm-tools
 
-install_and_enable_service vmtoolsd
-install_and_enable_service vmware-vmblock-fuse
+install_and_enable_service vmtoolsd log
+install_and_enable_service vmware-vmblock-fuse log
 
 ####################################################################
 

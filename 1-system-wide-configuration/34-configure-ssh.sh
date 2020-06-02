@@ -32,7 +32,7 @@ sed -i "s/^#X11UseLocalhost .*/X11UseLocalhost yes/" /etc/ssh/sshd_config
 sed -i "/^Subsystem.*sftp.*/ s/Subsystem/#Subsystem/" /etc/ssh/sshd_config
 cat $(aux_dir)/sshd_config_tail | tee -a /etc/ssh/sshd_config
 
-install_and_enable_service sshd
+install_and_enable_service sshd log
 
 ####################################################################
 

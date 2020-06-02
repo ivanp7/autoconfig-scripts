@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Enabling autosuspending on inactivity ####"
+print_message "#### Installing libvirt ####"
 
 ####################################################################
 
@@ -13,9 +13,10 @@ check_root
 
 ####################################################################
 
-install -Dm 755 -o root -g root -t /usr/local/bin/autosuspend/ \
-    $(aux_dir)/activity-check.sh $(aux_dir)/suspend.sh
-install_and_enable_service autosuspend log
+install_official_packages libvirt dnsmasq firewalld
+install_and_enable_service firewalld
+install_and_enable_service virtlogd
+install_and_enable_service libvirtd log
 
 ####################################################################
 

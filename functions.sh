@@ -68,13 +68,17 @@ uninstall_packages ()
 install_and_enable_service ()
 {
     install -Dm 754 -o root -g root -T $(aux_dir)/$1.service $SERVICES_DIRECTORY/$1/run
-    [ -n "$2" ] && touch $SERVICES_DIRECTORY/$1/down
+    case "$2" in *down*) touch $SERVICES_DIRECTORY/$1/down ;; esac
 
-    mkdir -p $SERVICES_DIRECTORY/$1/log
-    echo '#!/bin/sh' > $SERVICES_DIRECTORY/$1/log/run
-    echo "svlogd -tt $SERVICES_LOG_DIRECTORY/$1" >> $SERVICES_DIRECTORY/$1/log/run
-    chmod 754 $SERVICES_DIRECTORY/$1/log/run
-    mkdir -p $SERVICES_LOG_DIRECTORY/$1
+    case "$2" in 
+        *log*)
+            mkdir $SERVICES_DIRECTORY/$1/log
+            echo '#!/bin/sh' > $SERVICES_DIRECTORY/$1/log/run
+            echo "svlogd -tt $SERVICES_LOG_DIRECTORY/$1" >> $SERVICES_DIRECTORY/$1/log/run
+            chmod 754 $SERVICES_DIRECTORY/$1/log/run
+            mkdir -p $SERVICES_LOG_DIRECTORY/$1
+            ;;
+    esac
 
     sudo ln -s -t $SERVICES_RUN_DIRECTORY $SERVICES_DIRECTORY/$1
 }

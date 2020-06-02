@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install_and_enable_service set-kbdrate
+install_and_enable_service set-kbdrate log
 
 ####################################################################
 
