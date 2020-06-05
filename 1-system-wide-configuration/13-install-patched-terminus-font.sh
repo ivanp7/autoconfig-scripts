@@ -5,18 +5,16 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Installing long term support kernel ####"
+print_message "#### Install patched Terminus font ####"
 
 ####################################################################
 
-check_root
+check_user
 
 ####################################################################
 
-install_official_packages linux-lts
-uninstall_packages linux
-mkinitcpio -P
-grub-mkconfig -o /boot/grub/grub.cfg
+uninstall_packages terminus-font
+install_packages terminus-font-ll2-td1-dv1-ij1
 
 ####################################################################
 
