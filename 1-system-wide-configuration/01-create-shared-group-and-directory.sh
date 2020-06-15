@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Performing initial preparations ####"
+print_message "#### Creating shared group and directory ####"
 
 ####################################################################
 
@@ -13,18 +13,10 @@ check_root
 
 ####################################################################
 
-print_message "Creating group 'shared'..."
 groupadd shared
 mkdir $SHARED_DIRECTORY
 chown root:shared $SHARED_DIRECTORY
 chmod 2775 $SHARED_DIRECTORY
-
-print_message "Installing sudo..."
-pacman --noconfirm -Syu
-pacman --noconfirm -S sudo
-
-print_message "Configuring pacman..."
-sed -i "s/^#Color/Color/" /etc/pacman.conf
 
 ####################################################################
 

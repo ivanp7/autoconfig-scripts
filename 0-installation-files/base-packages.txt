@@ -6,4 +6,5 @@ git moreutils
 dhcpcd connman-runit wpa_supplicant crda
 grub
 intel-ucode amd-ucode
+sudo
 
