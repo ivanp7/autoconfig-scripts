@@ -6,3 +6,5 @@ libreoffice-still aspell-ru
 
 virt-manager
 
+powdertoy-bin
+
