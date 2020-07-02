@@ -19,7 +19,7 @@ install_official_packages neovim
 install_official_packages fzf
 install_official_packages gdb strace
 install_official_packages screen tmux
-install_official_packages neofetch htop glances
+install_official_packages neofetch htop glances powertop
 install_official_packages pkgfile
 install_official_packages when task pass
 install_official_packages openssh sshfs encfs
