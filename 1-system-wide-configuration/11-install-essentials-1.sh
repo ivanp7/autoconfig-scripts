@@ -16,6 +16,7 @@ check_root
 install_official_packages man-db man-pages
 install_official_packages base-devel ctags
 install_official_packages neovim
+install_official_packages fzf
 install_official_packages gdb strace
 install_official_packages screen tmux
 install_official_packages neofetch htop glances
