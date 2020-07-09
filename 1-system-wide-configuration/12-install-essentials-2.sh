@@ -36,6 +36,7 @@ install_packages stardict-full-eng-rus stardict-full-rus-eng
 install_packages stardict-slang-eng-rus stardict-computer-ru
 
 print_message "Install Roswell applications..."
+ros install ivanp7/remote-control
 ros install ivanp7/cl-image2text
 
 print_message "Installing basic game collection..."
