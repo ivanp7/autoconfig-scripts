@@ -2,6 +2,6 @@
 exec 2>&1
 sv once set-kbdrate
 sleep 1
-kbdrate -d 250 -r 15
+kbdrate -d 250 -r 15 > /dev/null
 sleep 1
 
