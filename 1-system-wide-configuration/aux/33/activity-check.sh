@@ -2,13 +2,13 @@
 
 users_logged_in ()
 {
-    [ "$(who | cut -d' ' -f1 | sort | uniq | wc -l)" -gt 0 ]
+    [ "$(who | wc -l)" -gt 0 ]
     return
 }
 
 connections_on_port ()
 {
-    [ "$(ss -anp | grep :$1 | grep ESTAB | wc -l)" -gt 0 ]
+    [ "$(ss -HOn state established "( sport = $1 )" | wc -l)" -gt 0 ]
     return
 }
 
