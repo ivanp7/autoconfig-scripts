@@ -33,6 +33,9 @@ install_official_packages lxappearance
 
 ####################################################################
 
+print_message "Installing messenger..."
+install_official_packages qtox
+
 print_message "Installing media software..."
 install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu
 

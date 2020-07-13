@@ -36,7 +36,7 @@ install_official_packages jq dialog expect
 install_official_packages alsa-utils
 install_official_packages beep libcaca fbv mpv
 install_official_packages ffmpegthumbnailer poppler
-install_official_packages w3m youtube-dl
+install_official_packages w3m toxic youtube-dl
 install_official_packages sdcv
 install_official_packages octave
 
