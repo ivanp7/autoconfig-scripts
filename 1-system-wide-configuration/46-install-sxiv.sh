@@ -24,6 +24,9 @@ cd ../..
 
 makepkg --noconfirm -esi
 
+print_message "Setting sxiv as default image opener..."
+xdg-mime default sxiv.desktop $(sed '/^MimeType=/!d; s/.*=//; s/;/ /g' /usr/share/applications/sxiv.desktop)
+
 ####################################################################
 
 finish
