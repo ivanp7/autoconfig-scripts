@@ -49,10 +49,13 @@ install_and_enable_service atd
 
 ####################################################################
 
-print_message "#### Adding pkgfile cronjob ####"
+print_message "#### Adding cronjobs ####"
 
 pkgfile --update
+mandb
+
 crontab -l | { cat; echo '@daily /usr/bin/pkgfile --update'; } | crontab -
+crontab -l | { cat; echo '@daily /usr/bin/mandb'; } | crontab -
 
 ####################################################################
 
