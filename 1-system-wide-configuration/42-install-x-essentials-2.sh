@@ -22,6 +22,10 @@ print_message "Installing x-dotfiles..."
 git clone $GIT_URL_PREFIX/x-dotfiles.git
 sudo sh x-dotfiles/install.sh
 
+print_message "Installing wallpapers..."
+git clone $GIT_URL_PREFIX/wallpapers.git
+ln -sf $(realpath wallpapers) $HOME/
+
 ####################################################################
 
 finish
