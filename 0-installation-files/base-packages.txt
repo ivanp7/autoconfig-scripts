@@ -3,7 +3,7 @@ linux-lts linux-firmware
 
 terminus-font
 git moreutils
-dhcpcd connman-runit wpa_supplicant crda
+dhcpcd connman-runit wpa_supplicant crda wvdial
 grub
 intel-ucode amd-ucode
 sudo
