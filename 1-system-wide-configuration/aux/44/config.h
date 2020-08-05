@@ -246,7 +246,7 @@ MouseKey mkeys[] = {
 static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler", "externalpipe", NULL };
 
 static char *copyurlcmd[] = { "/bin/sh", "-c",
-    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
+    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-~]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
     "externalpipe", NULL };
 
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
@@ -347,28 +347,24 @@ write_char2(const Arg *arg)
     { mod|LockMask, keycode, fun, arg }
 
 #define DEF_BUTTON_1(mod, keycode, chr) \
-    { mod, keycode, write_char, {.v = chr} }
+    { mod,          keycode, write_char, {.v = chr} }, \
+    { mod|LockMask, keycode, write_char, {.v = chr} }
 
 #define DEF_CHAR(mod, keycode, chr_low, chr_up) \
     DEF_BUTTON_1(mod|0, keycode, chr_low), \
-    DEF_BUTTON_1(mod|LockMask, keycode, chr_low), \
-    DEF_BUTTON_1(mod|ShiftMask, keycode, chr_up), \
-    DEF_BUTTON_1(mod|LockMask|ShiftMask, keycode, chr_up)
+    DEF_BUTTON_1(mod|ShiftMask, keycode, chr_up)
 
 #define DEF_BUTTON_2(mod, keycode, chars) \
-    { mod, keycode, write_char2, {.v = chars} }
+    { mod,          keycode, write_char2, {.v = chars} }, \
+    { mod|LockMask, keycode, write_char2, {.v = chars} }
 
 #define DEF_LETTER(mod, keycode, chars_low, chars_up) \
     DEF_BUTTON_2(mod|0, keycode, chars_low chars_up), \
-    DEF_BUTTON_2(mod|LockMask, keycode, chars_low chars_up), \
-    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_up chars_low), \
-    DEF_BUTTON_2(mod|LockMask|ShiftMask, keycode, chars_up chars_low)
+    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_up chars_low)
 
 #define DEF_LETTER_SHIFT(mod, keycode, chars, chars_s) \
     DEF_BUTTON_2(mod|0, keycode, chars), \
-    DEF_BUTTON_2(mod|LockMask, keycode, chars), \
-    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_s), \
-    DEF_BUTTON_2(mod|LockMask|ShiftMask, keycode, chars_s)
+    DEF_BUTTON_2(mod|ShiftMask, keycode, chars_s)
 
 /******************************************************************************/
 
@@ -470,6 +466,7 @@ static Shortcut shortcuts[] = {
     DEF_LETTER_SHIFT(0, 59, ",б,Б", "<Б<б"),
     DEF_LETTER_SHIFT(0, 60, ".ю.Ю", ">Ю>ю"),
     DEF_CHAR(0, 61, "/", "?"),
+    DEF_BUTTON_1(ControlMask, 61, "\x1F"),
     DEF_CHAR(0, 51, "\\", "|"),
 
     DEF_CHAR(MODKEY, 24, "`", "~"),
