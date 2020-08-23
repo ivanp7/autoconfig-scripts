@@ -15,6 +15,7 @@ check_user
 
 install_packages shantz-xwinwrap-bzr
 install_packages polybar
+install_packages xkb-switch
 
 ####################################################################
 
