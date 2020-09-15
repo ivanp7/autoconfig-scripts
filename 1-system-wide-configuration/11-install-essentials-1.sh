@@ -29,7 +29,7 @@ install_official_packages wol ethtool ifplugd
 install_official_packages qemu edk2-ovmf
 install_official_packages acpi cpupower usbutils usb_modeswitch
 install_official_packages dosfstools ntfs-3g inotify-tools entr
-install_official_packages ncdu extundelete trash-cli
+install_official_packages ncdu trash-cli
 install_official_packages unzip unrar p7zip atool
 install_official_packages at cronie
 install_official_packages jq dialog expect
