@@ -25,7 +25,7 @@ install_official_packages when task pass
 install_official_packages openssh sshfs encfs
 install_official_packages wget rsync
 install_official_packages inetutils gnu-netcat ngrep tcpdump
-install_official_packages wol ethtool ifplugd
+install_official_packages wol ethtool
 install_official_packages qemu edk2-ovmf
 install_official_packages acpi cpupower usbutils usb_modeswitch
 install_official_packages dosfstools ntfs-3g inotify-tools entr
