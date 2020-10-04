@@ -13,15 +13,6 @@ check_root
 
 ####################################################################
 
-if pacman -Qi linux-lts > /dev/null 2>&1 
-then
-    install_official_packages linux-lts-headers
-    HOOK=nvidia-lts 
-else 
-    install_official_packages linux-headers
-    HOOK=nvidia
-fi
-install -Dm 644 $(aux_dir)/${HOOK}.hook /etc/pacman.d/hooks/
 install_official_packages nvidia-dkms
 
 grep -q '^MODULES=[^#]*nvidia' /etc/mkinitcpio.conf || {

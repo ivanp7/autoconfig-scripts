@@ -13,8 +13,18 @@ check_user
 
 ####################################################################
 
-pacman -Qi linux-lts > /dev/null 2>&1 && PKG=nvidia-lts || PKG=nvidia
-install_official_packages $PKG nvidia-settings libvdpau-va-gl
+if pacman -Qi linux-lts > /dev/null 2>&1 
+then
+    install_official_packages linux-lts-headers nvidia-lts
+    HOOK=nvidia-lts 
+else 
+    install_official_packages linux-headers nvidia
+    HOOK=nvidia
+fi
+
+install_official_packages nvidia-settings libvdpau-va-gl
+
+install -Dm 644 $(aux_dir)/${HOOK}.hook /etc/pacman.d/hooks/
 
 ####################################################################
 
