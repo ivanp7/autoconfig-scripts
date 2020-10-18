@@ -20,7 +20,7 @@ install_official_packages terminus-font
 
 install_official_packages bspwm picom unclutter libnotify dunst maim
 install_official_packages sxhkd wmctrl xdotool
-install_official_packages xssstate slock
+install_official_packages xssstate
 install_official_packages dex
 
 install_official_packages xclip xsel
