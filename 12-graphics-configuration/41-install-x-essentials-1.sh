@@ -15,6 +15,8 @@ check_root
 
 uninstall_packages terminus-font
 install_official_packages xorg xorg-xinit
+uninstall_packages xorg-xbacklight
+install_official_packages acpilight
 install_official_packages xf86-video-fbdev
 install_official_packages terminus-font
 
