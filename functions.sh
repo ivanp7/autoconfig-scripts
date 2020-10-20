@@ -65,6 +65,11 @@ uninstall_packages ()
     sudo pacman --noconfirm -Rns "$@"
 }
 
+enable_service ()
+{
+    sudo ln -s -t $SERVICES_RUN_DIRECTORY $SERVICES_DIRECTORY/$1
+}
+
 install_and_enable_service ()
 {
     install -Dm 754 -o root -g root -T $(aux_dir)/$1.service $SERVICES_DIRECTORY/$1/run
@@ -80,7 +85,7 @@ install_and_enable_service ()
             ;;
     esac
 
-    sudo ln -s -t $SERVICES_RUN_DIRECTORY $SERVICES_DIRECTORY/$1
+    enable_service $1
 }
 
 clone_git_repo_and_cd ()

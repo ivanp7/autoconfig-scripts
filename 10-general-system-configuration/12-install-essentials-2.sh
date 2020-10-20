@@ -29,7 +29,6 @@ cd $SHARED_DIRECTORY
 ####################################################################
 
 print_message "Installing essentials from AUR..."
-install_packages pm-utils
 install_packages lf archivemount xxd-standalone nvimpager-git
 install_packages roswell quicklisp
 install_packages stardict-full-eng-rus stardict-full-rus-eng

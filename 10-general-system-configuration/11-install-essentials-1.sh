@@ -27,7 +27,7 @@ install_official_packages wget rsync
 install_official_packages inetutils gnu-netcat ngrep tcpdump
 install_official_packages wol ethtool
 install_official_packages qemu edk2-ovmf
-install_official_packages acpi cpupower usbutils usb_modeswitch
+install_official_packages acpi tlp tlp-runit cpupower usbutils usb_modeswitch
 install_official_packages dosfstools ntfs-3g inotify-tools entr
 install_official_packages ncdu trash-cli
 install_official_packages unzip unrar p7zip atool
@@ -44,6 +44,7 @@ install_official_packages octave
 
 print_message "#### Enabling services ####"
 
+enable_service tlp
 install_and_enable_service cronie
 install_and_enable_service atd
 
