@@ -5,7 +5,7 @@ SCRIPT_DIR=$(realpath `dirname $0`)
 
 ####################################################################
 
-print_message "#### Allow backlight adjusting for non-privileged users ####"
+print_message "#### Fix computer suspend with Nvidia driver ####"
 
 ####################################################################
 
@@ -13,8 +13,7 @@ check_root
 
 ####################################################################
 
-mkdir -p /etc/udev/rules.d
-install -Dm 644 $(aux_dir)/90-backlight.rules /etc/udev/rules.d/
+install -Dm 755 $(aux_dir)/nvidia /usr/lib/elogind/system-sleep/
 
 ####################################################################
 

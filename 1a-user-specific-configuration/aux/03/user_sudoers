@@ -1,5 +1,4 @@
 
 # User configuration
 %$USERNAME ALL=(ALL) ALL
-%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/reboot,/usr/bin/poweroff,/usr/bin/halt,/usr/bin/pm-powersave,/usr/bin/pm-suspend,/usr/bin/pm-hibernate,/usr/bin/pm-suspend-hybrid,/usr/bin/on_ac_power,/usr/bin/pm-is-supported
-
+%$USERNAME ALL=(ALL) NOPASSWD: /usr/bin/reboot,/usr/bin/poweroff,/usr/bin/halt
