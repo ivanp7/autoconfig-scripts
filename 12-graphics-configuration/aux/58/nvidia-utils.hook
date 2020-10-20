@@ -1,0 +1,12 @@
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Type=Package
+Target=nvidia-utils
+
+[Action]
+Description=Update system-sleep/nvidia script
+When=PostTransaction
+NeedsTargets
+Exec=/bin/install -Dm 755 /usr/lib/elogind/system-sleep/nvidia_copy /usr/lib/elogind/system-sleep/nvidia
+
