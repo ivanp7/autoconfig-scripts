@@ -17,6 +17,13 @@ keycode 53 = slash question slash question Delete
 
 
 
+alt keycode 57 = space
+altgr alt keycode 57 = space
+shift alt keycode 57 = space
+altgr shift alt keycode 57 = space
+
+
+
 alt keycode 41 = grave
 alt keycode 2 = one
 alt keycode 3 = two

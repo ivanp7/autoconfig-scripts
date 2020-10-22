@@ -415,6 +415,8 @@ static Shortcut shortcuts[] = {
     DEF_CHAR(0, 20, "-", "_"),
     DEF_CHAR(0, 21, "=", "+"),
 
+    DEF_CHAR(MODKEY, 65, " ", " "),
+
     DEF_CHAR(MODKEY, 49, "`", "~"),
     DEF_CHAR(MODKEY, 10, "1", "!"),
     DEF_CHAR(MODKEY, 11, "2", "@"),
