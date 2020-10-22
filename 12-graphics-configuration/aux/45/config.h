@@ -399,7 +399,7 @@ static Shortcut shortcuts[] = {
 	DEF_FUNCTION( MODKEY|ControlMask,   32 /*XK_o*/,            externalpipe,   {.v = copyoutput } ),
 
     /* Input */
-    DEF_FUNCTION( MODKEY,               65 /*XK_space*/,        switch_language, {} ),
+    DEF_FUNCTION( 0,                    108 /*XK_Alt_R*/,       switch_language, {} ),
     DEF_FUNCTION( MODKEY,               135 /*XK_Menu*/,        switch_capslock, {} ),
 
     DEF_CHAR(0, 10, "1", "!"),
