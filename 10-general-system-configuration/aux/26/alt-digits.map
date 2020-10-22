@@ -1,0 +1,181 @@
+
+keycode 2 = one exclam one exclam
+keycode 3 = two at two at nul nul nul
+keycode 4 = three numbersign three numbersign Escape
+keycode 5 = four dollar four dollar Control_backslash
+keycode 6 = five percent five percent Control_bracketright
+keycode 7 = six asciicircum six asciicircum Control_asciicircum
+keycode 8 = seven ampersand seven ampersand Control_underscore
+keycode 9 = eight asterisk eight asterisk Delete
+keycode 10 = nine parenleft nine parenleft
+keycode 11 = zero parenright nine parenright
+keycode 12 = minus underscore minus underscore Control_underscore Control_underscore Control_underscore
+keycode 13 = equal plus equal plus
+
+keycode 43 = backslash bar backslash bar Control_backslash
+keycode 53 = slash question slash question Delete
+
+
+
+alt keycode 41 = grave
+alt keycode 2 = one
+alt keycode 3 = two
+alt keycode 4 = three
+alt keycode 5 = four
+alt keycode 6 = five
+alt keycode 7 = six
+alt keycode 8 = seven
+alt keycode 9 = eight
+alt keycode 10 = nine
+alt keycode 11 = zero
+alt keycode 12 = minus
+alt keycode 13 = equal
+
+altgr alt keycode 41 = grave
+altgr alt keycode 2 = one
+altgr alt keycode 3 = two
+altgr alt keycode 4 = three
+altgr alt keycode 5 = four
+altgr alt keycode 6 = five
+altgr alt keycode 7 = six
+altgr alt keycode 8 = seven
+altgr alt keycode 9 = eight
+altgr alt keycode 10 = nine
+altgr alt keycode 11 = zero
+altgr alt keycode 12 = minus
+altgr alt keycode 13 = equal
+
+shift alt keycode 41 = asciitilde
+shift alt keycode 2 = exclam
+shift alt keycode 3 = at
+shift alt keycode 4 = numbersign
+shift alt keycode 5 = dollar
+shift alt keycode 6 = percent
+shift alt keycode 7 = asciicircum
+shift alt keycode 8 = ampersand
+shift alt keycode 9 = asterisk
+shift alt keycode 10 = parenleft
+shift alt keycode 11 = parenright
+shift alt keycode 12 = underscore
+shift alt keycode 13 = plus
+
+altgr shift alt keycode 41 = asciitilde
+altgr shift alt keycode 2 = exclam
+altgr shift alt keycode 3 = at
+altgr shift alt keycode 4 = numbersign
+altgr shift alt keycode 5 = dollar
+altgr shift alt keycode 6 = percent
+altgr shift alt keycode 7 = asciicircum
+altgr shift alt keycode 8 = ampersand
+altgr shift alt keycode 9 = asterisk
+altgr shift alt keycode 10 = parenleft
+altgr shift alt keycode 11 = parenright
+altgr shift alt keycode 12 = underscore
+altgr shift alt keycode 13 = plus
+
+
+
+alt keycode 16 = grave
+alt keycode 23 = backslash
+alt keycode 24 = minus
+alt keycode 25 = equal
+alt keycode 26 = bracketleft
+alt keycode 27 = bracketright
+alt keycode 43 = backslash
+
+altgr alt keycode 16 = grave
+altgr alt keycode 23 = backslash
+altgr alt keycode 24 = minus
+altgr alt keycode 25 = equal
+altgr alt keycode 26 = bracketleft
+altgr alt keycode 27 = bracketright
+altgr alt keycode 43 = backslash
+
+shift alt keycode 16 = asciitilde
+shift alt keycode 23 = bar
+shift alt keycode 24 = underscore
+shift alt keycode 25 = plus
+shift alt keycode 26 = braceleft
+shift alt keycode 27 = braceright
+shift alt keycode 43 = bar
+
+altgr shift alt keycode 16 = asciitilde
+altgr shift alt keycode 23 = bar
+altgr shift alt keycode 24 = underscore
+altgr shift alt keycode 25 = plus
+altgr shift alt keycode 26 = braceleft
+altgr shift alt keycode 27 = braceright
+altgr shift alt keycode 43 = bar
+
+
+
+alt keycode 30 = one
+alt keycode 31 = two
+alt keycode 32 = three
+alt keycode 33 = four
+alt keycode 34 = five
+alt keycode 35 = six
+alt keycode 36 = seven
+alt keycode 37 = eight
+alt keycode 38 = nine
+alt keycode 39 = zero
+alt keycode 40 = apostrophe
+
+altgr alt keycode 30 = one
+altgr alt keycode 31 = two
+altgr alt keycode 32 = three
+altgr alt keycode 33 = four
+altgr alt keycode 34 = five
+altgr alt keycode 35 = six
+altgr alt keycode 36 = seven
+altgr alt keycode 37 = eight
+altgr alt keycode 38 = nine
+altgr alt keycode 39 = zero
+altgr alt keycode 40 = apostrophe
+
+shift alt keycode 30 = exclam
+shift alt keycode 31 = at
+shift alt keycode 32 = numbersign
+shift alt keycode 33 = dollar
+shift alt keycode 34 = percent
+shift alt keycode 35 = asciicircum
+shift alt keycode 36 = ampersand
+shift alt keycode 37 = asterisk
+shift alt keycode 38 = parenleft
+shift alt keycode 39 = parenright
+shift alt keycode 40 = quotedbl
+
+altgr shift alt keycode 30 = exclam
+altgr shift alt keycode 31 = at
+altgr shift alt keycode 32 = numbersign
+altgr shift alt keycode 33 = dollar
+altgr shift alt keycode 34 = percent
+altgr shift alt keycode 35 = asciicircum
+altgr shift alt keycode 36 = ampersand
+altgr shift alt keycode 37 = asterisk
+altgr shift alt keycode 38 = parenleft
+altgr shift alt keycode 39 = parenright
+altgr shift alt keycode 40 = quotedbl
+
+
+
+alt keycode 50 = semicolon
+alt keycode 51 = comma
+alt keycode 52 = period
+alt keycode 53 = slash
+
+altgr alt keycode 50 = semicolon
+altgr alt keycode 51 = comma
+altgr alt keycode 52 = period
+altgr alt keycode 53 = slash
+
+shift alt keycode 50 = colon
+shift alt keycode 51 = less
+shift alt keycode 52 = greater
+shift alt keycode 53 = question
+
+altgr shift alt keycode 50 = colon
+altgr shift alt keycode 51 = less
+altgr shift alt keycode 52 = greater
+altgr shift alt keycode 53 = question
+
