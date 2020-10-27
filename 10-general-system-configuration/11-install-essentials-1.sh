@@ -53,7 +53,7 @@ grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || {
 
 mkdir -p /usr/local/share/kbd/keymaps
 
-install -m 755 $(aux-dir)/console-keymap.sh /usr/local/bin/startup-init/
+install_init_script $(aux-dir)/console-keymap.sh
 
 ####################################################################
 
@@ -71,8 +71,8 @@ print_message "#### Adding cronjobs ####"
 pkgfile --update
 mandb
 
-crontab -l | { cat; echo '@daily /usr/bin/pkgfile --update'; } | crontab -
-crontab -l | { cat; echo '@daily /usr/bin/mandb'; } | crontab -
+add_cronjob '@daily /usr/bin/pkgfile --update'
+add_crobjob '@daily /usr/bin/mandb'
 
 ####################################################################
 

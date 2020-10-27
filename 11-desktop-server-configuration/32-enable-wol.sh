@@ -15,8 +15,7 @@ check_root
 
 INTERFACE="$(ip link | grep -E '^[[:digit:]]*: *en.*:' | 
     sed -E 's/^(.*): *(.*): (.*)/\2/' | head -n 1)"
-[ -n "$INTERFACE" ] &&
-crontab -l | { cat; echo "@reboot /usr/bin/ethtool -s $INTERFACE wol g"; } | crontab -
+[ -n "$INTERFACE" ] && add_cronjob "@reboot /usr/bin/ethtool -s $INTERFACE wol g"
 
 ####################################################################
 

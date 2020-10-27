@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install -Dm 755 -o root -g root -t /usr/local/bin/autosuspend/ \
+install -Dm 755 -t /usr/local/bin/autosuspend/ \
     $(aux_dir)/activity-check.sh $(aux_dir)/suspend.sh
 install_and_enable_service autosuspend log
 

@@ -88,6 +88,16 @@ install_and_enable_service ()
     enable_service $1
 }
 
+add_cronjob ()
+{
+    crontab -l | { cat; echo "$@"; } | crontab -
+}
+
+install_init_script ()
+{
+    install -m 755 $1 /usr/local/bin/startup-init/
+}
+
 install_keymap ()
 {
     local MAP_FILE=/usr/local/share/kbd/keymaps/$(basename $1)
