@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install_and_enable_service set-kbdrate
+install -m 755 $(aux_dir)/set-kbdrate.sh /usr/local/bin/startup-init/
 
 ####################################################################
 

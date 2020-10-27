@@ -1,10 +1,7 @@
 #!/bin/sh
-exec 2>&1
-sv once console-keymap
-sleep 1
+
 for keymap in $(find /usr/local/share/kbd/keymaps/ -type f)
 do
     loadkeys "$keymap"
 done
-sleep 1
 

@@ -42,7 +42,9 @@ install_official_packages octave
 
 ####################################################################
 
-print_message "#### Enabling keymaps ####"
+print_message "#### Making preparations ####"
+
+mkdir -p /usr/local/bin/startup-init
 
 grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || { 
     sed -i "/^HOOKS=(/ s/keyboard/keyboard keymap/" /etc/mkinitcpio.conf
@@ -51,12 +53,14 @@ grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || {
 
 mkdir -p /usr/local/share/kbd/keymaps
 
+install -m 755 $(aux-dir)/console-keymap.sh /usr/local/bin/startup-init/
+
 ####################################################################
 
 print_message "#### Enabling services ####"
 
 enable_service tlp
-install_and_enable_service console-keymap
+install_and_enable_service startup-init
 install_and_enable_service cronie
 install_and_enable_service atd
 
