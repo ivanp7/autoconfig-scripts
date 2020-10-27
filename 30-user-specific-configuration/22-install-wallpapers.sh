@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Adding user to the sftp group ####"
+print_message "#### Installing wallpapers ####"
 
 ####################################################################
 
@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-sudo gpasswd -a $(whoami) sftp-users
+ln -sf "$(realpath wallpapers)" $HOME/
 
 ####################################################################
 

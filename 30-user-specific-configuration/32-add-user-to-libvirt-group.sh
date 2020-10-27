@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Preventing Ctrl/CapsLock key swapping in X ####"
+print_message "#### Adding user to the libvirt group ####"
 
 ####################################################################
 
@@ -13,8 +13,7 @@ check_user
 
 ####################################################################
 
-mkdir -p $HOME/.config/X11
-touch $HOME/.config/X11/xmodmap
+sudo gpasswd -a $(whoami) libvirt
 
 ####################################################################
 

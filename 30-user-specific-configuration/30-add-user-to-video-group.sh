@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Installing wallpapers ####"
+print_message "#### Adding user to video group ####"
 
 ####################################################################
 
@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-ln -sf "$(realpath wallpapers)" $HOME/
+sudo gpasswd -a $(whoami) video
 
 ####################################################################
 

@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Performing basic user configuration ####"
+print_message "#### Preventing Ctrl/CapsLock key swapping in X ####"
 
 ####################################################################
 
@@ -13,14 +13,8 @@ check_user
 
 ####################################################################
 
-print_message "Changing shell to zsh..."
-mkdir -p $HOME/.cache/zsh
-chsh -s /usr/bin/zsh
-
-####################################################################
-
-print_message "Adding Roswell binaries to PATH..."
-ln -sT $HOME/.roswell/bin $HOME/bin/roswell
+mkdir -p $HOME/.config/X11
+touch $HOME/.config/X11/xmodmap
 
 ####################################################################
 

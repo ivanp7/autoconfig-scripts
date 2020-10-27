@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Adding user to the ssh group ####"
+print_message "#### Adding user to the sftp group ####"
 
 ####################################################################
 
@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-sudo gpasswd -a $(whoami) ssh-users
+sudo gpasswd -a $(whoami) sftp-users
 
 ####################################################################
 

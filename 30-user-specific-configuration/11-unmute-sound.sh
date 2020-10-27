@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ROOT_DIR="$(realpath "$(dirname "$0")")/.."
-. "$ROOT_DIR/functions.sh"
+. "$ROOT_DIR/.functions.sh"
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Unmuting sound  ####"
 
 ####################################################################
 
@@ -13,7 +13,9 @@ check_user
 
 ####################################################################
 
-sh dotfiles/install.sh
+amixer sset Master unmute
+amixer sset Speaker unmute
+amixer sset Headphone unmute
 
 ####################################################################
 
