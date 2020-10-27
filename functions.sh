@@ -9,7 +9,7 @@ SERVICES_LOG_DIRECTORY=/var/log/runit
 # enable self-logging
 [ -z "$LOGGING" ] && { 
     export LOGGING=yes
-    mispipe "$0" "tee \"$(basename "$0").log\""
+    mispipe "$0 2>&1" "tee \"$(basename "$0").log\""
     exit $?
 }
 
@@ -37,8 +37,7 @@ check_user ()
 
 aux_dir ()
 {
-    local NUM_PREFIX=$(echo "$(basename $0)" | cut -c1-2)
-    echo $SCRIPT_DIR/aux/$NUM_PREFIX
+    echo "$(realpath "$ROOT_DIR/.aux/$(basename "$0")")"
 }
 
 print_message ()
@@ -72,7 +71,7 @@ enable_service ()
 
 install_and_enable_service ()
 {
-    install -Dm 754 -o root -g root -T $(aux_dir)/$1.service $SERVICES_DIRECTORY/$1/run
+    install -Dm 754 -o root -g root -T "$(aux_dir)/$1.service" $SERVICES_DIRECTORY/$1/run
     case "$2" in *down*) touch $SERVICES_DIRECTORY/$1/down ;; esac
 
     case "$2" in 
