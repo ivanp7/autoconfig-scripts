@@ -66,5 +66,11 @@ install -Dm 644 "$(aux_dir)/zsh.hook" /etc/pacman.d/hooks/
 
 ####################################################################
 
+print_message "Installing configuration files..."
+
+install -Dm 644 "$(aux_dir)/sbclrc" /etc/
+
+####################################################################
+
 finish
 
