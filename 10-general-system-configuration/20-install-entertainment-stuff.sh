@@ -19,7 +19,7 @@ install_packages cgames bs
 
 print_message "#### Installing other stuff ####"
 
-install_packages lolcat fortune-mod sl cmatrix ponysay nyancat
+install_packages lolcat sl cmatrix ponysay nyancat
 
 ####################################################################
 

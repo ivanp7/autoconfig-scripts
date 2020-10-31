@@ -86,6 +86,10 @@ install_official_packages alsa-utils beep
 install_official_packages mpv 
 install_official_packages poppler
 
+print_message "#### Installing miscellaneous stuff ####"
+
+install_official_packages fortune-mod
+
 ####################################################################
 
 finish
