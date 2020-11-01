@@ -13,8 +13,7 @@ check_root
 
 ####################################################################
 
-mkdir -p /etc/sysctl.d
-echo "vm.swappiness=10" | tee -a /etc/sysctl.d/99-sysctl.conf
+install -Dm 644 "$(aux_dir)/99-sysctl.conf" /etc/sysctl.d/
 sysctl vm.swappiness=10
 
 ####################################################################
