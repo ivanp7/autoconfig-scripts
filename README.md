@@ -21,10 +21,6 @@ Scripts that do configuration for desktop/server systems.
 
 Scripts that configure virtual machine emulators.
 
-* 13-user-specific-configuration
-
-Scripts that do user-specific adjustments.
-
 * 20-graphics-configuration
 
 Scripts that configure X server, graphics driver and related things.
@@ -32,6 +28,14 @@ Scripts that configure X server, graphics driver and related things.
 * 21-nvidia-configuration
 
 Scripts that configure NVIDIA driver and related things.
+
+* 30-user-specific-configuration
+
+Scripts that do user-specific adjustments.
+
+* 31-extra-configuration
+
+Scripts that don't fall into other cathegories.
 
 * extra-software-lists
 
