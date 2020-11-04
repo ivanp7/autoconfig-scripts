@@ -27,6 +27,8 @@ print_message "#### Installing hotkey daemon ####"
 
 install_official_packages sxhkd
 
+install_packages xkbset
+
 print_message "#### Installing screen capturing tools ####"
 
 install_official_packages maim
