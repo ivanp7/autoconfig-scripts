@@ -1,0 +1,13 @@
+--- window.c	2020-11-04 17:01:01.890528802 +0300
++++ window.c.new	2020-11-04 16:59:21.620526997 +0300
+@@ -119,8 +119,8 @@
+ 	f = win_res(db, RES_CLASS ".font", "monospace-8");
+ 	win_init_font(e, f);
+ 
+-	bg = win_res(db, RES_CLASS ".background", "white");
+-	fg = win_res(db, RES_CLASS ".foreground", "black");
++	bg = win_res(db, RES_CLASS ".background", default_bg_color);
++	fg = win_res(db, RES_CLASS ".foreground", default_fg_color);
+ 	win_alloc_color(e, bg, &win->bg);
+ 	win_alloc_color(e, fg, &win->fg);
+ 
