@@ -48,7 +48,7 @@ install_official_packages gtkmm3 fltk
 
 print_message "#### Installing fonts and themes ####"
 
-install_official_packages ttf-roboto
+install_official_packages ttf-roboto ttf-liberation
 install_official_packages adapta-gtk-theme
 
 print_message "#### Installing graphical appearance settings interface ####"
