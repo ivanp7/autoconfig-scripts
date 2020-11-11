@@ -2,6 +2,7 @@ qtox telegram-desktop
 gmapcatcher
 qbittorrent
 phototonic vlc
+pinta
 libreoffice-still aspell-ru
 
 virt-manager
