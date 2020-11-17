@@ -24,7 +24,7 @@ grep -q '^GRUB_CMDLINE_LINUX_DEFAULT=[^#]*nvidia' /etc/default/grub && {
     grub-mkconfig -o /boot/grub/grub.cfg
 }
 
-uninstall_packages nvidia-dkms
+uninstall_packages nvidia-dkms nvidia-prime
 
 ####################################################################
 

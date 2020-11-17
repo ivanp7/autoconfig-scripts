@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install_official_packages nvidia-dkms
+install_official_packages nvidia-dkms nvidia-prime
 
 grep -q '^MODULES=[^#]*nvidia' /etc/mkinitcpio.conf || {
     MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
