@@ -22,7 +22,7 @@ else
     HOOK=nvidia
 fi
 
-install_official_packages nvidia-settings libvdpau-va-gl
+install_official_packages nvidia-settings libvdpau-va-gl nvtop
 
 install -Dm 644 "$(aux_dir)/${HOOK}.hook" /etc/pacman.d/hooks/
 
