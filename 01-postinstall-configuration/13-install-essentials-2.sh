@@ -41,6 +41,7 @@ install_packages quicklisp
 print_message "#### Installing miscellaneous stuff ####"
 
 install_official_packages fortune-mod-ru
+install_packages tty-clock
 
 ####################################################################
 
