@@ -44,10 +44,10 @@ print_message "#### Installing hardware management tools ####"
 install_official_packages acpi tlp tlp-runit cpupower usbutils usb_modeswitch
 install_official_packages wol ethtool
 
-print_message "#### Installing system state monitoring tools ####"
+print_message "#### Installing system state monitoring and control tools ####"
 
 install_official_packages neofetch htop glances powertop
-
+install_official_packages ntp
 install_official_packages pkgfile
 
 print_message "#### Installing cron and delayed jobs tools ####"

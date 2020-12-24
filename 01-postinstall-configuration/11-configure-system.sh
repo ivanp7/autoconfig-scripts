@@ -32,6 +32,7 @@ enable_service tlp
 install_and_enable_service startup-init
 install_and_enable_service cronie
 install_and_enable_service atd
+install_and_enable_service ntp
 
 ####################################################################
 
