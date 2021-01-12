@@ -4,6 +4,7 @@ qbittorrent
 phototonic vlc
 pinta
 libreoffice-still aspell-ru
+minder
 
 virt-manager
 
