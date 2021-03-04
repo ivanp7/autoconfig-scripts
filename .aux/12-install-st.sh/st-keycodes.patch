@@ -1,8 +1,8 @@
 diff --git a/x.c b/x.c
-index c09392b..8787040 100644
+index 696ade9..23ed0b8 100644
 --- a/x.c
 +++ b/x.c
-@@ -24,7 +24,7 @@ static char *argv0;
+@@ -25,7 +25,7 @@ char *argv0;
  /* types used in config.h */
  typedef struct {
  	uint mod;
@@ -11,16 +11,19 @@ index c09392b..8787040 100644
  	void (*func)(const Arg *);
  	const Arg arg;
  } Shortcut;
-@@ -1869,6 +1869,7 @@ void
- kpress(XEvent *ev)
+@@ -1967,6 +1967,7 @@ kpress(XEvent *ev)
  {
  	XKeyEvent *e = &ev->xkey;
-+	KeyCode kcode = e->keycode;
  	KeySym ksym;
- 	char buf[32], *customkey;
++	KeyCode kcode;
+ 	char buf[64], *customkey;
  	int len;
-@@ -1882,7 +1883,7 @@ kpress(XEvent *ev)
- 	len = XmbLookupString(xw.xic, e, buf, sizeof buf, &ksym, &status);
+ 	Rune c;
+@@ -1980,9 +1981,10 @@ kpress(XEvent *ev)
+ 		len = XmbLookupString(xw.ime.xic, e, buf, sizeof buf, &ksym, &status);
+ 	else
+ 		len = XLookupString(e, buf, sizeof buf, &ksym, NULL);
++	kcode = XKeysymToKeycode(xw.dpy, ksym);
  	/* 1. shortcuts */
  	for (bp = shortcuts; bp < shortcuts + LEN(shortcuts); bp++) {
 -		if (ksym == bp->keysym && match(bp->mod, e->state)) {

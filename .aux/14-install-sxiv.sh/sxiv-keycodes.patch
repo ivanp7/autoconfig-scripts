@@ -1,19 +1,20 @@
 --- main.c.orig	2020-02-26 00:52:28.357480704 +0300
 +++ main.c	2020-02-26 00:58:59.670449649 +0300
-@@ -572,9 +572,12 @@
+@@ -572,9 +572,13 @@
  	int i;
  	unsigned int sh = 0;
  	KeySym ksym, shksym;
-+    KeyCode kcode = kev->keycode;
-+    char kcode_str[12];
++	KeyCode kcode;
++	char kcode_str[12];
  	char dummy, key;
  	bool dirty = false;
  
-+    snprintf(kcode_str, 12, "%d", kcode);
  	XLookupString(kev, &key, 1, &ksym, NULL);
++	kcode = XKeysymToKeycode(win.env.dpy, ksym);
++	snprintf(kcode_str, 12, "%d", kcode);
  
  	if (kev->state & ShiftMask) {
-@@ -589,14 +592,14 @@
+@@ -589,14 +593,14 @@
  	if (ksym == XK_Escape && MODMASK(kev->state) == 0) {
  		extprefix = False;
  	} else if (extprefix) {
@@ -28,7 +29,7 @@
 -		if (keys[i].ksym == ksym &&
 -		    MODMASK(keys[i].mask | sh) == MODMASK(kev->state) &&
 +		if (keys[i].kcode == kcode &&
-+		    MODMASK(keys[i].mask) == MODMASK(kev->state) &&
++			MODMASK(keys[i].mask) == MODMASK(kev->state) &&
  		    keys[i].cmd >= 0 && keys[i].cmd < CMD_COUNT &&
  		    (cmds[keys[i].cmd].mode < 0 || cmds[keys[i].cmd].mode == mode))
 		{
@@ -39,7 +40,7 @@
  typedef struct {
  	unsigned int mask;
 -	KeySym ksym;
-+    KeyCode kcode;
++	KeyCode kcode;
  	cmd_id_t cmd;
  	arg_t arg;
  } keymap_t;
