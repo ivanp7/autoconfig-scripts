@@ -10,7 +10,7 @@
  	bool dirty = false;
  
  	XLookupString(kev, &key, 1, &ksym, NULL);
-+	kcode = XKeysymToKeycode(win.env.dpy, ksym);
++	kcode = kev->keycode;
 +	snprintf(kcode_str, 12, "%d", kcode);
  
  	if (kev->state & ShiftMask) {
