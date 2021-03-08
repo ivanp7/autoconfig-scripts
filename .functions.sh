@@ -99,9 +99,9 @@ install_init_script ()
 
 install_keymap ()
 {
-    local MAP_FILE=/usr/local/share/kbd/keymaps/$(basename $1)
-    { dumpkeys | head -1; cat $1; } > $MAP_FILE
-    chmod 644 $MAP_FILE
+    local MAP_FILE="/usr/local/share/kbd/keymaps/$(basename "$1")"
+    { dumpkeys | head -1; cat "$1"; } > "$MAP_FILE"
+    chmod 644 "$MAP_FILE"
 }
 
 clone_git_repo_and_cd ()
