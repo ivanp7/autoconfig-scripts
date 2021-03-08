@@ -14,7 +14,9 @@ check_root
 ####################################################################
 
 install -Dm 644 "$(aux_dir)/99-sysctl.conf" /etc/sysctl.d/
+
 sysctl vm.swappiness=10
+sysctl kernel.sysrq=1
 
 ####################################################################
 
