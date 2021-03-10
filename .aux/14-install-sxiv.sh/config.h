@@ -10,8 +10,9 @@ enum {
  * 'font' X resource properties.
  * See X(7) section Resources and xrdb(1) for more information.
  */
-static const char *default_fg_color = "#bbbbbb";
 static const char *default_bg_color = "#222222";
+static const char *default_fg_color = "#bbbbbb";
+static const char *default_font = "xos4 Terminus-10";
 
 #endif
 #ifdef _IMAGE_CONFIG
