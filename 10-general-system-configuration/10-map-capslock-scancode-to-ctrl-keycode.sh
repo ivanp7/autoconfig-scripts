@@ -13,7 +13,8 @@ check_root
 
 ####################################################################
 
-install_keymap "$(aux_dir)/ctrl-caps-swap.map"
+install -m 644 "$(aux_dir)/99-map-capslock-to-ctrl.hwdb" /usr/lib/udev/hwdb.d/
+udevadm --debug hwdb --update
 
 ####################################################################
 
