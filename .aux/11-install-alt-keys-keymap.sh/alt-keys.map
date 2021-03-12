@@ -1,4 +1,6 @@
 
+! digit row
+
 keycode 2 = one exclam one exclam
 keycode 3 = two at two at nul nul nul
 keycode 4 = three numbersign three numbersign Escape
@@ -12,19 +14,6 @@ keycode 11 = zero parenright nine parenright
 keycode 12 = minus underscore minus underscore Control_underscore Control_underscore Control_underscore
 keycode 13 = equal plus equal plus
 
-keycode 43 = backslash bar backslash bar Control_backslash
-keycode 53 = slash question slash question Delete
-
-
-
-alt keycode 57 = space
-altgr alt keycode 57 = space
-shift alt keycode 57 = space
-altgr shift alt keycode 57 = space
-
-
-
-alt keycode 41 = grave
 alt keycode 2 = one
 alt keycode 3 = two
 alt keycode 4 = three
@@ -38,7 +27,6 @@ alt keycode 11 = zero
 alt keycode 12 = minus
 alt keycode 13 = equal
 
-altgr alt keycode 41 = grave
 altgr alt keycode 2 = one
 altgr alt keycode 3 = two
 altgr alt keycode 4 = three
@@ -52,7 +40,6 @@ altgr alt keycode 11 = zero
 altgr alt keycode 12 = minus
 altgr alt keycode 13 = equal
 
-shift alt keycode 41 = asciitilde
 shift alt keycode 2 = exclam
 shift alt keycode 3 = at
 shift alt keycode 4 = numbersign
@@ -66,7 +53,6 @@ shift alt keycode 11 = parenright
 shift alt keycode 12 = underscore
 shift alt keycode 13 = plus
 
-altgr shift alt keycode 41 = asciitilde
 altgr shift alt keycode 2 = exclam
 altgr shift alt keycode 3 = at
 altgr shift alt keycode 4 = numbersign
@@ -80,41 +66,44 @@ altgr shift alt keycode 11 = parenright
 altgr shift alt keycode 12 = underscore
 altgr shift alt keycode 13 = plus
 
-
+! top row
 
 alt keycode 16 = grave
-alt keycode 23 = backslash
-alt keycode 24 = minus
-alt keycode 25 = equal
-alt keycode 26 = bracketleft
-alt keycode 27 = bracketright
-alt keycode 43 = backslash
-
 altgr alt keycode 16 = grave
-altgr alt keycode 23 = backslash
-altgr alt keycode 24 = minus
-altgr alt keycode 25 = equal
-altgr alt keycode 26 = bracketleft
-altgr alt keycode 27 = bracketright
-altgr alt keycode 43 = backslash
-
 shift alt keycode 16 = asciitilde
-shift alt keycode 23 = bar
-shift alt keycode 24 = underscore
-shift alt keycode 25 = plus
-shift alt keycode 26 = braceleft
-shift alt keycode 27 = braceright
-shift alt keycode 43 = bar
-
 altgr shift alt keycode 16 = asciitilde
-altgr shift alt keycode 23 = bar
-altgr shift alt keycode 24 = underscore
-altgr shift alt keycode 25 = plus
+
+alt keycode 22 = backslash
+altgr alt keycode 22 = backslash
+shift alt keycode 22 = bar
+altgr shift alt keycode 22 = bar
+
+alt keycode 23 = minus
+altgr alt keycode 23 = minus
+shift alt keycode 23 = underscore
+altgr shift alt keycode 23 = underscore
+
+alt keycode 24 = equal
+altgr alt keycode 24 = equal
+shift alt keycode 24 = plus
+altgr shift alt keycode 24 = plus
+
+alt keycode 25 = semicolon
+altgr alt keycode 25 = semicolon
+shift alt keycode 25 = colon
+altgr shift alt keycode 25 = colon
+
+alt keycode 26 = bracketleft
+altgr alt keycode 26 = bracketleft
+shift alt keycode 26 = braceleft
 altgr shift alt keycode 26 = braceleft
+
+alt keycode 27 = bracketright
+altgr alt keycode 27 = bracketright
+shift alt keycode 27 = braceright
 altgr shift alt keycode 27 = braceright
-altgr shift alt keycode 43 = bar
 
-
+! middle row
 
 alt keycode 30 = one
 alt keycode 31 = two
@@ -164,25 +153,49 @@ altgr shift alt keycode 38 = parenleft
 altgr shift alt keycode 39 = parenright
 altgr shift alt keycode 40 = quotedbl
 
+alt keycode 41 = grave
+altgr alt keycode 41 = grave
+shift alt keycode 41 = asciitilde
+altgr shift alt keycode 41 = asciitilde
 
+! bottom row
 
-alt keycode 50 = semicolon
+keycode 43 = backslash bar backslash bar Control_backslash
+alt keycode 43 = backslash
+altgr alt keycode 43 = backslash
+shift alt keycode 43 = bar
+altgr shift alt keycode 43 = bar
+
+alt keycode 47 = five
+altgr alt keycode 47 = five
+shift alt keycode 47 = percent
+altgr shift alt keycode 47 = percent
+
+alt keycode 49 = six
+altgr alt keycode 49 = six
+shift alt keycode 49 = asciicircum
+altgr shift alt keycode 49 = asciicircum
+
 alt keycode 51 = comma
-alt keycode 52 = period
-alt keycode 53 = slash
-
-altgr alt keycode 50 = semicolon
 altgr alt keycode 51 = comma
-altgr alt keycode 52 = period
-altgr alt keycode 53 = slash
-
-shift alt keycode 50 = colon
 shift alt keycode 51 = less
-shift alt keycode 52 = greater
-shift alt keycode 53 = question
-
-altgr shift alt keycode 50 = colon
 altgr shift alt keycode 51 = less
+
+alt keycode 52 = period
+altgr alt keycode 52 = period
+shift alt keycode 52 = greater
 altgr shift alt keycode 52 = greater
+
+keycode 53 = slash question slash question Delete
+alt keycode 53 = slash
+altgr alt keycode 53 = slash
+shift alt keycode 53 = question
 altgr shift alt keycode 53 = question
+
+! space
+
+alt keycode 57 = space
+altgr alt keycode 57 = space
+shift alt keycode 57 = space
+altgr shift alt keycode 57 = space
 
