@@ -171,10 +171,10 @@ altgr alt keycode 47 = five
 shift alt keycode 47 = percent
 altgr shift alt keycode 47 = percent
 
-alt keycode 49 = six
-altgr alt keycode 49 = six
-shift alt keycode 49 = asciicircum
-altgr shift alt keycode 49 = asciicircum
+alt keycode 50 = six
+altgr alt keycode 50 = six
+shift alt keycode 50 = asciicircum
+altgr shift alt keycode 50 = asciicircum
 
 alt keycode 51 = comma
 altgr alt keycode 51 = comma

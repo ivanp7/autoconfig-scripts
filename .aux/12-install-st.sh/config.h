@@ -475,7 +475,7 @@ static Shortcut shortcuts[] = {
 
     /* Input */
     DEF_FUNCTION( 0,                    108 /*XK_Alt_R*/,       switch_language, {} ),
-    DEF_FUNCTION( MODKEY,               135 /*XK_Menu*/,        switch_layout, {} ),
+    DEF_FUNCTION( MODKEY,               28  /*XK_t*/,           switch_layout, {} ),
 
     // digit row
     DEF_SELFINSERT_KEY(9), // Escape
@@ -529,8 +529,8 @@ static Shortcut shortcuts[] = {
     DEF_SELFINSERT_KEY(54), // c
     DEF_SELFINSERT_KEY_WITH_ALT(55, "5", "%"), // v
     DEF_SELFINSERT_KEY(56), // b
-    DEF_SELFINSERT_KEY_WITH_ALT(57, "6", "^"), // n
-    DEF_SELFINSERT_KEY(58), // m
+    DEF_SELFINSERT_KEY(57), // n
+    DEF_SELFINSERT_KEY_WITH_ALT(58, "6", "^"), // m
     DEF_SELFINSERT_KEY_WITH_ALT(59, ",", "<"), // ,
     DEF_SELFINSERT_KEY_WITH_ALT(60, ".", ">"), // .
     DEF_SELFINSERT_KEY_WITH_ALT(61, "/", "?"), // Slash
