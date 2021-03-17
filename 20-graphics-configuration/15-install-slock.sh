@@ -13,16 +13,9 @@ check_user
 
 ####################################################################
 
-clone_git_repo_and_cd slock-git https://aur.archlinux.org/slock-git.git
+clone_git_repo_and_cd slock-ivanp7 $GIT_URL_PREFIX/slock-ivanp7.git
 
-makepkg --noconfirm -o
-cd src/slock/
-
-install -Dm 644 "$(aux_dir)/extra-keycodes.patch" ./
-patch < extra-keycodes.patch
-cd ../..
-
-makepkg --noconfirm -esi
+makepkg --noconfirm -si
 
 ####################################################################
 
