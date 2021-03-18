@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-until { echo -n 'User name: '; read USERNAME; useradd -m "$USERNAME"; }
+until { echo -n 'User name: '; read -r USERNAME; useradd -m "$USERNAME"; }
 do echo "Try again"; sleep 2; done
 until passwd $USERNAME; do echo "Try again"; sleep 2; done
 

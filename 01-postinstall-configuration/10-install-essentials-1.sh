@@ -60,7 +60,7 @@ install_official_packages base-devel ctags
 install_official_packages gdb strace
 install_official_packages lsof
 
-install_official_packages inetutils gnu-netcat ngrep tcpdump
+install_official_packages inetutils gnu-netcat socat ngrep tcpdump
 
 print_message "#### Installing auxilliary tools ####"
 
@@ -83,9 +83,9 @@ install_official_packages w3m toxic
 
 print_message "#### Installing media tools ####"
 
-install_official_packages alsa-utils beep 
+install_official_packages alsa-utils beep
 install_official_packages pulseaudio pavucontrol
-install_official_packages mpv 
+install_official_packages mpv
 install_official_packages poppler
 
 print_message "#### Installing miscellaneous stuff ####"
