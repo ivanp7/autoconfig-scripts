@@ -1,0 +1,4 @@
+#!/bin/sh
+sleep 1
+exec 2>&1
+exec quark -p 80 -g nobody -d /srv/http/site
