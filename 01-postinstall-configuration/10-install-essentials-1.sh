@@ -84,7 +84,7 @@ install_official_packages w3m toxic
 print_message "#### Installing media tools ####"
 
 install_official_packages alsa-utils beep
-install_official_packages pulseaudio pavucontrol
+install_official_packages pulseaudio pavucontrol paprefs
 install_official_packages mpv
 install_official_packages poppler
 
