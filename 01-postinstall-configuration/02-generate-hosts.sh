@@ -17,7 +17,7 @@ DIR=hosts-gen
 
 cd /tmp
 if [ ! -d "$DIR" ]
-then git clone http://git.r-36.net/hosts-gen
+then git clone https://github.com/mustaqimM/hosts-gen.git
 fi
 cd $DIR
 

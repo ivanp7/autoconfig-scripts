@@ -17,12 +17,12 @@ print_message "Preparing services..."
 
 mkdir -p /usr/local/bin/startup-init
 
-grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || { 
+grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || {
     sed -i "/^HOOKS=(/ s/keyboard/keyboard keymap/" /etc/mkinitcpio.conf
     mkinitcpio -P
 }
 mkdir -p /usr/local/share/kbd/keymaps
-install_init_script $(aux-dir)/console-keymap.sh
+install_init_script $(aux_dir)/console-keymap.sh
 
 ####################################################################
 
@@ -39,7 +39,7 @@ install_and_enable_service ntp
 print_message "Adding cronjobs..."
 
 add_cronjob '@daily /usr/bin/pkgfile --update'
-add_crobjob '@daily /usr/bin/mandb'
+add_cronjob '@daily /usr/bin/mandb'
 
 ####################################################################
 
