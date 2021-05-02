@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kbdrate -d 250 -r 15 > /dev/null
+kbdrate -d 500 -r 20 > /dev/null
 
