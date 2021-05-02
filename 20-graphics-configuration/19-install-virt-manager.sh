@@ -5,18 +5,15 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing entertainment stuff ####"
+print_message "#### Installing virt-manager ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-print_message "#### Installing basic game collection ####"
-
-install_official_packages gnome-mahjongg
-install_packages powdertoy-bin
+install_official_packages virt-manager
 
 ####################################################################
 

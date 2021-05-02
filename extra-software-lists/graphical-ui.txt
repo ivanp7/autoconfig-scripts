@@ -1,13 +1,10 @@
 qtox telegram-desktop
+steam
+
 gmapcatcher
-qbittorrent
-phototonic vlc
-pinta
+phototonic
 libreoffice-still aspell-ru
 minder
 
-virt-manager
-
-powdertoy-bin
-steam
+qbittorrent
 
