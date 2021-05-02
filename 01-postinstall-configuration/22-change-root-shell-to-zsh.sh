@@ -5,20 +5,15 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing AUR helper ####"
+print_message "#### Changing root shell to zsh ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-print_message "Installing yay..."
-cd /tmp
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg --noconfirm -si
-cd $SHARED_DIRECTORY
+chsh -s /usr/bin/zsh
 
 ####################################################################
 

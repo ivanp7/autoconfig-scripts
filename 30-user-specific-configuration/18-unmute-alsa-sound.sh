@@ -5,7 +5,7 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Unmuting ALSA sound ####"
 
 ####################################################################
 
@@ -13,7 +13,9 @@ check_user
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+amixer sset Master unmute
+amixer sset Speaker unmute
+amixer sset Headphone unmute
 
 ####################################################################
 

@@ -5,7 +5,7 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Installing computer remote control script ####"
 
 ####################################################################
 
@@ -13,7 +13,7 @@ check_user
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+ros install ivanp7/remote-control
 
 ####################################################################
 

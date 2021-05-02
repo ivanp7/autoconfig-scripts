@@ -62,10 +62,6 @@ print_message "#### Installing media tools ####"
 install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu zathura-ps
 install_official_packages ffmpeg ffmpegthumbnailer
 
-print_message "#### Install Roswell applications ####"
-
-ros install ivanp7/cl-image2text
-
 ####################################################################
 
 finish

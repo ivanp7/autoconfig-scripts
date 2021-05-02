@@ -5,7 +5,7 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing NVIDIA graphics driver ####"
+print_message "#### Making dash the default script interpreter ####"
 
 ####################################################################
 
@@ -13,19 +13,10 @@ check_root
 
 ####################################################################
 
-if pacman -Qi linux-lts > /dev/null 2>&1
-then
-    install_official_packages linux-lts-headers nvidia-lts
-    HOOK=nvidia-lts
-else
-    install_official_packages linux-headers nvidia
-    HOOK=nvidia
-fi
-
-install_official_packages nvidia-settings libvdpau-va-gl nvtop
+ln -sfT dash /usr/bin/sh
 
 mkdir -p /etc/pacman.d/hooks/
-install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/${HOOK}.hook"
+install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/dash.hook"
 
 ####################################################################
 

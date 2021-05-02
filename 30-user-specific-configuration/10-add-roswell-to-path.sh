@@ -5,7 +5,7 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Unmuting sound  ####"
+print_message "#### Adding Roswell binaries to PATH ####"
 
 ####################################################################
 
@@ -13,9 +13,7 @@ check_user
 
 ####################################################################
 
-amixer sset Master unmute
-amixer sset Speaker unmute
-amixer sset Headphone unmute
+ln -sT "$HOME/.roswell/bin" "$HOME/bin/roswell"
 
 ####################################################################
 

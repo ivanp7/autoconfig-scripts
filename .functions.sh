@@ -7,9 +7,14 @@ SERVICES_LOG_DIRECTORY=/var/log/runit
 ###############################################################################
 
 # enable self-logging
-[ -z "$LOGGING" ] && { 
-    export LOGGING=yes
-    mispipe "$0 2>&1" "tee \"$(basename "$0").log\""
+[ -z "$AUTOCONFIG_LOG_DIR" ] && {
+    export AUTOCONFIG_LOG_DIR="/tmp/archlinux-autoconfig-logs"
+    mkdir -p "$AUTOCONFIG_LOG_DIR"
+    chmod 777 "$AUTOCONFIG_LOG_DIR" 2> /dev/null
+
+    AUTOCONFIG_LOG_FILE="$AUTOCONFIG_LOG_DIR/$(basename "$0").log"
+    mispipe "$0 2>&1" "tee \"$AUTOCONFIG_LOG_FILE\""
+    chmod 666 "$AUTOCONFIG_LOG_FILE" 2> /dev/null
     exit $?
 }
 
@@ -32,7 +37,7 @@ check_user ()
         exit 1
     fi
 
-    cd $SHARED_DIRECTORY
+    cd -- "$SHARED_DIRECTORY"
 }
 
 aux_dir ()
@@ -74,7 +79,7 @@ install_and_enable_service ()
     install -Dm 754 -o root -g root -T "$(aux_dir)/$1.service" $SERVICES_DIRECTORY/$1/run
     case "$2" in *down*) touch $SERVICES_DIRECTORY/$1/down ;; esac
 
-    case "$2" in 
+    case "$2" in
         *log*)
             mkdir $SERVICES_DIRECTORY/$1/log
             echo '#!/bin/sh' > $SERVICES_DIRECTORY/$1/log/run
@@ -111,13 +116,14 @@ clone_git_repo_and_cd ()
 
     cd /tmp
     if [ -d "$DIR" ]
-    then 
-        cd "$DIR"
+    then
+        cd -- "$DIR"
         rm -f *.pkg.tar.*
+        rm -rf pkg
         git pull
-    else 
+    else
         git clone $URL
-        cd "$DIR"
+        cd -- "$DIR"
     fi
 }
 

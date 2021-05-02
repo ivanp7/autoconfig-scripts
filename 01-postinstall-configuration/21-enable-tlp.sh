@@ -5,22 +5,15 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Performing basic user configuration ####"
+print_message "#### Enabling TLP service ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-print_message "Changing shell to zsh..."
-mkdir -p $HOME/.cache/zsh
-chsh -s /usr/bin/zsh
-
-####################################################################
-
-print_message "Adding Roswell binaries to PATH..."
-ln -sT $HOME/.roswell/bin $HOME/bin/roswell
+enable_service tlp
 
 ####################################################################
 

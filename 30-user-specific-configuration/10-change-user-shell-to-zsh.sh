@@ -5,7 +5,7 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Changing user shell to zsh ####"
 
 ####################################################################
 
@@ -13,7 +13,9 @@ check_user
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+mkdir -p $HOME/.cache/zsh
+
+chsh -s /usr/bin/zsh
 
 ####################################################################
 

@@ -5,15 +5,15 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Installing and enabling atd service ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+install_and_enable_service atd
 
 ####################################################################
 

@@ -15,6 +15,7 @@ check_root
 
 install -Dm 644 -t /usr/lib/elogind/system-sleep/ "$(aux_dir)/nvidia_copy"
 install -Dm 755 -t /usr/lib/elogind/system-sleep/nvidia "$(aux_dir)/nvidia_copy"
+
 install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/nvidia-utils.hook"
 
 ####################################################################

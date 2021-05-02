@@ -5,15 +5,17 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Configuring startup-init service ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+mkdir -p /usr/local/bin/startup-init
+
+install_and_enable_service startup-init
 
 ####################################################################
 

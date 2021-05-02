@@ -5,15 +5,20 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Enabling keymap loading ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+grep -q '^HOOKS=([^#]*keymap.*' /etc/mkinitcpio.conf || {
+    sed -i "/^HOOKS=(/ s/keyboard/keyboard keymap/" /etc/mkinitcpio.conf
+    mkinitcpio -P
+}
+mkdir -p /usr/local/share/kbd/keymaps
+install_init_script "$(aux_dir)/console-keymap.sh"
 
 ####################################################################
 

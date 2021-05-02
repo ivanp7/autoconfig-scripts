@@ -5,15 +5,16 @@ ROOT_DIR="$(realpath "$(dirname "$0")")/.."
 
 ####################################################################
 
-print_message "#### Installing dotfiles ####"
+print_message "#### Configuring mandb ####"
 
 ####################################################################
 
-check_user
+check_root
 
 ####################################################################
 
-sh "$SHARED_DIRECTORY/dotfiles/install.sh"
+add_cronjob '@daily /usr/bin/mandb'
+mandb
 
 ####################################################################
 
