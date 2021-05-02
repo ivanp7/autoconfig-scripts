@@ -15,13 +15,15 @@ check_user
 
 print_message "#### Installing window manager and components ####"
 
-install_official_packages bspwm picom 
-install_official_packages unclutter 
+install_official_packages bspwm picom
+install_official_packages unclutter
 install_official_packages libnotify dunst
 
 install_packages polybar
 
 install_official_packages dex
+
+install_official_packages arandr
 
 print_message "#### Installing hotkey daemon ####"
 
