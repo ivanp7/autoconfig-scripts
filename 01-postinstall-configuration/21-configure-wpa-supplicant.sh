@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install -Dm 644 "$(aux_dir)/wpa_supplicant.conf" /etc/wpa_supplicant/
+install -Dm 644 -t /etc/wpa_supplicant/ "$(aux_dir)/wpa_supplicant.conf"
 
 DBUS_FILE="/usr/share/dbus-1/system-services/fi.w1.wpa_supplicant1.service"
 grep -q '^Exec=.*-f /var/log/wpa_supplicant\.log' "$DBUS_FILE" ||

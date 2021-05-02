@@ -14,7 +14,7 @@ check_root
 ####################################################################
 
 mkdir -p /etc/X11/xorg.conf.d
-install -Dm 644 "$(aux_dir)/90-resolution.conf" /etc/X11/xorg.conf.d/
+install -Dm 644 -t /etc/X11/xorg.conf.d/ "$(aux_dir)/90-resolution.conf"
 
 ####################################################################
 

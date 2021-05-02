@@ -24,7 +24,7 @@ cd $DIR
 HOSTNAME=$(cat /etc/hostname)
 
 mkdir -p /etc/hosts.d/
-install -Dm 644 "$(aux_dir)/00-hosts.header" /etc/hosts.d/
+install -Dm 644 -t /etc/hosts.d/ "$(aux_dir)/00-hosts.header"
 echo "127.0.1.1 $HOSTNAME.localdomain $HOSTNAME" > /etc/hosts.d/01-hosts.local
 echo >> /etc/hosts.d/01-hosts.local
 examples/gethostszero

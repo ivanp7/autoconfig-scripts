@@ -17,7 +17,7 @@ clone_git_repo_and_cd st-luke-git https://aur.archlinux.org/st-luke-git.git
 
 makepkg --noconfirm -o
 cd src/st-luke/
-install -Dm 644 "$(aux_dir)/config.h" "$(aux_dir)/st.1" ./
+install -m 644 "$(aux_dir)/config.h" "$(aux_dir)/st.1" ./
 
 [ -z "$DEFAULT_FONT" ] && DEFAULT_FONT="xos4 Terminus:size=10"
 
@@ -26,7 +26,7 @@ FONT_SIZE=$(echo ${DEFAULT_FONT#*:} | sed -E 's/.*:?size=([0-9]*):?.*/\1/')
 sed -i "s/FONT_NAME/$FONT/; s/FONT_SIZE/$FONT_SIZE/" config.h
 sed -i -E 's/^(\s*)it#8,/\1it#4,/' st.info
 
-install -Dm 644 "$(aux_dir)/st-keycodes.patch" ./
+install -m 644 "$(aux_dir)/st-keycodes.patch" ./
 patch < st-keycodes.patch
 cd ../..
 

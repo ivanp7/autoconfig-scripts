@@ -54,7 +54,7 @@ print_message "Making dash the default script interpreter..."
 
 ln -sfT dash /usr/bin/sh
 mkdir -p /etc/pacman.d/hooks/
-install -Dm 644 "$(aux_dir)/dash.hook" /etc/pacman.d/hooks/
+install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/dash.hook"
 
 print_message "Changing shell to zsh for root..."
 
@@ -63,13 +63,13 @@ chsh -s /usr/bin/zsh
 print_message "Adding pacman hook for zsh..."
 
 mkdir -p /var/cache/zsh/
-install -Dm 644 "$(aux_dir)/zsh.hook" /etc/pacman.d/hooks/
+install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/zsh.hook"
 
 ####################################################################
 
 print_message "Installing configuration files..."
 
-install -Dm 644 "$(aux_dir)/sbclrc" /etc/
+install -m 644 "$(aux_dir)/sbclrc" /etc/
 
 ####################################################################
 

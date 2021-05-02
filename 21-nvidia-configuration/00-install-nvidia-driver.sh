@@ -13,18 +13,18 @@ check_root
 
 ####################################################################
 
-if pacman -Qi linux-lts > /dev/null 2>&1 
+if pacman -Qi linux-lts > /dev/null 2>&1
 then
     install_official_packages linux-lts-headers nvidia-lts
-    HOOK=nvidia-lts 
-else 
+    HOOK=nvidia-lts
+else
     install_official_packages linux-headers nvidia
     HOOK=nvidia
 fi
 
 install_official_packages nvidia-settings libvdpau-va-gl nvtop
 
-install -Dm 644 "$(aux_dir)/${HOOK}.hook" /etc/pacman.d/hooks/
+install -Dm 644 -t /etc/pacman.d/hooks/ "$(aux_dir)/${HOOK}.hook"
 
 ####################################################################
 

@@ -13,7 +13,7 @@ check_root
 
 ####################################################################
 
-install -Dm 644 "$(aux_dir)/grub.jpg" /boot/grub/
+install -m 644 "$(aux_dir)/grub.jpg" /boot/grub/
 sed -i 's@^#GRUB_BACKGROUND=.*$@GRUB_BACKGROUND="/boot/grub/grub.jpg"@' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
