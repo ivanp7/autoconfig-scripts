@@ -57,6 +57,10 @@ print_message "#### Installing graphical appearance settings interface ####"
 
 install_official_packages lxappearance
 
+print_message "#### Installing Pulseaudio settings interface ####"
+
+install_official_packages pavucontrol paprefs
+
 print_message "#### Installing media tools ####"
 
 install_official_packages feh zathura zathura-pdf-mupdf zathura-djvu zathura-ps
