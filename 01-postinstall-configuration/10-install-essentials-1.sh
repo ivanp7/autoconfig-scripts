@@ -46,8 +46,8 @@ install_official_packages wol ethtool
 
 print_message "#### Installing system state monitoring and control tools ####"
 
-install_official_packages neofetch htop glances powertop
-install_official_packages ntp
+install_official_packages neofetch htop glances powertop iftop
+install_official_packages ntp ntp-runit
 install_official_packages pkgfile
 
 print_message "#### Installing cron and delayed jobs tools ####"
@@ -60,7 +60,7 @@ install_official_packages base-devel ctags
 install_official_packages gdb strace
 install_official_packages lsof
 
-install_official_packages inetutils gnu-netcat socat ngrep tcpdump
+install_official_packages inetutils gnu-netcat socat ngrep tcpdump nmap
 
 print_message "#### Installing auxilliary tools ####"
 
