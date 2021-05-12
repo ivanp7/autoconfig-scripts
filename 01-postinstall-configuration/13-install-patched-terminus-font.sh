@@ -13,8 +13,24 @@ check_user
 
 ####################################################################
 
+DIR=terminus-font-ll2-td1-dv1-ij1
+
+cd /tmp
+if [ -d "$DIR" ]
+then
+    cd -- "$DIR"
+    rm -f *.pkg.tar.*
+    rm -rf pkg
+else
+    mkdir -p -- "$DIR"
+    cd -- "$DIR"
+fi
+
+install -m 644 -t ./ "$(aux_dir)/PKGBUILD"
+install -m 644 -t ./ "$(aux_dir)/fix-75-yes-terminus.patch"
+
 uninstall_packages terminus-font
-install_packages terminus-font-ll2-td1-dv1-ij1
+makepkg --noconfirm -si
 
 ####################################################################
 
