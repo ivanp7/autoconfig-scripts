@@ -29,7 +29,9 @@ fi
 install -m 644 -t ./ "$(aux_dir)/PKGBUILD"
 install -m 644 -t ./ "$(aux_dir)/fix-75-yes-terminus.patch"
 
-uninstall_packages terminus-font
+TERMINUS_FONT_PACKAGE=$(pacman -Qi terminus-font | grep '^Name\s*:' | sed -E 's/.*:\s*//')
+[ -z "$TERMINUS_FONT_PACKAGE" ] || uninstall_packages $TERMINUS_FONT_PACKAGE
+
 makepkg --noconfirm -si
 
 ####################################################################
