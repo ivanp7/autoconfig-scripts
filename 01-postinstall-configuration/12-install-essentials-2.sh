@@ -25,6 +25,10 @@ print_message "#### Installing editor functionality extension tools ####"
 
 install_packages nvimpager-git xxd-standalone
 
+print_message "#### Installing framebuffer terminal ####"
+
+install_packages fbterm
+
 print_message "#### Installing miscellaneous stuff ####"
 
 install_packages fortune-mod-ru
