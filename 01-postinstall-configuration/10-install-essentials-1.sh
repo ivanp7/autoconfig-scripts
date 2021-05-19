@@ -75,6 +75,10 @@ print_message "#### Installing terminal session tools ####"
 install_official_packages screen tmux
 install_official_packages fzf ripgrep
 
+print_message "#### Installing general purpose mouse daemon ####"
+
+install_official_packages gpm gpm-runit
+
 print_message "#### Installing working environment tools ####"
 
 install_official_packages when task pass
