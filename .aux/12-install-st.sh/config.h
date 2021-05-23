@@ -107,33 +107,35 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.85;
+float alpha = 0.8;
+float alphaOffset = 0.0;
+float alphaUnfocus;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
     /* 8 normal colors */
-    [0] = "#000000", /* black   */
-    [1] = "#d54e53", /* red     */
-    [2] = "#b9ca4a", /* green   */
-    [3] = "#e6c547", /* yellow  */
-    [4] = "#7aa6da", /* blue    */
-    [5] = "#c397d8", /* magenta */
-    [6] = "#70c0ba", /* cyan    */
-    [7] = "#eaeaea", /* white   */
+    [0] = "#2e3436", /* black   */
+    [1] = "#cc0000", /* red     */
+    [2] = "#4e9a06", /* green   */
+    [3] = "#c4a000", /* yellow  */
+    [4] = "#3465a4", /* blue    */
+    [5] = "#75507b", /* magenta */
+    [6] = "#06989a", /* cyan    */
+    [7] = "#d3d7cf", /* white   */
 
     /* 8 bright colors */
-    [8]  = "#666666", /* black   */
-    [9]  = "#ff3334", /* red     */
-    [10] = "#9ec400", /* green   */
-    [11] = "#e7c547", /* yellow  */
-    [12] = "#7aa6da", /* blue    */
-    [13] = "#b77ee0", /* magenta */
-    [14] = "#54ced6", /* cyan    */
-    [15] = "#ffffff", /* white   */
-    [255] = 0,
-    /* more colors can be added after 255 to use with DefaultXX */
-    [256] = "#282828",   /* background */
-    [257] = "#ebdbb2",   /* foreground */
+    [8]  = "#555753", /* black   */
+    [9]  = "#ef2929", /* red     */
+    [10] = "#8ae234", /* green   */
+    [11] = "#fce94f", /* yellow  */
+    [12] = "#729fcf", /* blue    */
+    [13] = "#ad7fa8", /* magenta */
+    [14] = "#34e2e2", /* cyan    */
+    [15] = "#eeeeec", /* white   */
+
+    /* special colors */
+    [256] = "#2b2b2b", /* background */
+    [257] = "#dedede", /* foreground */
 
     [258] = "#add8e6", /* cursor */
     [259] = "#0ef096", /* cursor, alternative layout */
@@ -150,6 +152,15 @@ unsigned int defaultbg = 256;
 static unsigned int defaultcs_mode[] = {258, 259, 260};
 unsigned int defaultcs = 258;
 unsigned int defaultrcs = 0;
+unsigned int background = 256;
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 
 /*
  * Default shape of cursor
@@ -212,6 +223,8 @@ ResourcePref resources[] = {
     { "background",   STRING,  &colorname[256] },
     { "foreground",   STRING,  &colorname[257] },
     { "cursorColor",  STRING,  &colorname[258] },
+    { "cursorColorAltLayout",    STRING,  &colorname[259] },
+    { "cursorColorAltLanguage",  STRING,  &colorname[260] },
     { "termname",     STRING,  &termname },
     { "shell",        STRING,  &shell },
     { "minlatency",   INTEGER, &minlatency },
@@ -223,6 +236,7 @@ ResourcePref resources[] = {
     { "cwscale",      FLOAT,   &cwscale },
     { "chscale",      FLOAT,   &chscale },
     { "alpha",        FLOAT,   &alpha },
+    { "alphaOffset",  FLOAT,   &alphaOffset },
 };
 
 /*
@@ -231,6 +245,8 @@ ResourcePref resources[] = {
  */
 static MouseShortcut mshortcuts[] = {
     /* mask                 button   function        argument       release */
+    { XK_NO_MOD,            Button4, kscrollup,      {.i = 1} },
+    { XK_NO_MOD,            Button5, kscrolldown,    {.i = 1} },
     { XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
     { ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
     { XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -268,7 +284,7 @@ char_length(char signed_c)
         return 0; // error
 }
 
-static void 
+static void
 write_char(const char *chrs, int skip)
 {
     while (skip > 0)
@@ -462,6 +478,11 @@ static Shortcut shortcuts[] = {
     DEF_FUNCTION( MODKEY|ControlMask,   54 /*XK_c*/,            clipcopy,       {.i =  0} ),
     DEF_FUNCTION( MODKEY|ControlMask,   55 /*XK_v*/,            clippaste,      {.i =  0} ),
     DEF_FUNCTION( MODKEY|ControlMask,   33 /*XK_p*/,            selpaste,       {.i =  0} ),
+
+    DEF_FUNCTION( MODKEY|ControlMask,   114 /*XK_Right*/,       kscrolldown,    {.i = +1} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   113 /*XK_Left*/,        kscrollup,      {.i = +1} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   116 /*XK_Down*/,        kscrolldown,    {.i = -1} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   111 /*XK_Up*/,          kscrollup,      {.i = -1} ),
 
     DEF_FUNCTION( MODKEY,               110 /*XK_Home*/,        zoomreset,      {.f =  0} ),
     DEF_FUNCTION( TERMMOD|ControlMask,  111 /*XK_Up*/,          zoom,           {.f = +1} ),

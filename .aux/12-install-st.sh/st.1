@@ -1,6 +1,6 @@
 .TH ST 1 st\-VERSION
 .SH NAME
-st \- simple terminal (Luke Smith (https://lukesmith.xyz)'s build)
+st \- simple terminal
 .SH SYNOPSIS
 .B st
 .RB [ \-aiv ]
@@ -125,13 +125,13 @@ and all the remaining arguments are used as a command
 even without it.
 .SH SHORTCUTS
 .TP
-.B Alt-Up/Down or Alt-Mouse Wheel
-Scroll up/down ten lines at a time.
+.B Alt-Ctrl-Left/Right or Mouse Wheel
+Scroll up/down one line at a time.
 .TP
-.B Alt-Ctrl-u/d or Alt-Page Up/Page Down
+.B Alt-Ctrl-Up/Down
 Scroll up/down one screen at a time.
 .TP
-.B Alt-Shift-Page Up/Page Down or Alt-Shift-Mouse Wheel
+.B Alt-Shift-Ctrl-Up/Down
 Increase or decrease font size.
 .TP
 .B Alt-Home
@@ -153,6 +153,9 @@ Show dmenu menu of all URLs on screen and choose one to copy.
 Show dmenu menu of all recently run commands and copy the output of the chosen command to the clipboard.
 .I xclip
 required.
+.TP
+.B Alt-Shift-Ctrl-Left/Right
+Increase or decrease opacity/alpha value (make window more or less transparent).
 .TP
 .B Break
 Send a break in the serial line.
@@ -190,7 +193,7 @@ See the LICENSE file for the terms of redistribution.
 .SH SEE ALSO
 .BR tabbed (1),
 .BR utmp (1),
-.BR stty (1)
+.BR stty (1),
+.BR scroll (1)
 .SH BUGS
 See the TODO file in the distribution.
-
