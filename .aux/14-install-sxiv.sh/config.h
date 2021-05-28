@@ -12,7 +12,7 @@ enum {
  */
 static const char *default_bg_color = "#222222";
 static const char *default_fg_color = "#bbbbbb";
-static const char *default_font = "xos4 Terminus-10";
+static const char *default_font = "xos4 Terminus-12";
 
 #endif
 #ifdef _IMAGE_CONFIG
@@ -21,8 +21,8 @@ static const char *default_font = "xos4 Terminus-10";
  * (first/last value is used as min/max zoom level)
  */
 static const float zoom_levels[] = {
-    1.0, 5.0, 12.5, 25.0, 33.3, 40.0, 50.0, 66.6, 75.0, 80.0, 90.0, 
-    100.0, 125.0, 150.0, 175.0, 200.0, 250.0, 300.0, 350.0, 400.0, 
+    1.0, 5.0, 12.5, 25.0, 33.3, 40.0, 50.0, 66.6, 75.0, 80.0, 90.0,
+    100.0, 125.0, 150.0, 175.0, 200.0, 250.0, 300.0, 350.0, 400.0,
     500.0, 600.0, 700.0, 800.0, 900.0, 1000.0, 2000.0, 5000.0, 10000.0
 };
 

@@ -19,7 +19,7 @@ makepkg --noconfirm -o
 cd src/st-luke/
 install -m 644 "$(aux_dir)/config.h" "$(aux_dir)/st.1" ./
 
-[ -z "$DEFAULT_FONT" ] && DEFAULT_FONT="xos4 Terminus:size=10"
+[ -z "$DEFAULT_FONT" ] && DEFAULT_FONT="xos4 Terminus:size=12"
 
 FONT=${DEFAULT_FONT%%:*}
 FONT_SIZE=$(echo ${DEFAULT_FONT#*:} | sed -E 's/.*:?size=([0-9]*):?.*/\1/')
