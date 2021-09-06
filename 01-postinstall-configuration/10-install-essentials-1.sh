@@ -56,7 +56,7 @@ install_official_packages at cronie
 
 print_message "#### Installing basic development, programming and debugging tools ####"
 
-install_official_packages base-devel ctags
+install_official_packages base-devel ctags cppcheck
 install_official_packages gdb strace
 install_official_packages lsof
 
