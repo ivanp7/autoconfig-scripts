@@ -15,6 +15,7 @@ check_root
 
 sed -i "s/^#Color/Color/" /etc/pacman.conf
 cat "$(aux_dir)/arch_repos" | tee -a /etc/pacman.conf
+install -Dm 644 -t "/etc/pacman.d/" "$(aux_dir)/mirrorlist-arch"
 
 ####################################################################
 
