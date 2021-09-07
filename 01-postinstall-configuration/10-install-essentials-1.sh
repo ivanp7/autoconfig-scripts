@@ -65,6 +65,7 @@ install_official_packages inetutils gnu-netcat socat ngrep tcpdump nmap
 print_message "#### Installing auxilliary tools ####"
 
 install_official_packages jq dialog expect
+install_official_packages dos2unix
 
 print_message "#### Installing editor ####"
 
