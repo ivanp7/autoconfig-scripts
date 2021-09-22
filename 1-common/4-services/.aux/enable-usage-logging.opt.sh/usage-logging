@@ -1,0 +1,18 @@
+#!/bin/sh
+exec 2>&1
+sleep 1
+
+LOGFILE="/var/log/usage-log/$(date +'%F:%u')"
+
+[ ! -f "$LOGFILE" ] && {
+    { dd if=/dev/zero bs=1 count=$((24*60)) | tr '\0' '.' 2> /dev/null | fold -w 60; echo; } > "$LOGFILE"
+    chmod 644 "$LOGFILE"
+}
+
+TIME="$(date +'%H:%M')"
+HOUR="${TIME%:*}"
+MINUTE="${TIME#*:}"
+sed -i -E "$(($HOUR+1))s/^(.{$MINUTE})./\1#/" "$LOGFILE"
+
+sleep 30
+

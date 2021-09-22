@@ -1,43 +1,33 @@
 Arch/Artix Linux auto configuration scripts
 --------------------------------------------
 
-* installation-files
+# Rules of application
 
-Helper files to be used during the installation process.
+0) all scripts are to be run as root
 
-* 01-postinstall-configuration
+1) directories and files with numeral prefix come in ascending order
 
-Scripts that perform essential system configuring after installation.
+2) directories and files without numeral prefix come without specified order (except when dependencies exist)
 
-* 10-general-system-configuration
+3) .req.sh scripts are essential regardless of the usecase
 
-Scripts that do general configuration suitable for any system.
+4) .opt.sh scripts are optional and should be picked according to the usecase
 
-* 11-desktop-server-configuration
+# Contents
 
-Scripts that do configuration for desktop/server systems.
+## installation-files
 
-* 12-virtual-machine-emulation-configuration
+Helper scripts to be used during the installation process.
 
-Scripts that configure virtual machine emulators.
+## 1-common
 
-* 20-graphics-configuration
+System configuration common to the most usecases.
 
-Scripts that configure X server, graphics driver and related things.
+## 2-specific
 
-* 21-nvidia-configuration
+Variants of customized configuration for specific usecases.
 
-Scripts that configure NVIDIA driver and related things.
+## extras
 
-* 30-user-specific-configuration
-
-Scripts that do user-specific adjustments.
-
-* 31-extra-configuration
-
-Scripts that don't fall into other cathegories.
-
-* extra-software-lists
-
-Lists of the useful optional software.
+Additional info and resources that don't fall into other categories.
 

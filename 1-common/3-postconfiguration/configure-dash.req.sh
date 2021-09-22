@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SCRIPT_NAME="$(basename "$0")"
+cd -- "$(dirname "$0")"
+SCRIPT_DIR="$PWD"
+
+SCRIPT_TITLE="Configure dash"
+. "./.init.sh"
+
+####################################################################
+
+install_pacman_hook dash
+ln -sfT dash /usr/bin/sh
+

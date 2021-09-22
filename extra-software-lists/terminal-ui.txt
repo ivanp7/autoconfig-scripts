@@ -1,7 +1,0 @@
-youtube-dl
-mutt-wizard-git
-
-fbv pixterm-git termplay
-
-iptraf-ng
-

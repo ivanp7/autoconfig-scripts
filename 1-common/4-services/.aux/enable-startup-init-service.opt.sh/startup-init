@@ -1,0 +1,28 @@
+#!/bin/sh
+exec 2>&1
+sv once startup-init
+sleep 1
+
+cd /usr/local/bin/startup-init/
+
+echo
+echo ===============================================================================
+date
+
+for script in $(find . -type f)
+do
+    if [ -x "$script" ]
+    then
+        echo -------------------------------------------------------------------------------
+
+        echo "startup-init: executing script '${script#./}'"
+        echo
+        "$script"
+        CODE=$?
+        echo
+        echo "startup-init: exit code = $CODE"
+    fi
+done
+
+sleep 1
+

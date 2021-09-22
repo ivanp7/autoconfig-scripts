@@ -1,0 +1,2 @@
+gpasswd -a $(whoami) sftp-users
+
