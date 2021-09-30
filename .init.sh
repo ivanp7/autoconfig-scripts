@@ -117,7 +117,7 @@ download_and_extract_source ()
 build_and_install_package ()
 {
     export HOME="$PWD"
-    sudo --preserve-env=HOME -u autoconfig makepkg --noconfirm -Lfsri
+    sudo --preserve-env=HOME -u autoconfig makepkg --noconfirm -Lefsri
 }
 
 install_pacman_hook ()
