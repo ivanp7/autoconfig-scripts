@@ -1,2 +1,0 @@
-gpasswd -a $(whoami) ssh-users
-
