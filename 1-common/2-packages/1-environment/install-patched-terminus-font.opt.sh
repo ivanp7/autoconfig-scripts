@@ -16,5 +16,6 @@ uninstall_packages $(find_package terminus-font) # to avoid conflict in pacman
 install -m 644 -t . "$(aux_dir)/PKGBUILD"
 install -m 644 -t . "$(aux_dir)/fix-75-yes-terminus.patch"
 
+download_and_extract_source
 build_and_install_package
 
