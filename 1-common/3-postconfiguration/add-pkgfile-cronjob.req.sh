@@ -9,6 +9,7 @@ SCRIPT_TITLE="Add pkgfile cronjob"
 
 ####################################################################
 
-add_cronjob '@daily /usr/bin/pkgfile --update' 'pkgfile --update'
+add_cronjob '@daily /usr/bin/pkgfile --update' 'pkgfile --update' &&
+    echo "Added the cronjob, now running the task for the first time"
 pkgfile --update
 

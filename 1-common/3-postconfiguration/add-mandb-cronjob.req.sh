@@ -9,6 +9,7 @@ SCRIPT_TITLE="Add mandb cronjob"
 
 ####################################################################
 
-add_cronjob '@daily /usr/bin/mandb' 'mandb'
+add_cronjob '@daily /usr/bin/mandb' 'mandb' &&
+    echo "Added the cronjob, now running the task for the first time"
 mandb
 
