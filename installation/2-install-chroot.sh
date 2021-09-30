@@ -72,6 +72,12 @@ install -m 644 -t /etc/ "etc/hosts"
 sed -i "s/hostname/$HOSTNAME/g" /etc/hosts
 ln -s -t /etc/runit/runsvdir/default/ /etc/runit/sv/connmand
 
+print_step "Set root password"
+
+while ! passwd
+do echo ">>> FAIL, RETRY <<<"
+done
+
 ###############################################################################
 
 print_step "Done! Now continue with GRUB installation"

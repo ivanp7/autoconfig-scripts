@@ -59,8 +59,9 @@ fstabgen -U /mnt >> /mnt/etc/fstab
 ###############################################################################
 
 print_step "Copy autoconfig scripts"
-mkdir -p "/mnt/var/tmp"
-cp -rf --preserve=mode -t "/mnt/var/tmp/" ".."
+AUTOCONFIG_PATH="/mnt/var/tmp/archlinux-autoconfig"
+mkdir -p "$AUTOCONFIG_PATH"
+cp -rf --preserve=mode -t "$AUTOCONFIG_PATH" ".."
 
 ###############################################################################
 
