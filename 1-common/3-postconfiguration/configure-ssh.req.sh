@@ -45,3 +45,5 @@ sed -i "/^Subsystem.*sftp.*/ s/Subsystem/#Subsystem/" /etc/ssh/sshd_config
 ! grep -q "\<sftp-users\>" /etc/ssh/sshd_config &&
     cat "$(aux_dir)/sshd_config_tail" | tee -a /etc/ssh/sshd_config
 
+ssh-keygen -A
+
