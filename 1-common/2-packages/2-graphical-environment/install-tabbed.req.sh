@@ -10,6 +10,7 @@ SCRIPT_TITLE="Install tabbed"
 ####################################################################
 
 git_clone_and_cd tabbed-ivanp7 $GIT_URL_PREFIX/tabbed-ivanp7.git
+download_and_extract_source
 
 HARDCODED_FONT="xos4 Terminus:size=12"
 [ -n "$DEFAULT_FONT" ] && sed -i "s/$HARDCODED_FONT/$DEFAULT_FONT/" config.h

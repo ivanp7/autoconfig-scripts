@@ -10,5 +10,6 @@ SCRIPT_TITLE="Install slock"
 ####################################################################
 
 git_clone_and_cd slock-ivanp7 $GIT_URL_PREFIX/slock-ivanp7.git
+download_and_extract_source
 build_and_install_package
 
