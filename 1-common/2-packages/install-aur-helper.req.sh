@@ -10,5 +10,6 @@ SCRIPT_TITLE="Install AUR helper"
 ####################################################################
 
 git_clone_and_cd yay https://aur.archlinux.org/yay.git
+download_and_extract_source
 build_and_install_package
 
