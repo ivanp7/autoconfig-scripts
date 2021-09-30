@@ -35,7 +35,7 @@ echo "Installing dotfiles..."
 cd plugins
 for plugin in $AUTOCONFIG_DOTFILES_PLUGINS
 do
-    git clone "$GIT_URL_PREFIX/$plugin.git"
+    [ ! -d "$plugin" ] && git clone "$GIT_URL_PREFIX/$plugin.git"
     echo "Installing $plugin..."
     ../install.sh $plugin
 done
