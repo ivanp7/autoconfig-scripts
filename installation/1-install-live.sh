@@ -62,6 +62,7 @@ print_step "Copy autoconfig scripts"
 AUTOCONFIG_PATH="/mnt/var/tmp/autoconfig-scripts"
 mkdir -p "$AUTOCONFIG_PATH"
 cp -rf --preserve=mode -t "$AUTOCONFIG_PATH" ".."
+echo "Copied the repository to $AUTOCONFIG_PATH"
 
 ###############################################################################
 
