@@ -9,6 +9,6 @@ SCRIPT_TITLE="Add pkgfile cronjob"
 
 ####################################################################
 
-pkgfile --update
 add_cronjob '@daily /usr/bin/pkgfile --update' 'pkgfile --update'
+pkgfile --update
 

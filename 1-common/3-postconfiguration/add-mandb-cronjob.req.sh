@@ -9,6 +9,6 @@ SCRIPT_TITLE="Add mandb cronjob"
 
 ####################################################################
 
-mandb
 add_cronjob '@daily /usr/bin/mandb' 'mandb'
+mandb
 
