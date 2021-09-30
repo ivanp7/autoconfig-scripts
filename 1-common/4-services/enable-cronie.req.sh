@@ -10,5 +10,5 @@ SCRIPT_TITLE="Install and enable cronie service"
 ####################################################################
 
 install_service up "$(aux_dir)/cronie"
-enable-service cronie
+enable_service cronie
 

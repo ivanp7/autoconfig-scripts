@@ -10,5 +10,5 @@ SCRIPT_TITLE="Install and enable sshd service"
 ####################################################################
 
 install_service up "$(aux_dir)/sshd"
-enable-service sshd
+enable_service sshd
 

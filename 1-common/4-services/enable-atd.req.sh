@@ -10,5 +10,5 @@ SCRIPT_TITLE="Install and enable atd service"
 ####################################################################
 
 install_service up "$(aux_dir)/atd"
-enable-service atd
+enable_service atd
 
