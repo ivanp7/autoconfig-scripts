@@ -1,0 +1,4 @@
+
+# temp directory
+tmpfs   /tmp         tmpfs   rw,nodev,nosuid          0  0
+
