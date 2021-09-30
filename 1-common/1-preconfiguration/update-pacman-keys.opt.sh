@@ -9,7 +9,7 @@ SCRIPT_TITLE="Update pacman's GPG keys"
 
 ####################################################################
 
-pacman -Sy archlinux-keyring artix-keyring
+pacman --noconfirm -Sy archlinux-keyring artix-keyring
 pacman-key --init
 pacman-key --populate archlinux artix
 pacman --noconfirm -Scc
