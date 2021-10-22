@@ -36,6 +36,7 @@ install_packages \
     at cronie \
 `# Basic development, programming and debugging tools` \
     ctags cppcheck \
+    time \
     gdb strace ltrace \
     lsof \
     gnu-netcat ngrep tcpdump nmap \
