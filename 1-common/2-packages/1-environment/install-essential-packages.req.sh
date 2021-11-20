@@ -45,8 +45,6 @@ install_packages \
     dialog \
     jq expect \
     dos2unix \
-`# File manager` \
-    lf \
 `# Editor` \
     neovim \
     nvimpager-git xxd-standalone \
