@@ -31,6 +31,7 @@ done
 
 useradd -m -U -s /usr/bin/zsh "$USERNAME" && {
     mkdir -p "$HOME/.cache/zsh"
+    mkdir -p "$HOME/.local/bin"
 
     until passwd "$USERNAME"
     do echo "Try again"; sleep 2; done
