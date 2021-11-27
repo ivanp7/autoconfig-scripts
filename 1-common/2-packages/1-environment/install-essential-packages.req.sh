@@ -35,6 +35,7 @@ install_packages \
 `# Cron and delayed jobs tools` \
     at cronie \
 `# Basic development, programming and debugging tools` \
+    patchutils \
     ctags cppcheck \
     time \
     gdb strace ltrace \
