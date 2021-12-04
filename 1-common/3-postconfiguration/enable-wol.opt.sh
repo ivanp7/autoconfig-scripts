@@ -22,9 +22,7 @@ do
 
     INTERFACE="$(cat "$DIALOG_FILE")"
 
-    [ -n "$INTERFACE" ] && ip link show "$INTERFACE" > /dev/null 2>&1 || INTERFACE=
-
-    [ -z "$INTERFACE" ] && continue
+    [ "$INTERFACE" ] && ip link show "$INTERFACE" > /dev/null 2>&1 || continue
 
     export INTERFACE
     self_logging

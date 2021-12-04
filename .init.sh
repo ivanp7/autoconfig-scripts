@@ -54,7 +54,7 @@ AUR_HELPER=yay
 
 choose_packages_and_start_self_logging ()
 {
-    [ -n "$AUTOCONFIG_CHOSEN_PACKAGES" ] && return
+    [ "$AUTOCONFIG_CHOSEN_PACKAGES" ] && return
 
     local DIALOG_FILE="$(mktemp_file dialog_file)"
     local HEIGHT=$(tput lines)
