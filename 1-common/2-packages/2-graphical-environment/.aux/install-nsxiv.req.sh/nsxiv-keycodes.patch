@@ -8,11 +8,11 @@
 +	char kcode_str[12];
  	char dummy, key;
  	bool dirty = false;
- 
+
  	XLookupString(kev, &key, 1, &ksym, NULL);
 +	kcode = kev->keycode;
 +	snprintf(kcode_str, 12, "%d", kcode);
- 
+
  	if (kev->state & ShiftMask) {
 @@ -589,14 +593,14 @@
  	if (ksym == XK_Escape && MODMASK(kev->state) == 0) {
@@ -33,10 +33,10 @@
  		    keys[i].cmd >= 0 && keys[i].cmd < CMD_COUNT &&
  		    (cmds[keys[i].cmd].mode < 0 || cmds[keys[i].cmd].mode == mode))
 		{
---- sxiv.h.orig	2020-02-26 00:37:07.110392838 +0300
-+++ sxiv.h	2020-02-26 00:37:40.060663087 +0300
+--- nsxiv.h.orig	2020-02-26 00:37:07.110392838 +0300
++++ nsxiv.h	2020-02-26 00:37:40.060663087 +0300
 @@ -174,7 +174,7 @@
- 
+
  typedef struct {
  	unsigned int mask;
 -	KeySym ksym;
