@@ -25,7 +25,7 @@ install_packages \
     xkbset \
     shantz-xwinwrap-bzr \
 `# Graphical toolkits` \
-    gtkmm3 fltk \
+    gtkmm3 \
 `# Media tools` \
     feh zathura \
     ffmpeg ffmpegthumbnailer
