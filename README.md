@@ -15,7 +15,7 @@ Arch/Artix Linux auto configuration scripts
 
 # Contents
 
-## installation-files
+## installation
 
 Helper scripts to be used during the installation process.
 
