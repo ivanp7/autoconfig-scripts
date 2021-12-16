@@ -1,7 +1,24 @@
---- main.c.orig	2020-02-26 00:52:28.357480704 +0300
-+++ main.c	2020-02-26 00:58:59.670449649 +0300
-@@ -572,9 +572,13 @@
- 	int i;
+--- a/main.c	2021-12-16 23:25:53.901619571 +0300
++++ b/main.c	2021-12-16 23:33:59.070275402 +0300
+@@ -605,14 +605,14 @@
+ 	redraw();
+ }
+
+-static bool process_bindings(const keymap_t *keys, unsigned int len, KeySym ksym_or_button,
++static bool process_bindings(const keymap_t *keys, unsigned int len, KeyCode keycode,
+                              unsigned int state, unsigned int implicit_mod)
+ {
+ 	unsigned int i;
+ 	bool dirty = false;
+
+ 	for (i = 0; i < len; i++) {
+-		if (keys[i].ksym_or_button == ksym_or_button &&
++		if (keys[i].keycode == keycode &&
+ 		    MODMASK(keys[i].mask | implicit_mod) == MODMASK(state) &&
+ 		    keys[i].cmd.func &&
+ 		    (keys[i].cmd.mode == MODE_ALL || keys[i].cmd.mode == mode))
+@@ -628,10 +628,14 @@
+ {
  	unsigned int sh = 0;
  	KeySym ksym, shksym;
 +	KeyCode kcode;
@@ -14,33 +31,32 @@
 +	snprintf(kcode_str, 12, "%d", kcode);
 
  	if (kev->state & ShiftMask) {
-@@ -589,14 +593,14 @@
- 	if (ksym == XK_Escape && MODMASK(kev->state) == 0) {
- 		extprefix = False;
+ 		kev->state &= ~ShiftMask;
+@@ -645,14 +649,14 @@
+ 	if (extprefix && ksym == KEYHANDLER_ABORT && MODMASK(kev->state) == 0) {
+ 		handle_key_handler(false);
  	} else if (extprefix) {
 -		run_key_handler(XKeysymToString(ksym), kev->state & ~sh);
 +		run_key_handler(kcode_str, kev->state & ~sh);
- 		extprefix = False;
+ 		extprefix = false;
  	} else if (key >= '0' && key <= '9') {
  		/* number prefix for commands */
  		prefix = prefix * 10 + (int) (key - '0');
  		return;
- 	} else for (i = 0; i < ARRLEN(keys); i++) {
--		if (keys[i].ksym == ksym &&
--		    MODMASK(keys[i].mask | sh) == MODMASK(kev->state) &&
-+		if (keys[i].kcode == kcode &&
-+			MODMASK(keys[i].mask) == MODMASK(kev->state) &&
- 		    keys[i].cmd >= 0 && keys[i].cmd < CMD_COUNT &&
- 		    (cmds[keys[i].cmd].mode < 0 || cmds[keys[i].cmd].mode == mode))
-		{
---- nsxiv.h.orig	2020-02-26 00:37:07.110392838 +0300
-+++ nsxiv.h	2020-02-26 00:37:40.060663087 +0300
-@@ -174,7 +174,7 @@
+ 	} else {
+-		dirty = process_bindings(keys, ARRLEN(keys), ksym, kev->state, sh);
++		dirty = process_bindings(keys, ARRLEN(keys), kcode, kev->state, 0);
+ 	}
+ 	if (dirty)
+ 		redraw();
+--- a/nsxiv.h	2021-12-16 23:25:11.341738170 +0300
++++ b/nsxiv.h	2021-12-16 23:24:47.071805857 +0300
+@@ -172,7 +172,7 @@
 
  typedef struct {
  	unsigned int mask;
--	KeySym ksym;
-+	KeyCode kcode;
- 	cmd_id_t cmd;
+-	KeySym ksym_or_button;
++	KeyCode keycode;
+ 	cmd_t cmd;
  	arg_t arg;
  } keymap_t;

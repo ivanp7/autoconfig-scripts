@@ -4,10 +4,17 @@
 static const int WIN_WIDTH  = 800;
 static const int WIN_HEIGHT = 600;
 
-/* colors and font are configured with 'background', 'foreground' and
- * 'font' X resource properties.
- * See X(7) section Resources and xrdb(1) for more information.
+/* colors and font can be overwritten via X resource properties.
+ * See nsxiv(1), X(7) section Resources and xrdb(1) for more information.
  */
+static const char *DEFAULT_WIN_BG     = "#222222";
+static const char *DEFAULT_WIN_FG     = "#bbbbbb";
+static const char *DEFAULT_MARK_COLOR = "#ff0000";  /* NULL means it will default to window foreground */
+#if HAVE_LIBFONTS
+static const char *DEFAULT_BAR_BG     = NULL;  /* NULL means it will default to window background */
+static const char *DEFAULT_BAR_FG     = NULL;  /* NULL means it will default to window foreground */
+static const char *DEFAULT_FONT       = "xos4 Terminus:pixelsize=12:antialias=true:autohint=true";
+#endif
 
 #endif
 #ifdef _TITLE_CONFIG
@@ -39,7 +46,7 @@ static const int SLIDESHOW_DELAY = 5;
 
 /* gamma correction: the user-visible ranges [-GAMMA_RANGE, 0] and
  * (0, GAMMA_RANGE] are mapped to the ranges [0, 1], and (1, GAMMA_MAX].
- * */
+ */
 static const double GAMMA_MAX   = 10.0;
 static const int    GAMMA_RANGE = 32;
 
@@ -56,6 +63,12 @@ static const bool ANTI_ALIAS = true;
  */
 static const bool ALPHA_LAYER = false;
 
+/* cache size for imlib2, in bytes. For backwards compatibility reasons, the
+ * size is kept at 4MiB. For most users, it is advised to pick a value close to
+ * or above 128MiB for better image (re)loading performance.
+ */
+static const int CACHE_SIZE = 128 * 1024 * 1024; /* 128MiB */
+
 #endif
 #ifdef _THUMBS_CONFIG
 
@@ -67,6 +80,12 @@ static const int THUMB_SIZE = 4;
 
 #endif
 #ifdef _MAPPINGS_CONFIG
+
+/* these modifiers will be used when processing keybindings */
+static const unsigned int USED_MODMASK = ShiftMask | ControlMask | Mod1Mask;
+
+/* abort the keyhandler */
+static const KeySym KEYHANDLER_ABORT = XK_Escape;
 
 /* keyboard mappings for image and thumbnail mode: */
 static const keymap_t keys[] = {
@@ -167,6 +186,16 @@ static const button_t buttons[] = {
     { ShiftMask,    4,                g_zoom,               +3 },
     { 0,            5,                g_zoom,               -1 },
     { ShiftMask,    5,                g_zoom,               -3 },
+};
+
+/* true means NAV_WIDTH is relative (33%), false means absolute (33 pixels) */
+static const bool NAV_IS_REL = true;
+/* width of navigation area, 0 disables cursor navigation, */
+static const unsigned int NAV_WIDTH = 33;
+
+/* mouse cursor on left, middle and right part of the window */
+static const cursor_t imgcursor[3] = {
+    CURSOR_LEFT, CURSOR_ARROW, CURSOR_RIGHT
 };
 
 #endif
