@@ -14,20 +14,10 @@ static const char *DEFAULT_MARK_COLOR = "#ff0000";  /* NULL means it will defaul
 static const char *DEFAULT_BAR_BG     = NULL;  /* NULL means it will default to window background */
 static const char *DEFAULT_BAR_FG     = NULL;  /* NULL means it will default to window foreground */
 static const char *DEFAULT_FONT       = "xos4 Terminus:pixelsize=12:antialias=true:autohint=true";
-#endif
 
-#endif
-#ifdef _TITLE_CONFIG
-
-/* default title prefix */
-static const char *TITLE_PREFIX = "nsxiv - ";
-
-/* default title suffixmode, available options are:
- * SUFFIX_EMPTY
- * SUFFIX_BASENAME
- * SUFFIX_FULLPATH
- */
-static const suffixmode_t TITLE_SUFFIXMODE = SUFFIX_BASENAME;
+/* if true, statusbar appears on top of the window */
+static const bool TOP_STATUSBAR = false;
+#endif /* HAVE_LIBFONTS */
 
 #endif
 #ifdef _IMAGE_CONFIG
@@ -63,11 +53,14 @@ static const bool ANTI_ALIAS = true;
  */
 static const bool ALPHA_LAYER = false;
 
-/* cache size for imlib2, in bytes. For backwards compatibility reasons, the
- * size is kept at 4MiB. For most users, it is advised to pick a value close to
- * or above 128MiB for better image (re)loading performance.
+/* percentage of memory to use for imlib2's cache size.
+ *   3 means use 3% of total memory which is about 245MiB on 8GiB machine.
+ *   0 or less means disable cache.
+ * 100 means use all available memory (but not above CACHE_SIZE_LIMIT).
  */
-static const int CACHE_SIZE = 128 * 1024 * 1024; /* 128MiB */
+static const int CACHE_SIZE_MEM_PERCENTAGE = 3;          /* use 3% of total memory for cache */
+static const int CACHE_SIZE_LIMIT = 256 * 1024 * 1024;   /* but not above 256MiB */
+static const int CACHE_SIZE_FALLBACK = 32 * 1024 * 1024; /* fallback to 32MiB if we can't determine total memory */
 
 #endif
 #ifdef _THUMBS_CONFIG
@@ -176,16 +169,27 @@ static const keymap_t keys[] = {
 };
 
 /* mouse button mappings for image mode: */
-static const button_t buttons[] = {
+static const button_t buttons_img[] = {
     /* modifiers    button            function              argument */
     { 0,            1,                i_drag,               DRAG_RELATIVE },
     { ControlMask,  1,                i_drag,               DRAG_ABSOLUTE },
     { 0,            2,                g_switch_mode,        None },
     { 0,            3,                i_cursor_navigate,    None },
     { 0,            4,                g_zoom,               +1 },
-    { ShiftMask,    4,                g_zoom,               +3 },
     { 0,            5,                g_zoom,               -1 },
-    { ShiftMask,    5,                g_zoom,               -3 },
+    { ControlMask,  4,                g_zoom,               +3 },
+    { ControlMask,  5,                g_zoom,               -3 },
+};
+
+/* mouse button mappings for thumbnail mode: */
+static const button_t buttons_tns[] = {
+    /* modifiers    button            function              argument */
+    { 0,            1,                t_select,             None },
+    { 0,            3,                t_drag_mark_image,    None },
+    { 0,            4,                t_scroll,             DIR_UP },
+    { 0,            5,                t_scroll,             DIR_DOWN },
+    { ControlMask,  4,                g_scroll_screen,      DIR_UP },
+    { ControlMask,  5,                g_scroll_screen,      DIR_DOWN },
 };
 
 /* true means NAV_WIDTH is relative (33%), false means absolute (33 pixels) */

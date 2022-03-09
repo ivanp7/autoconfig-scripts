@@ -1,23 +1,23 @@
 --- a/main.c	2021-12-16 23:25:53.901619571 +0300
 +++ b/main.c	2021-12-16 23:33:59.070275402 +0300
-@@ -605,14 +605,14 @@
- 	redraw();
+@@ -622,14 +622,14 @@
+ 	return true;
  }
 
--static bool process_bindings(const keymap_t *keys, unsigned int len, KeySym ksym_or_button,
-+static bool process_bindings(const keymap_t *keys, unsigned int len, KeyCode keycode,
+-static bool process_bindings(const keymap_t *bindings, unsigned int len, KeySym ksym_or_button,
++static bool process_bindings(const keymap_t *bindings, unsigned int len, KeyCode keycode,
                               unsigned int state, unsigned int implicit_mod)
  {
  	unsigned int i;
  	bool dirty = false;
 
  	for (i = 0; i < len; i++) {
--		if (keys[i].ksym_or_button == ksym_or_button &&
-+		if (keys[i].keycode == keycode &&
- 		    MODMASK(keys[i].mask | implicit_mod) == MODMASK(state) &&
- 		    keys[i].cmd.func &&
- 		    (keys[i].cmd.mode == MODE_ALL || keys[i].cmd.mode == mode))
-@@ -628,10 +628,14 @@
+-		if (bindings[i].ksym_or_button == ksym_or_button &&
++		if (bindings[i].keycode == keycode &&
+ 		    MODMASK(bindings[i].mask | implicit_mod) == MODMASK(state) &&
+ 		    bindings[i].cmd.func &&
+ 		    (bindings[i].cmd.mode == MODE_ALL || bindings[i].cmd.mode == mode))
+@@ -645,10 +645,14 @@
  {
  	unsigned int sh = 0;
  	KeySym ksym, shksym;
@@ -32,15 +32,16 @@
 
  	if (kev->state & ShiftMask) {
  		kev->state &= ~ShiftMask;
-@@ -645,14 +649,14 @@
+@@ -662,7 +666,7 @@
  	if (extprefix && ksym == KEYHANDLER_ABORT && MODMASK(kev->state) == 0) {
  		handle_key_handler(false);
  	} else if (extprefix) {
--		run_key_handler(XKeysymToString(ksym), kev->state & ~sh);
-+		run_key_handler(kcode_str, kev->state & ~sh);
- 		extprefix = false;
- 	} else if (key >= '0' && key <= '9') {
- 		/* number prefix for commands */
+-		if ((dirty = run_key_handler(XKeysymToString(ksym), kev->state & ~sh)))
++		if ((dirty = run_key_handler(kcode_str, kev->state & ~sh)))
+ 			extprefix = false;
+ 		else
+ 			handle_key_handler(false);
+@@ -671,7 +675,7 @@
  		prefix = prefix * 10 + (int) (key - '0');
  		return;
  	} else {
@@ -51,7 +52,7 @@
  		redraw();
 --- a/nsxiv.h	2021-12-16 23:25:11.341738170 +0300
 +++ b/nsxiv.h	2021-12-16 23:24:47.071805857 +0300
-@@ -172,7 +172,7 @@
+@@ -161,7 +161,7 @@
 
  typedef struct {
  	unsigned int mask;
