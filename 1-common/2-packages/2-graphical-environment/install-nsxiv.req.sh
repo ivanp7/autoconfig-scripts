@@ -12,7 +12,7 @@ SCRIPT_TITLE="Install nsxiv"
 git_clone_and_cd nsxiv https://aur.archlinux.org/nsxiv.git
 download_and_extract_source
 
-cd src/nsxiv-$(grep "pkgver=" PKGBUILD | cut -d'=' -f2)/
+cd src/nsxiv/
 install -m 644 "$(aux_dir)/nsxiv.1" ./
 install -m 644 "$(aux_dir)/config.h" ./
 install -m 644 "$(aux_dir)/nsxiv-keycodes.patch" ./
