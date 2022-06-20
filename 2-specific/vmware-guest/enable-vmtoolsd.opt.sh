@@ -10,5 +10,5 @@ SCRIPT_TITLE="Install and enable vmtoolsd service"
 ####################################################################
 
 install_service up,log "$(aux_dir)/vmtoolsd"
-enable-service vmtoolsd
+enable_service vmtoolsd
 
