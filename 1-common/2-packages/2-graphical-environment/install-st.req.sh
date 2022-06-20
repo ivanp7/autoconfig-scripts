@@ -10,6 +10,7 @@ SCRIPT_TITLE="Install st"
 ####################################################################
 
 git_clone_and_cd st-luke-git https://github.com/LukeSmithxyz/st.git
+sed -i "s/^source=('git:/source=('git+https:/" PKGBUILD # patch PKGBUILD to fix cloning
 download_and_extract_source
 
 cd src/st/
