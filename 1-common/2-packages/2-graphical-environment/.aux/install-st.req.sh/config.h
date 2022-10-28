@@ -258,9 +258,9 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (Mod1Mask|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe", NULL };
-static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c", "externalpipe", NULL };
-static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
+/* static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe", NULL }; */
+/* static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c", "externalpipe", NULL }; */
+/* static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL }; */
 
 /******************************************************************************/
 
@@ -491,8 +491,8 @@ static Shortcut shortcuts[] = {
     DEF_FUNCTION( TERMMOD|ControlMask,  114 /*XK_Right*/,       changealpha,    {.f = +0.05} ),
 
     /* { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } }, */
-    DEF_FUNCTION( MODKEY|ControlMask,   29 /*XK_y*/,            externalpipe,   {.v = copyurlcmd } ),
-    DEF_FUNCTION( MODKEY|ControlMask,   32 /*XK_o*/,            externalpipe,   {.v = copyoutput } ),
+    /* DEF_FUNCTION( MODKEY|ControlMask,   XK_y,            externalpipe,   {.v = copyurlcmd } ), */
+    /* DEF_FUNCTION( MODKEY|ControlMask,   XK_o,            externalpipe,   {.v = copyoutput } ), */
 
     /* Input */
     DEF_FUNCTION( 0,                    108 /*XK_Alt_R*/,       switch_language, {} ),
@@ -520,7 +520,6 @@ static Shortcut shortcuts[] = {
     DEF_SELFINSERT_KEY(25), // w
     DEF_SELFINSERT_KEY(26), // e
     DEF_SELFINSERT_KEY(27), // r
-    DEF_SELFINSERT_KEY(28), // t
     DEF_SELFINSERT_KEY(29), // y
     DEF_SELFINSERT_KEY_WITH_ALT(30, "\\", "|"), // u
     DEF_SELFINSERT_KEY_WITH_ALT(31, "-", "_"), // i
