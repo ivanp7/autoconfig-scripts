@@ -479,10 +479,10 @@ static Shortcut shortcuts[] = {
     DEF_FUNCTION( MODKEY|ControlMask,   55 /*XK_v*/,            clippaste,      {.i =  0} ),
     DEF_FUNCTION( MODKEY|ControlMask,   33 /*XK_p*/,            selpaste,       {.i =  0} ),
 
-    DEF_FUNCTION( MODKEY|ControlMask,   114 /*XK_Right*/,       kscrolldown,    {.i = +1} ),
-    DEF_FUNCTION( MODKEY|ControlMask,   113 /*XK_Left*/,        kscrollup,      {.i = +1} ),
-    DEF_FUNCTION( MODKEY|ControlMask,   116 /*XK_Down*/,        kscrolldown,    {.i = -1} ),
-    DEF_FUNCTION( MODKEY|ControlMask,   111 /*XK_Up*/,          kscrollup,      {.i = -1} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   111 /*XK_Up*/,          kscrollup,      {.i = +10} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   116 /*XK_Down*/,        kscrolldown,    {.i = +10} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   113 /*XK_Left*/,        kscrollup,      {.i = -1} ),
+    DEF_FUNCTION( MODKEY|ControlMask,   114 /*XK_Right*/,       kscrolldown,    {.i = -1} ),
 
     DEF_FUNCTION( MODKEY,               110 /*XK_Home*/,        zoomreset,      {.f =  0} ),
     DEF_FUNCTION( TERMMOD|ControlMask,  111 /*XK_Up*/,          zoom,           {.f = +1} ),
@@ -496,10 +496,9 @@ static Shortcut shortcuts[] = {
 
     /* Input */
     DEF_FUNCTION( 0,                    108 /*XK_Alt_R*/,       switch_language, {} ),
-    DEF_FUNCTION( MODKEY,               28  /*XK_t*/,           switch_layout, {} ),
+    DEF_FUNCTION( MODKEY,               135  /*XK_Menu*/,       switch_layout, {} ),
 
     // digit row
-    DEF_SELFINSERT_KEY(9), // Escape
     DEF_SELFINSERT_KEY_WITH_ALT(10, "1", "!"), // 1
     DEF_SELFINSERT_KEY_WITH_ALT(11, "2", "@"), // 2
     DEF_SELFINSERT_KEY_WITH_ALT(12, "3", "#"), // 3
@@ -517,10 +516,11 @@ static Shortcut shortcuts[] = {
     // top row
     DEF_SELFINSERT_KEY(23), // Tab
     DEF_SELFINSERT_KEY_WITH_ALT(24, "`", "~"), // q
-    DEF_SELFINSERT_KEY(25), // w
-    DEF_SELFINSERT_KEY(26), // e
-    DEF_SELFINSERT_KEY(27), // r
-    DEF_SELFINSERT_KEY(29), // y
+    DEF_SELFINSERT_KEY_WITH_ALT(25, "¬", "´"), // w
+    DEF_SELFINSERT_KEY_WITH_ALT(26, "°", "‰"), // e
+    DEF_SELFINSERT_KEY_WITH_ALT(27, "·", "¤"), // r
+    DEF_SELFINSERT_KEY_WITH_ALT(28, "±", "∓"), // t
+    DEF_SELFINSERT_KEY_WITH_ALT(29, "µ", "¦"), // y
     DEF_SELFINSERT_KEY_WITH_ALT(30, "\\", "|"), // u
     DEF_SELFINSERT_KEY_WITH_ALT(31, "-", "_"), // i
     DEF_SELFINSERT_KEY_WITH_ALT(32, "=", "+"), // o
@@ -544,12 +544,12 @@ static Shortcut shortcuts[] = {
 
     // bottom row
     DEF_SELFINSERT_KEY_WITH_ALT(51, "\\", "|"), // Backslash
-    DEF_SELFINSERT_KEY(52), // z
-    DEF_SELFINSERT_KEY(53), // x
-    DEF_SELFINSERT_KEY(54), // c
+    DEF_SELFINSERT_KEY_WITH_ALT(52, "¶", "§"), // z
+    DEF_SELFINSERT_KEY_WITH_ALT(53, "×", "÷"), // x
+    DEF_SELFINSERT_KEY_WITH_ALT(54, "©", "®"), // c
     DEF_SELFINSERT_KEY_WITH_ALT(55, "5", "%"), // v
-    DEF_SELFINSERT_KEY(56), // b
-    DEF_SELFINSERT_KEY(57), // n
+    DEF_SELFINSERT_KEY_WITH_ALT(56, "¡", "«"), // b
+    DEF_SELFINSERT_KEY_WITH_ALT(57, "¿", "»"), // n
     DEF_SELFINSERT_KEY_WITH_ALT(58, "6", "^"), // m
     DEF_SELFINSERT_KEY_WITH_ALT(59, ",", "<"), // ,
     DEF_SELFINSERT_KEY_WITH_ALT(60, ".", ">"), // .
