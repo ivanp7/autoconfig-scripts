@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pacman -Qi artix-archlinux-support > /dev/null 2>&1
+

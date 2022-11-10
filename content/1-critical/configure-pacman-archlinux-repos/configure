@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+pacman -Qi artix-archlinux-support > /dev/null 2>&1 || exit 1
+
+curl -s "https://raw.githubusercontent.com/archlinux/svntogit-packages/packages/pacman-mirrorlist/trunk/mirrorlist" > /etc/pacman.d/mirrorlist-arch || exit 1
+vi /etc/pacman.d/mirrorlist-arch
+
+grep -Fxq "# Arch" /etc/pacman.conf || echo '
+# Arch
+[extra]
+Include = /etc/pacman.d/mirrorlist-arch
+[community]
+Include = /etc/pacman.d/mirrorlist-arch
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist-arch
+' >> /etc/pacman.conf
+

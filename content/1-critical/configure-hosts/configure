@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -d "/etc/hosts.d" ]
+then
+    mkdir /etc/hosts.d
+    mv /etc/hosts /etc/hosts.d/00-manual
+fi
+
+curl -s "https://someonewhocares.org/hosts/zero/hosts" > /etc/hosts.d/99-hosts.zero
+
+cat /etc/hosts.d/* > /etc/hosts
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+grep -q "^\s*tmpfs\s\+/tmp\s\+tmpfs\s\+" /etc/fstab ||
+echo "
+# mount /tmp as tmpfs
+tmpfs   /tmp    tmpfs   rw,nodev,nosuid     0   0
+" >> /etc/fstab
+
+mount /tmp
+

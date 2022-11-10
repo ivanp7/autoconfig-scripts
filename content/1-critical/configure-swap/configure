@@ -1,0 +1,31 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+DIALOG_FILE="$(mktemp dialog_file.XXXXXX)" || exit 1
+trap 'rm "$DIALOG_FILE"' EXIT
+
+while true
+do
+    dialog --erase-on-exit --inputbox "Input swap file size in KiB" \
+        9 25 "$(($(awk '/MemTotal/ {print $2}' /proc/meminfo) + 4))" \
+        2> "$DIALOG_FILE" || {
+        echo "Canceled"
+        exit
+    }
+
+    grep -qE "^[1-9][0-9]*\$" "$DIALOG_FILE" && break || continue
+done
+
+fallocate -l "$(cat -- "$DIALOG_FILE")k" /swapfile || exit 1
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+grep -q "^\s*/swapfile\s\+none\s\+swap\s\+" /etc/fstab ||
+echo "
+# swap file
+/swapfile   none    swap    defaults    0   0
+" >> /etc/fstab
+

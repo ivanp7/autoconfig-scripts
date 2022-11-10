@@ -1,33 +1,19 @@
 Arch/Artix Linux auto configuration scripts
 --------------------------------------------
 
-# Rules of application
+# Directories
 
-0) all scripts are to be run as root
+1. `installation`: helper files and scripts to be used during the installation process
 
-1) directories and files with numeral prefix come in ascending order
+2. `content`: scripts for configuration of an installed system
 
-2) directories and files without numeral prefix come without specified order (except when dependencies exist)
+3. `extras`: additional info and resources
 
-3) .req.sh scripts are essential regardless of the usecase
+# Rules of application of scripts in `content` directory
 
-4) .opt.sh scripts are optional and should be picked according to the usecase
+1. all scripts are to be run as root
 
-# Contents
+2. `check` scripts determine whether configuration is needed, which is true in case of non-zero exit code
 
-## installation
-
-Helper scripts to be used during the installation process.
-
-## 1-common
-
-System configuration common to the most usecases.
-
-## 2-specific
-
-Variants of customized configuration for specific usecases.
-
-## extras
-
-Additional info and resources that don't fall into other categories.
+3. `configure` scripts transfer system into specified state
 

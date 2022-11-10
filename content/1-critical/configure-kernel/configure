@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+mkdir -p /etc/sysctl.d
+
+install -Dm 644 -t /etc/sysctl.d/ "files/50-auto.conf"
+sed '/^#/d; /^;/d; /^$/d; s/^\s*//; s/\s*=\s*/=/; s/\s*$//' "files/50-auto.conf" | tr '\n' '\0' | xargs -0 -n 1 sysctl
+

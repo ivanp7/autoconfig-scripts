@@ -1,0 +1,4 @@
+#!/bin/sh
+
+setcap cap_net_raw+p /usr/bin/ping
+
