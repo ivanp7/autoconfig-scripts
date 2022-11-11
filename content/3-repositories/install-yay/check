@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pacman -Qi yay > /dev/null 2>&1
+

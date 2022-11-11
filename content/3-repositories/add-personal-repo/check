@@ -1,0 +1,4 @@
+#!/bin/sh
+
+grep -Fxq "### PERSONAL" /etc/pacman.conf
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+! id -u autoconfig-scripts > /dev/null 2>&1
+

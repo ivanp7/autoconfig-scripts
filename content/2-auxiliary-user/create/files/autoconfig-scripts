@@ -1,0 +1,3 @@
+# autoconfig-scripts
+%autoconfig-scripts ALL=(ALL) NOPASSWD: /usr/bin/pacman
+

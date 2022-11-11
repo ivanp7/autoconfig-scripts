@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+useradd --system --home-dir / --no-log-init --shell /usr/bin/nologin --user-group autoconfig-scripts &&
+install -m 440 -t /etc/sudoers.d/ "files/autoconfig-scripts"
+

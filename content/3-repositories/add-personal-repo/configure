@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+curl -s "https://gist.githubusercontent.com/ivanp7/58ac5f6fed3f6f700c52527693044d5d/raw/923acb6bea80aa969c1739106e48f106634980f3/repo" >> /etc/pacman.conf
+
