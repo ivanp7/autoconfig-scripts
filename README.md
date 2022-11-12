@@ -5,9 +5,11 @@ Arch/Artix Linux auto configuration scripts
 
 1. `installation`: helper files and scripts to be used during the installation process
 
-2. `content`: scripts for configuration of an installed system
+2. `configuration`: scripts for configuration of an installed system
 
-3. `extras`: additional info and resources
+3. `deploy`: scripts for deployment of packaged applications and dot-files
+
+4. `extras`: additional information and resources
 
 # Rules of application of scripts in `content` directory
 
