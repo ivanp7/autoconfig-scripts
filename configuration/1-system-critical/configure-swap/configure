@@ -3,7 +3,7 @@
 cd -- "$(dirname -- "$0")"
 ./check && exit
 
-DIALOG_FILE="$(mktemp dialog_file.XXXXXX)" || exit 1
+DIALOG_FILE="$(mktemp -p /tmp dialog_file.XXXXXX)" || exit 1
 trap 'rm "$DIALOG_FILE"' EXIT
 
 while true
