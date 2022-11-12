@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -f "/etc/pacman.d/hooks/zsh-rehash.hook" ]
+

@@ -2,11 +2,11 @@
 Operation = Install
 Operation = Upgrade
 Operation = Remove
-Type = Package
-Target = *
+Type = Path
+Target = usr/bin/*
 
 [Action]
 Depends = zsh
 When = PostTransaction
-Exec = /usr/bin/env touch /var/cache/zsh/pacman
+Exec = /usr/bin/install -Dm 644 /dev/null /var/cache/zsh/pacman
 
