@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+pacman --needed -S at at-runit
+ln -s -t /run/runit/service /etc/runit/sv/at
+sv start at
+
