@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sv status gpm > /dev/null
+

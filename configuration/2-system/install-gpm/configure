@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+pacman --needed -S gpm gpm-runit
+ln -s -t /run/runit/service /etc/runit/sv/gpm
+sv start gpm
+
