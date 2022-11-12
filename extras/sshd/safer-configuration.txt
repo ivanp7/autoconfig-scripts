@@ -1,0 +1,16 @@
+--- 1. comment the following line:
+
+Subsystem  sftp  /usr/lib/ssh/sftp-server
+
+--- 2. append the following lines:
+
+AllowGroups ssh-users sftp-users
+
+Subsystem sftp internal-sftp
+
+Match Group sftp-users
+    ChrootDirectory /srv/sftp
+    ForceCommand internal-sftp
+
+--- 3. add allowed users to either of the groups
+

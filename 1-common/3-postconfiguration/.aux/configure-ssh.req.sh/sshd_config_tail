@@ -1,9 +1,0 @@
-
-AllowGroups ssh-users sftp-users
-
-Subsystem sftp internal-sftp
-
-Match Group sftp-users
-    ChrootDirectory /srv/sftp
-    ForceCommand internal-sftp
-

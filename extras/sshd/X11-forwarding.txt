@@ -1,0 +1,5 @@
+--- 1. set the following options to 'yes':
+
+X11Forwarding
+X11UseLocalhost
+
