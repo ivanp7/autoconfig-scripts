@@ -5,4 +5,5 @@ cd -- "$(dirname -- "$0")"
 
 pacman --needed -S cronie cronie-runit
 ln -s -t /run/runit/service /etc/runit/sv/cronie
+sv start cronie
 

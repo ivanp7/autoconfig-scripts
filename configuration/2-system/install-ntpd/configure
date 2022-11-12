@@ -5,4 +5,5 @@ cd -- "$(dirname -- "$0")"
 
 pacman --needed -S ntp ntp-runit
 ln -s -t /run/runit/service /etc/runit/sv/ntpd
+sv start ntpd
 
