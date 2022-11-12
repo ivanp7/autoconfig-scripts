@@ -3,7 +3,7 @@
 cd -- "$(dirname -- "$0")"
 ./check && exit
 
-pacman --needed -S gpm gpm-runit
+pacman --needed -S gpm gpm-runit || exit 1
 ln -s -t /run/runit/service /etc/runit/sv/gpm
 sv start gpm
 

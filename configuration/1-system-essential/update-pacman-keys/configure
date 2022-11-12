@@ -1,8 +1,8 @@
 #!/bin/sh
 
-pacman --noconfirm -Sy archlinux-keyring artix-keyring
-pacman-key --init
-pacman-key --populate archlinux artix
-pacman --noconfirm -Scc
-pacman --noconfirm -Syyu
+pacman --noconfirm -Sy archlinux-keyring artix-keyring &&
+    pacman-key --init &&
+    pacman-key --populate archlinux artix &&
+    pacman --noconfirm -Scc &&
+    pacman --noconfirm -Syyu
 

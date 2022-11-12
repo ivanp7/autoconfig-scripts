@@ -3,7 +3,7 @@
 cd -- "$(dirname -- "$0")"
 ./check && exit
 
-pacman --needed -S at at-runit
+pacman --needed -S at at-runit || exit 1
 ln -s -t /run/runit/service /etc/runit/sv/at
 sv start at
 

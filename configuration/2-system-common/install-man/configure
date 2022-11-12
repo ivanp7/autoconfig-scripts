@@ -5,7 +5,7 @@ cd -- "$(dirname -- "$0")"
 
 command -v crontab > /dev/null || exit 1
 
-pacman --needed -S man-db man-pages
+pacman --needed -S man-db man-pages || exit 1
 command -v mandb > /dev/null || exit 1
 crontab -l | { cat; echo "@daily /usr/bin/mandb"; } | crontab -
 mandb
