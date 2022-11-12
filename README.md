@@ -11,7 +11,7 @@ Arch/Artix Linux auto configuration scripts
 
 4. `extras`: additional information and resources
 
-# Rules of application of scripts in `content` directory
+# Rules of application of scripts
 
 1. all scripts are to be run as root
 
