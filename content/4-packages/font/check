@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pacman -Qi terminus-font-ll2-td1-dv1-ij1 > /dev/null 2>&1
+
