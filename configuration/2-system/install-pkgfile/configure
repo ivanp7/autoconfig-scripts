@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+command -v crontab > /dev/null || exit 1
+
+pacman --needed -S pkgfile
+command -v pkgfile > /dev/null || exit 1
+crontab -l | { cat; echo "@daily /usr/bin/pkgfile --update"; } | crontab -
+pkgfile --update
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+crontab -l | grep -Fxq "@daily /usr/bin/pkgfile --update"
+
