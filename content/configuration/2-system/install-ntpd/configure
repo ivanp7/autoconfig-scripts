@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+pacman --needed -S ntp ntp-runit
+ln -s -t /run/runit/service /etc/runit/sv/ntpd
+
