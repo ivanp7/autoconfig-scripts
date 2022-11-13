@@ -1,0 +1,4 @@
+evdev:input:b0003v25A7pFA61e0110*
+ KEYBOARD_KEY_70039=leftctrl
+ KEYBOARD_KEY_70046=rightshift
+

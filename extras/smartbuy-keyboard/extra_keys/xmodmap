@@ -1,0 +1,10 @@
+keycode 179 = XF86AudioMute NoSymbol XF86AudioMute
+keycode 173 = Prior NoSymbol Prior
+keycode 171 = Next NoSymbol Next
+keycode 172 = Pause Break Pause Break
+keycode 174 = End NoSymbol End
+keycode 180 = Home NoSymbol Home
+keycode 163 = Insert NoSymbol Insert
+keycode 152 = Print NoSymbol Print
+keycode 164 = Scroll_Lock NoSymbol Scroll_Lock
+
