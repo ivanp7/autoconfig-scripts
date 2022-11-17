@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+DIALOG_FILE="$(mktemp -p /tmp dialog_file.XXXXXX)" || exit 1
+trap 'rm "$DIALOG_FILE"' EXIT
+
+GRUB_WALLPAPER="files/tiles.jpg"
+
+while true
+do
+    dialog --erase-on-exit --fselect "$GRUB_WALLPAPER" $(($(tput lines)-13)) $(($(tput cols)-6)) \
+        2> "$DIALOG_FILE" || {
+        echo "Canceled"
+        exit
+    }
+
+    GRUB_WALLPAPER="$(cat "$DIALOG_FILE")"
+
+    [ -f "$GRUB_WALLPAPER" ] && break || continue
+done
+
+EXT="${GRUB_WALLPAPER##*.}"
+install -m 644 "$GRUB_WALLPAPER" "/boot/grub/wallpaper.$EXT" || exit 1
+sed -i "s@^#\?GRUB_BACKGROUND=.*\$@GRUB_BACKGROUND=\"/boot/grub/wallpaper.$EXT\"@" /etc/default/grub || exit 1
+grub-mkconfig -o /boot/grub/grub.cfg
+
