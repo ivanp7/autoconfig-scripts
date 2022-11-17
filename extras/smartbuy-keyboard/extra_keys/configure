@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+{ dumpkeys | head -1; cat "files/map"; } | tee -a /usr/local/share/kbd/keymaps/smartbuy-keyboard.map || exit 1
+chmod 644 /usr/local/share/kbd/keymaps/smartbuy-keyboard.map || exit 1
+
