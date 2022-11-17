@@ -1,6 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-
-install -Dm 644 "files/udev-rules" /etc/udev/rules.d/90-backlight.rules
-
