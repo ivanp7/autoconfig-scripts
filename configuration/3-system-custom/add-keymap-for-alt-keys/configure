@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+install -Dm 644 "files/map" /usr/local/share/kbd/keymaps/alt-keys.map
+
