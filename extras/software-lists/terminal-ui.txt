@@ -3,5 +3,3 @@ toxic
 
 pixterm-git termplay
 
-iptraf-ng
-

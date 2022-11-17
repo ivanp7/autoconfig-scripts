@@ -7,5 +7,4 @@ libreoffice-still aspell-ru
 minder
 
 qbittorrent
-torbrowser-launcher
 
