@@ -1,0 +1,8 @@
+#!/bin/sh
+exec 2>&1
+sv once autostart
+
+sleep 1
+find /usr/local/bin/autostart -type f -name "*.sh" -exec "{}" \;
+sleep 1
+

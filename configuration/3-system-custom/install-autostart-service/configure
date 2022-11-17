@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+mkdir -p /usr/local/bin/autostart || exit 1
+
+mkdir -p /var/log/runit/autostart || exit 1
+install -Dm 754 -T "files/run" /etc/runit/sv/autostart/run || exit 1
+install -Dm 754 -T "files/log-run" /etc/runit/sv/autostart/log/run || exit 1
+
+ln -s -t /run/runit/service /etc/runit/sv/autostart
+sv start autostart
+
