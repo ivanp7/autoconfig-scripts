@@ -1,0 +1,10 @@
+#!/bin/sh
+
+USERNAME="$(echo "<user to add to sudoers>" | vipe)"
+id -- "$USERNAME" > /dev/null 2>&1 || exit 1
+
+echo "
+%${USERNAME} ALL=(ALL) ALL
+" > "/etc/sudoers.d/${USERNAME}"
+chmod 440 "/etc/sudoers.d/${USERNAME}"
+
