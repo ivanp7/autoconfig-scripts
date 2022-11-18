@@ -1,4 +1,0 @@
-(require :asdf)
-(setf sb-ext:*userinit-pathname-function*
-      (lambda () (uiop:xdg-config-home #P"sbcl/sbclrc")))
-
