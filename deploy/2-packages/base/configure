@@ -5,5 +5,5 @@ command -v yay > /dev/null || exit 1
 
 curl -s "https://gist.githubusercontent.com/ivanp7/3168598726f00e030029c9047c4d1936/raw" |
     vipe | sed "s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d" | tr '\n' ' ' |
-    xargs -r sudo -u autoconfig-scripts yay --needed -S
+    xargs -r sudo -u autoconfig-scripts yay --needed --noconfirm -S
 

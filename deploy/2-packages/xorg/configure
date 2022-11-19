@@ -6,5 +6,5 @@ command -v yay > /dev/null || exit 1
 { pacman -Sg xorg | sed "s/^xorg //" | sort | uniq |
   sed "s/^xorg-xbacklight$/acpilight/"; echo "xorg-xinit"; } |
     vipe | sed "s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d" | tr '\n' ' ' |
-    xargs -r sudo -u autoconfig-scripts yay --needed -S
+    xargs -r sudo -u autoconfig-scripts yay --needed --noconfirm -S
 
