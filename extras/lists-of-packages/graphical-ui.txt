@@ -8,3 +8,5 @@ minder
 
 qbittorrent
 
+gucharmap
+
