@@ -13,7 +13,7 @@ X xinerama fbcon alsa man \
 '
 
 MAKE_CONF_VIDEO_CARDS='intel nouveau' # other: radeon amdgpu
-MAKE_CONF_INPUT_DEVICES='libinput -joystick' # other: synaptics
+MAKE_CONF_INPUT_DEVICES='libinput synaptics'
 
 MAKE_CONF_ACCEPT_LICENSE='* -@EULA' # (this is old Gentoo default)
 
@@ -177,7 +177,7 @@ checkpoint
 emerge sys-kernel/linux-firmware
 checkpoint
 
-[ "$INSTALL_INTEL_MICROCODE" ] && emerge sys-firmware/intel-microcode
+[ -z "$INSTALL_INTEL_MICROCODE" ] || emerge sys-firmware/intel-microcode
 checkpoint
 
 emerge sys-apps/pciutils
@@ -197,9 +197,12 @@ else
     cd /usr/src/linux
     make menuconfig
 fi
+cd /
 checkpoint
 
+cd /usr/src/linux
 make -j$(nproc) && make modules_install && make install
+cd /
 checkpoint
 
 echo "$ETC_FSTAB" >> /etc/fstab
@@ -253,6 +256,9 @@ emerge --verbose sys-boot/grub
 checkpoint
 
 passwd
+checkpoint
+
+umount -l /dev{/shm,/pts,}
 checkpoint
 
 echo "#############################"
