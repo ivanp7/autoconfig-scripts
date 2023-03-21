@@ -154,6 +154,9 @@ ACCEPT_LICENSE="$MAKE_CONF_ACCEPT_LICENSE"
 _EOF_
 checkpoint
 
+emerge app-portage/gentoolkit
+checkpoint
+
 emerge app-portage/cpuid2cpuflags
 checkpoint
 
