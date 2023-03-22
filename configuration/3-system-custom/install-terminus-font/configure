@@ -3,5 +3,5 @@
 cd -- "$(dirname -- "$0")"
 
 install -m644 files/use /etc/portage/package.use/terminus-font
-emerge --newuse media-fonts/terminus-font
+emerge --ask --newuse media-fonts/terminus-font
 
