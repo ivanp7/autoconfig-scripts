@@ -17,5 +17,5 @@ process_active ()
 
 ########################################################################
 
-users_logged_in || connections_on_port 62222 || process_active tmux
+users_logged_in || connections_on_port 62222 || process_active tmux || process_active rsync
 
