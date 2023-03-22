@@ -1,0 +1,4 @@
+#!/bin/sh
+
+emerge --ask --newuse app-editors/neovim
+
