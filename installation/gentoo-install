@@ -44,7 +44,12 @@ ____________
 sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' ./etc/portage/make.conf
 
 ____________
-mirrorselect -i -o >> ./etc/portage/make.conf
+cat << _EOF_ >> ./etc/portage/make.conf
+
+GENTOO_MIRRORS="${MAKE_CONF_GENTOO_MIRRORS:?Error: no Gentoo mirrors specified}"
+
+_EOF_
+
 
 ____________
 mkdir -p ./etc/portage/repos.conf
@@ -68,7 +73,7 @@ mount --bind /run ./run
 ____________
 mount --make-slave ./run
 ____________
-mount "${BOOT_PARTITION:?Boot partition is not specified}" ./boot
+mount "${BOOT_PARTITION:?Error: boot partition is not specified}" ./boot
 
 ____________
 chroot_mode
@@ -99,14 +104,14 @@ ____________
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 ____________
-echo "${ETC_TIMEZONE:?No timezone specified}" > /etc/timezone
+echo "${ETC_TIMEZONE:?Error: no timezone specified}" > /etc/timezone
 emerge --config sys-libs/timezone-data
 
 ____________
-echo "${ETC_LOCALE_GEN:?No locales specified}" > /etc/locale.gen
+echo "${ETC_LOCALE_GEN:?Error: no locales specified}" > /etc/locale.gen
 locale-gen
 ____________
-echo "${ETC_ENV_D_02LOCALE:?No default locale specified}" > /etc/env.d/02locale
+echo "${ETC_ENV_D_02LOCALE:?Error: no default locale specified}" > /etc/env.d/02locale
 
 ____________
 env-update
@@ -117,18 +122,18 @@ ____________
 echo "$ETC_FSTAB" >> /etc/fstab
 
 ____________
-echo "${ETC_HOSTNAME:?Host name is not specified}" |
+echo "${ETC_HOSTNAME:?Error: host name is not specified}" |
     grep -q -E "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])\$"
 echo "$ETC_HOSTNAME" > /etc/hostname
 ____________
 echo "$ETC_HOSTS" >> /etc/hosts
 
 ____________
-echo "${CONSOLE_KEYMAP:?Console keymap is not specified}" | grep -q '[a-zA-Z_-]\+'
+echo "${CONSOLE_KEYMAP:?Error: console keymap is not specified}" | grep -q '[a-zA-Z_-]\+'
 sed -i "/^keymap=/ s/=.*/=\"$CONSOLE_KEYMAP\"/" /etc/conf.d/keymaps
 
 ____________
-echo "${CONSOLE_FONT:?Console font is not specified}" | grep -q '[a-zA-Z_-]\+'
+echo "${CONSOLE_FONT:?Error: console font is not specified}" | grep -q '[a-zA-Z_-]\+'
 sed -i "/^consolefont=/ s/=.*/=\"$CONSOLE_FONT\"/" /etc/conf.d/consolefont
 ____________
 rc-update add consolefont boot
