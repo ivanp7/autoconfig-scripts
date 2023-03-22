@@ -1,4 +1,0 @@
-#!/bin/sh
-
-svlogd -tt "/var/log/runit/autostart"
-

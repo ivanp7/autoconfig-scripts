@@ -38,6 +38,6 @@ done
 
 echo "#!/bin/sh
 kbdrate -r $KBD_RATE -d $KBD_DELAY > /dev/null
-" > /usr/local/bin/autostart/vt-kbdrate.sh
-chmod 754 /usr/local/bin/autostart/vt-kbdrate.sh
+" > /etc/local.d/set-kbdrate.start
+chmod 755 /etc/local.d/set-kbdrate.start
 
