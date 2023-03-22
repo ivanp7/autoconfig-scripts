@@ -1,0 +1,204 @@
+#!/bin/sh
+set -e # quit on fail
+
+cd -- "$(dirname -- "$0")" # go to this script directory
+THIS_SCRIPT="$(basename -- "$0")"
+
+if [ ! -r "${THIS_SCRIPT}.conf" ]
+then
+    echo "${THIS_SCRIPT}.conf is not found, should be in the same directory"
+    exit 2
+fi
+
+. "./${THIS_SCRIPT}.conf"
+
+if [ "$CONFIGURATION_IS_APPROVED" != "yes" ]
+then
+    echo "Configuration is not approved by user. Edit ${THIS_SCRIPT}.conf"
+    exit 2
+fi
+
+###############################################################################
+
+check_dir ()
+{ [ "$PWD" = "/mnt/gentoo" ]; }
+change_root () # change root and continue
+{ [ "$PWD" = "/" ] || { check_dir && exec chroot ./ "./$THIS_SCRIPT"; }; }
+
+check_dir ### _MODECMD_
+
+chroot_mode () # switch the script into the chroot mode
+{ sed -i 's/^check_dir ### _MODECMD_$/change_root ### _MODECMD_/' "$THIS_SCRIPT"; change_root; }
+
+REMOVE_FROM=$((4+$LINENO)); ____________ () # remove lines from $REMOVE_FROM up to checkpoint
+{ sed -i "$REMOVE_FROM,/^\s*____________\s*\$/d" "$THIS_SCRIPT"; }
+###############################################################################
+###############################################################################
+
+cp -v -- "$THIS_SCRIPT" "${THIS_SCRIPT}.orig" # make backup of the original script state
+
+____________
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+
+____________
+sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' ./etc/portage/make.conf
+
+____________
+mirrorselect -i -o >> ./etc/portage/make.conf
+
+____________
+mkdir -p ./etc/portage/repos.conf
+cp -v ./usr/share/portage/config/repos.conf ./etc/portage/repos.conf/gentoo.conf
+
+____________
+cp -Lv /etc/resolv.conf ./etc/
+
+____________
+mount --types proc /proc ./proc
+____________
+mount --rbind /sys ./sys
+____________
+mount --make-rslave ./sys
+____________
+mount --rbind /dev ./dev
+____________
+mount --make-rslave ./dev
+____________
+mount --bind /run ./run
+____________
+mount --make-slave ./run
+____________
+mount "${BOOT_PARTITION:?Boot partition is not specified}" ./boot
+
+____________
+chroot_mode
+
+###############################################################################
+
+____________
+emerge-webrsync
+____________
+emerge --verbose --update --deep --newuse @world
+
+____________
+cat << _EOF_ >> /etc/portage/make.conf
+
+USE=" \
+$MAKE_CONF_USE"
+
+VIDEO_CARDS="$MAKE_CONF_VIDEO_CARDS"
+INPUT_DEVICES="$MAKE_CONF_INPUT_DEVICES"
+
+ACCEPT_LICENSE="$MAKE_CONF_ACCEPT_LICENSE"
+
+_EOF_
+
+____________
+emerge app-portage/cpuid2cpuflags
+____________
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+
+____________
+echo "${ETC_TIMEZONE:?No timezone specified}" > /etc/timezone
+emerge --config sys-libs/timezone-data
+
+____________
+echo "${ETC_LOCALE_GEN:?No locales specified}" > /etc/locale.gen
+locale-gen
+____________
+echo "${ETC_ENV_D_02LOCALE:?No default locale specified}" > /etc/env.d/02locale
+
+____________
+env-update
+
+###############################################################################
+
+____________
+echo "$ETC_FSTAB" >> /etc/fstab
+
+____________
+echo "${ETC_HOSTNAME:?Host name is not specified}" |
+    grep -q -E "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])\$"
+echo "$ETC_HOSTNAME" > /etc/hostname
+____________
+echo "$ETC_HOSTS" >> /etc/hosts
+
+____________
+echo "${CONSOLE_KEYMAP:?Console keymap is not specified}" | grep -q '[a-zA-Z_-]\+'
+sed -i "/^keymap=/ s/=.*/=\"$CONSOLE_KEYMAP\"/" /etc/conf.d/keymaps
+
+____________
+echo "${CONSOLE_FONT:?Console font is not specified}" | grep -q '[a-zA-Z_-]\+'
+sed -i "/^consolefont=/ s/=.*/=\"$CONSOLE_FONT\"/" /etc/conf.d/consolefont
+____________
+rc-update add consolefont boot
+
+###############################################################################
+
+____________
+emerge sys-apps/pciutils
+
+____________
+emerge sys-kernel/linux-firmware
+____________
+[ "$INSTALL_INTEL_MICROCODE" != 'true' ] || emerge sys-firmware/intel-microcode
+
+____________
+emerge sys-kernel/gentoo-sources
+____________
+eselect kernel set 1
+
+____________
+if [ "$LINUX_KERNEL_CONFIG" ]
+then
+    cp -v -- "$LINUX_KERNEL_CONFIG" /usr/src/linux/.config
+else
+    cd /usr/src/linux
+    make menuconfig
+    cd /
+fi
+
+____________
+cd /usr/src/linux
+make -j$(nproc) && make modules_install && make install
+cd /
+
+###############################################################################
+
+____________
+emerge net-misc/dhcpcd
+____________
+rc-update add dhcpcd default
+
+____________
+emerge app-admin/sysklogd
+____________
+rc-update add sysklogd default
+
+____________
+emerge sys-process/cronie
+____________
+rc-update add cronie default
+
+____________
+emerge sys-apps/mlocate
+
+____________
+emerge net-misc/chrony
+____________
+rc-update add chronyd default
+
+____________
+emerge --verbose sys-boot/grub
+
+____________
+passwd
+
+____________
+umount -l /dev{/shm,/pts,}
+
+____________
+echo "#############################"
+echo "# Installation is finished! #"
+echo "#############################"
+
