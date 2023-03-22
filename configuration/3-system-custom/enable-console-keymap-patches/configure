@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+mkdir -p /usr/local/share/keymap-patches
+install -Dm 755 -t /etc/local.d "files/keymaps.start"
+

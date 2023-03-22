@@ -1,4 +1,0 @@
-#!/bin/sh
-
-[ -x "/usr/local/bin/autostart/vt-keymaps.sh" ]
-

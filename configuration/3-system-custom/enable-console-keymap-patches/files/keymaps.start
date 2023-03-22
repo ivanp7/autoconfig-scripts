@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find /usr/local/share/keymap-patches -type f -exec loadkeys -q "{}" \;
+

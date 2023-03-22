@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-mkdir -p /usr/local/share/kbd/keymaps || exit 1
-install -Dm 754 -t /usr/local/bin/autostart "files/vt-keymaps.sh"
-
