@@ -1,4 +1,0 @@
-#!/bin/sh
-sleep 1
-exec 2>&1
-exec socat TCP-LISTEN:8080,fork,reuseaddr TCP6:localhost:80

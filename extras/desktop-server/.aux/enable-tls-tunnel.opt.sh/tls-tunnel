@@ -1,4 +1,0 @@
-#!/bin/sh
-sleep 2
-exec 2>&1
-exec stunnel

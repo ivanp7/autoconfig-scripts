@@ -1,4 +1,0 @@
-ln -sT "$HOME/.roswell/bin" "$HOME/bin/roswell"
-    or
-put $PATH configuration to "$HOME/.config/zsh/env/"
-
