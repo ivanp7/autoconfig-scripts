@@ -1,4 +1,0 @@
-#!/bin/sh
-
-gpasswd -a "$(echo "<user to add to group video>" | vipe)" video
-

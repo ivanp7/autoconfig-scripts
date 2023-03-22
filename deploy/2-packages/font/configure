@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-id -u autoconfig-scripts > /dev/null 2>&1 || exit 1
-
-sudo -u autoconfig-scripts yay --noconfirm -S terminus-font-ll2-td1-dv1-ij1
-

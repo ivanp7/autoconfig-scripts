@@ -1,9 +1,0 @@
-#!/bin/sh
-
-id -u autoconfig-scripts > /dev/null 2>&1 || exit 1
-command -v yay > /dev/null || exit 1
-
-curl -s "https://gist.githubusercontent.com/ivanp7/9e4675122608f531b40a820fd94225aa/raw" |
-    vipe | sed "s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d" | tr '\n' ' ' |
-    xargs -r sudo -u autoconfig-scripts yay --needed --noconfirm -S
-
