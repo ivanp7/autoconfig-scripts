@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-pacman --needed -S tlp tlp-runit || exit 1
-ln -s -t /run/runit/service /etc/runit/sv/tlp
-sv start tlp
-

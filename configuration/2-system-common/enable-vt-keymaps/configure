@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-sed -i "/^HOOKS=(/ s/\<keyboard\>/keyboard keymap/" /etc/mkinitcpio.conf &&
-    mkinitcpio -P
-

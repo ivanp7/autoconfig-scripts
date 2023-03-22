@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+sed -i "s/^#\?PermitRootLogin\s\+.*/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i "s/^#\?PubkeyAuthentication\s\+.*/PubkeyAuthentication yes/" /etc/ssh/sshd_config
+sed -i "s/^#\?PasswordAuthentication\s\+.*/PasswordAuthentication no/" /etc/ssh/sshd_config
+sed -i "s/^#\?PermitEmptyPasswords\s\+.*/PermitEmptyPasswords no/" /etc/ssh/sshd_config
+

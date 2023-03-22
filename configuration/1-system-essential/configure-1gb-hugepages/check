@@ -1,4 +1,0 @@
-#!/bin/sh
-
-grep -q '^GRUB_CMDLINE_LINUX_DEFAULT=[^#]*\<default_hugepagesz=1G\>' /etc/default/grub
-

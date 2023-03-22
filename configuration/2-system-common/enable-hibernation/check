@@ -1,4 +1,0 @@
-#!/bin/sh
-
-grep -q '^HOOKS=[^#]*\<resume\>' /etc/mkinitcpio.conf && grep -q '^GRUB_CMDLINE_LINUX_DEFAULT=[^#]*\<resume\>' /etc/default/grub
-

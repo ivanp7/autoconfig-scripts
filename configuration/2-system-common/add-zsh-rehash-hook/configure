@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-mkdir -p /var/cache/zsh
-install -Dm 644 -t /etc/pacman.d/hooks "files/zsh-rehash.hook"
-

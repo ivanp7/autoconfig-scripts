@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sv status tlp > /dev/null
-

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-grep -q '^HOOKS=([^#]*keymap' /etc/mkinitcpio.conf
-
