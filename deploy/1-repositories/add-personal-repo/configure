@@ -1,7 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-curl -s "https://gist.githubusercontent.com/ivanp7/58ac5f6fed3f6f700c52527693044d5d/raw" >> /etc/pacman.conf
-

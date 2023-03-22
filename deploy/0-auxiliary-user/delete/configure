@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd -- "$(dirname -- "$0")"
-./check && exit
-
-userdel autoconfig-scripts &&
-rm "/etc/sudoers.d/autoconfig-scripts"
-
