@@ -2,6 +2,6 @@
 
 cd -- "$(dirname -- "$0")"
 
-install -Dm 644 "files/hwdb" /usr/lib/udev/hwdb.d/99-my-smartbuy-keyboard-fix.hwdb || exit 1
+install -Dm 644 "files/hwdb" /lib/udev/hwdb.d/99-my-smartbuy-keyboard-fix.hwdb || exit 1
 udevadm --debug hwdb --update
 
