@@ -1,4 +1,4 @@
-Arch/Artix Linux auto configuration scripts
+Gentoo Linux auto configuration scripts
 --------------------------------------------
 
 # Directories
