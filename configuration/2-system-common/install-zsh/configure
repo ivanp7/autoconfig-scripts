@@ -1,0 +1,4 @@
+#!/bin/sh
+
+emerge --ask --newuse app-shells/zsh app-shells/zsh-syntax-highlighting app-shells/zsh-completions app-shells/gentoo-zsh-completions
+
