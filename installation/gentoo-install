@@ -178,9 +178,9 @@ cd /
 ###############################################################################
 
 ____________
-echo "$PACKAGE_ACCEPT_KEYWORDS_LOCAL" > /etc/portage/package.accept_keywords/00local
+echo "$PACKAGE_ACCEPT_KEYWORDS" > "/etc/portage/package.accept_keywords/$LOCAL_PACKAGE_CONFIG_FILENAME"
 ____________
-echo "$PACKAGE_USE_LOCAL" > /etc/portage/package.use/00local
+echo "$PACKAGE_USE" > "/etc/portage/package.use/$LOCAL_PACKAGE_CONFIG_FILENAME"
 
 ____________
 emerge $INSTALL_PACKAGES
