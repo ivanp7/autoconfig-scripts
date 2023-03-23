@@ -23,7 +23,7 @@ fi
 check_dir ()
 { [ "$PWD" = "/mnt/gentoo" ]; }
 change_root () # change root and continue
-{ [ "$PWD" = "/" ] || { check_dir && exec chroot ./ "./$THIS_SCRIPT"; }; }
+{ [ "$PWD" = "/" ] || { check_dir && PATH="/bin:/usr/bin" LDPATH="/lib:/usr/lib" exec chroot ./ "./$THIS_SCRIPT"; }; }
 
 check_dir ### _MODECMD_
 
@@ -39,21 +39,6 @@ cp -v -- "$THIS_SCRIPT" "${THIS_SCRIPT}.orig" # make backup of the original scri
 
 ____________
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
-
-____________
-sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' ./etc/portage/make.conf
-
-____________
-cat << _EOF_ >> ./etc/portage/make.conf
-
-GENTOO_MIRRORS="${MAKE_CONF_GENTOO_MIRRORS:?Error: no Gentoo mirrors specified}"
-
-_EOF_
-
-
-____________
-mkdir -p ./etc/portage/repos.conf
-cp -v ./usr/share/portage/config/repos.conf ./etc/portage/repos.conf/gentoo.conf
 
 ____________
 cp -Lv /etc/resolv.conf ./etc/
@@ -72,8 +57,6 @@ ____________
 mount --bind /run ./run
 ____________
 mount --make-slave ./run
-____________
-mount "${BOOT_PARTITION:?Error: boot partition is not specified}" ./boot
 
 ____________
 chroot_mode
@@ -81,22 +64,40 @@ chroot_mode
 ###############################################################################
 
 ____________
-emerge-webrsync
-____________
-emerge --verbose --update --deep --newuse @world
+sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' /etc/portage/make.conf
 
 ____________
+: ${MAKE_CONF_GENTOO_MIRRORS:?Error: no Gentoo mirrors specified}
+
 cat << _EOF_ >> /etc/portage/make.conf
 
+MAKEOPTS="$MAKE_CONF_MAKEOPTS"
+
 USE=" \
-$MAKE_CONF_USE"
+$MAKE_CONF_USE
+"
 
 VIDEO_CARDS="$MAKE_CONF_VIDEO_CARDS"
 INPUT_DEVICES="$MAKE_CONF_INPUT_DEVICES"
 
 ACCEPT_LICENSE="$MAKE_CONF_ACCEPT_LICENSE"
 
+$MAKE_CONF_EXTRA
+
+GENTOO_MIRRORS="$MAKE_CONF_GENTOO_MIRRORS"
+
 _EOF_
+
+____________
+mkdir -p /etc/portage/repos.conf
+cp -v /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
+
+###############################################################################
+
+____________
+emerge-webrsync
+____________
+emerge --verbose --update --deep --newuse @world
 
 ____________
 emerge app-portage/cpuid2cpuflags
@@ -119,7 +120,7 @@ env-update
 ###############################################################################
 
 ____________
-echo "$ETC_FSTAB" >> /etc/fstab
+echo "${ETC_FSTAB:?Error: fstab entries are not specified}" >> /etc/fstab
 
 ____________
 echo "${ETC_HOSTNAME:?Error: host name is not specified}" |
@@ -129,14 +130,20 @@ ____________
 echo "$ETC_HOSTS" >> /etc/hosts
 
 ____________
-echo "${CONSOLE_KEYMAP:?Error: console keymap is not specified}" | grep -q '[a-zA-Z_-]\+'
-sed -i "/^keymap=/ s/=.*/=\"$CONSOLE_KEYMAP\"/" /etc/conf.d/keymaps
+if [ "$CONSOLE_KEYMAP" ]
+then
+    echo "$CONSOLE_KEYMAP" | grep -q '[a-zA-Z_-]\+'
+    sed -i "/^keymap=/ s/=.*/=\"$CONSOLE_KEYMAP\"/" /etc/conf.d/keymaps
+fi
 
 ____________
-echo "${CONSOLE_FONT:?Error: console font is not specified}" | grep -q '[a-zA-Z_-]\+'
-sed -i "/^consolefont=/ s/=.*/=\"$CONSOLE_FONT\"/" /etc/conf.d/consolefont
+if [ "$CONSOLE_FONT" ]
+then
+    echo "$CONSOLE_FONT" | grep -q '[a-zA-Z_-]\+'
+    sed -i "/^consolefont=/ s/=.*/=\"$CONSOLE_FONT\"/" /etc/conf.d/consolefont
+fi
 ____________
-rc-update add consolefont boot
+[ -z "$CONSOLE_FONT" ] || rc-update add consolefont boot
 
 ###############################################################################
 
@@ -154,9 +161,9 @@ ____________
 eselect kernel set 1
 
 ____________
-if [ "$LINUX_KERNEL_CONFIG" ]
+if [ "$KERNEL_CONFIG_FILE" ]
 then
-    cp -v -- "$LINUX_KERNEL_CONFIG" /usr/src/linux/.config
+    cp -v -- "$KERNEL_CONFIG_FILE" /usr/src/linux/.config
 else
     cd /usr/src/linux
     make menuconfig
@@ -171,39 +178,25 @@ cd /
 ###############################################################################
 
 ____________
-emerge net-misc/dhcpcd
+echo "$PACKAGE_ACCEPT_KEYWORDS_LOCAL" > /etc/portage/package.accept_keywords/00local
 ____________
-rc-update add dhcpcd default
+echo "$PACKAGE_USE_LOCAL" > /etc/portage/package.use/00local
 
 ____________
-emerge app-admin/sysklogd
-____________
-rc-update add sysklogd default
+emerge $INSTALL_PACKAGES
 
 ____________
-emerge sys-process/cronie
-____________
-rc-update add cronie default
+for srv in $ADD_SERVICES
+do
+    rc-update add $srv default
+done
 
 ____________
-emerge sys-apps/mlocate
-
-____________
-emerge net-misc/chrony
-____________
-rc-update add chronyd default
-
-____________
-emerge --verbose sys-boot/grub
-
-____________
-passwd
-
-____________
-umount -l /dev{/shm,/pts,}
-
-____________
-echo "#############################"
-echo "# Installation is finished! #"
-echo "#############################"
+echo "#####################################"
+echo "#     Installation is finished!     #"
+echo "# Don't forget to set root password #"
+echo "#    and unmount all filesystems:   #"
+echo "#    umount -l /dev{/shm,/pts,};    #"
+echo "#   exit; umount -R /mnt/gentoo     #"
+echo "#####################################"
 
