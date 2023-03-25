@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sed -i "/^consolefont=/ s/=.*/=\"ter-u12n\"/" /etc/conf.d/consolefont
-
