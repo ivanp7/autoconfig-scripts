@@ -1,4 +1,4 @@
 #!/bin/sh
 
-find /usr/local/share/keymap-patches -type f -exec loadkeys -q "{}" \;
+find /etc/keymaps.d -type f,l -exec loadkeys -q "{}" \;
 

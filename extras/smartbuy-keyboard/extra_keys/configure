@@ -2,6 +2,6 @@
 
 cd -- "$(dirname -- "$0")"
 
-{ dumpkeys | head -1; cat "files/map"; } | tee -a /usr/local/share/kbd/keymaps/smartbuy-keyboard.map || exit 1
-chmod 644 /usr/local/share/kbd/keymaps/smartbuy-keyboard.map || exit 1
+install -Dm 644 "files/map" /etc/keymaps.d/smartbuy-kbd.map
+install -Dm 644 "files/xmodmap" /etc/X11/xinit/xmodmap.d/smartbuy-kbd.map
 
