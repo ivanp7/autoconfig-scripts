@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+install -Dm 644 "files/use" /etc/portage/package.use/wpa_supplicant &&
+emerge net-wireless/wpa_supplicant
+
