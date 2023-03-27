@@ -97,6 +97,9 @@ cp -v /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 ____________
 emerge-webrsync
 ____________
+chown -R portage:portage /var/db/repos/gentoo
+
+____________
 emerge --verbose --update --deep --newuse @world
 
 ____________
