@@ -5,10 +5,12 @@ REPO_NAME="mine-gentoo"
 
 cd /var/db/repos
 git clone "https://github.com/ivanp7/${REPO_NAME}.git"
-chown -R portage:portage "/var/db/repos/${REPO_NAME}"
+cat -- "${REPO_NAME}/categories" >> /etc/portage/categories
 
 cat << _EOF_ > "/etc/portage/repos.conf/${REPO_NAME}.conf"
 [$REPO_NAME]
 location = /var/db/repos/${REPO_NAME}
+sync-type = git
+sync-uri = https://github.com/ivanp7/${REPO_NAME}.git
 _EOF_
 
