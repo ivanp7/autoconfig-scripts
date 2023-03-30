@@ -1,0 +1,7 @@
+#!/bin/sh
+
+INSTALL_PACKAGES="$(curl -s "https://gist.githubusercontent.com/ivanp7/d717242bb859ba5604e88109bd9c33e8/raw" |
+    sed 's/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d' | tr '\n' ' ')"
+
+emerge $INSTALL_PACKAGES
+
