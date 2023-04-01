@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e # quit on fail
+set -eu # quit on fail or undefined variable
 
 cd -- "$(dirname -- "$0")" # go to this script directory
 THIS_SCRIPT="$(basename -- "$0")"
@@ -18,17 +18,25 @@ then
     exit 2
 fi
 
+SED_DEL_COMMENTS='s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d'
+
 ###############################################################################
 
 check_dir ()
-{ [ "$PWD" = "/mnt/gentoo" ]; }
+{
+    [ "$PWD" = "/mnt/gentoo" ]
+}
+
 change_root () # change root and continue
-{ [ "$PWD" = "/" ] || { check_dir && PATH="/bin:/usr/bin" LDPATH="/lib:/usr/lib" exec chroot ./ "./$THIS_SCRIPT"; }; }
+{
+    if [ "$PWD" != "/" ]
+    then
+        check_dir
+        PATH="/bin:/usr/bin" LDPATH="/lib:/lib64:/usr/lib:/usr/lib64" exec chroot ./ "./$THIS_SCRIPT"
+    fi
+}
 
 check_dir ### _MODECMD_
-
-chroot_mode () # switch the script into the chroot mode
-{ sed -i 's/^check_dir ### _MODECMD_$/change_root ### _MODECMD_/' "$THIS_SCRIPT"; change_root; }
 
 REMOVE_FROM=$((4+$LINENO)); ____________ () # remove lines from $REMOVE_FROM up to checkpoint
 { sed -i "$REMOVE_FROM,/^\s*____________\s*\$/d" "$THIS_SCRIPT"; }
@@ -59,7 +67,9 @@ ____________
 mount --make-slave ./run
 
 ____________
-chroot_mode
+# switch the script into the chroot mode
+sed -i 's/^check_dir ### _MODECMD_$/change_root ### _MODECMD_/' "$THIS_SCRIPT"
+change_root
 
 ###############################################################################
 
@@ -68,6 +78,8 @@ sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' /etc/portage/make.conf
 
 ____________
 : ${MAKE_CONF_GENTOO_MIRRORS:?Error: no Gentoo mirrors specified}
+
+MAKE_CONF_USE="$(echo "$MAKE_CONF_USE" | sed "$SED_DEL_COMMENTS")"
 
 cat << _EOF_ >> /etc/portage/make.conf
 
@@ -135,20 +147,20 @@ ____________
 echo "$ETC_HOSTS" >> /etc/hosts
 
 ____________
-if [ "$CONSOLE_KEYMAP" ]
+if [ "${CONSOLE_KEYMAP:-}" ]
 then
     echo "$CONSOLE_KEYMAP" | grep -q '[a-zA-Z_-]\+'
     sed -i "/^keymap=/ s/=.*/=\"$CONSOLE_KEYMAP\"/" /etc/conf.d/keymaps
 fi
 
 ____________
-if [ "$CONSOLE_FONT" ]
+if [ "${CONSOLE_FONT:-}" ]
 then
     echo "$CONSOLE_FONT" | grep -q '[a-zA-Z_-]\+'
     sed -i "/^consolefont=/ s/=.*/=\"$CONSOLE_FONT\"/" /etc/conf.d/consolefont
 fi
 ____________
-[ -z "$CONSOLE_FONT" ] || rc-update add consolefont boot
+[ -z "${CONSOLE_FONT:-}" ] || rc-update add consolefont boot
 
 ###############################################################################
 
@@ -158,7 +170,7 @@ emerge sys-apps/pciutils
 ____________
 emerge sys-kernel/linux-firmware
 ____________
-[ "$INSTALL_INTEL_MICROCODE" != 'true' ] || emerge sys-firmware/intel-microcode
+[ -z "${INSTALL_FIRMWARE:-}" ] || emerge $INSTALL_FIRMWARE
 
 ____________
 emerge sys-kernel/gentoo-sources
@@ -166,7 +178,7 @@ ____________
 eselect kernel set 1
 
 ____________
-if [ "$KERNEL_CONFIG_FILE" ]
+if [ "${KERNEL_CONFIG_FILE:-}" ]
 then
     cp -v -- "$KERNEL_CONFIG_FILE" /usr/src/linux/.config
 else
@@ -183,14 +195,41 @@ cd /
 ###############################################################################
 
 ____________
-echo "$PACKAGE_ACCEPT_KEYWORDS" > "/etc/portage/package.accept_keywords/$LOCAL_PACKAGE_CONFIG_FILENAME"
-____________
-echo "$PACKAGE_USE" > "/etc/portage/package.use/$LOCAL_PACKAGE_CONFIG_FILENAME"
+if [ "${CUSTOM_REPO_NAME:-}" ]
+then
+    cd /var/db/repos
+    git clone "$CUSTOM_REPO_URL" "$CUSTOM_REPO_NAME"
+    cd /
+fi
 
 ____________
-emerge $INSTALL_PACKAGES
+if [ "${CUSTOM_REPO_NAME:-}" ]
+then
+    cat "/var/db/repos/$CUSTOM_REPO_NAME/categories" >> /etc/portage/categories
+fi
 
 ____________
+if [ "${CUSTOM_REPO_NAME:-}" ]
+then
+    cat << _EOF_ > "/etc/portage/repos.conf/${CUSTOM_REPO_NAME}.conf"
+[$CUSTOM_REPO_NAME]
+location = /var/db/repos/$CUSTOM_REPO_NAME
+sync-type = git
+sync-uri = $CUSTOM_REPO_URL
+_EOF_
+fi
+
+###############################################################################
+
+____________
+echo "$PACKAGE_USE"             > "/etc/portage/package.use/00install"
+echo "$PACKAGE_ACCEPT_KEYWORDS" > "/etc/portage/package.accept_keywords/00install"
+
+INSTALL_PACKAGES="$(echo "$INSTALL_PACKAGES" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
+emerge --keep-going --newuse --noreplace $INSTALL_PACKAGES
+
+____________
+ADD_SERVICES="$(echo "$ADD_SERVICES" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
 for srv in $ADD_SERVICES
 do
     rc-update add $srv default
