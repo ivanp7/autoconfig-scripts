@@ -3,19 +3,11 @@ Gentoo Linux auto configuration scripts
 
 # Directories
 
-1. `installation`: helper files and scripts to be used during the installation process
+1. `installation`: installer script and its configuration
 
-2. `configuration`: scripts for configuration of an installed system
+2. `configuration`: scripts for functional configuration of an installed system
 
-3. `deploy`: scripts for deployment of packaged applications and dot-files
+3. `customization`: scripts for appearance configuration of an installed system
 
-4. `extras`: additional information and resources
-
-# Rules of application of scripts
-
-1. all scripts are to be run as root
-
-2. `check` scripts determine whether configuration is needed, which is true in case of non-zero exit code
-
-3. `configure` scripts transfer system into specified state
+4. `extras`: additional information, resources, and scripts
 
