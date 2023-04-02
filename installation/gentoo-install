@@ -230,9 +230,12 @@ done
 ____________
 echo "#####################################"
 echo "#     Installation is finished!     #"
+echo "#    Now apply necessary scripts    #"
+echo "#      from configuration/ and      #"
+echo "#    customization/ directories.    #"
 echo "# Don't forget to set root password #"
 echo "#    and unmount all filesystems:   #"
 echo "#    umount -l /dev{/shm,/pts,};    #"
-echo "#   exit; umount -R /mnt/gentoo     #"
+echo "#    exit; umount -R /mnt/gentoo    #"
 echo "#####################################"
 
