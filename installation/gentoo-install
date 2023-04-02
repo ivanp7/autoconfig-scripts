@@ -195,29 +195,21 @@ cd /
 ###############################################################################
 
 ____________
-if [ "${CUSTOM_REPO_NAME:-}" ]
-then
-    cd /var/db/repos
-    git clone "$CUSTOM_REPO_URL" "$CUSTOM_REPO_NAME"
-    cd /
-fi
+emerge app-eselect/eselect-repository
 
 ____________
-if [ "${CUSTOM_REPO_NAME:-}" ]
-then
-    cat "/var/db/repos/$CUSTOM_REPO_NAME/categories" >> /etc/portage/categories
-fi
+echo "$CUSTOM_REPOSITORIES" | sed "$SED_DEL_COMMENTS" | while IFS="
+" read -r repo
+do
+    eselect repository add $repo
+done
 
 ____________
-if [ "${CUSTOM_REPO_NAME:-}" ]
-then
-    cat << _EOF_ > "/etc/portage/repos.conf/${CUSTOM_REPO_NAME}.conf"
-[$CUSTOM_REPO_NAME]
-location = /var/db/repos/$CUSTOM_REPO_NAME
-sync-type = git
-sync-uri = $CUSTOM_REPO_URL
-_EOF_
-fi
+echo "$CUSTOM_REPOSITORIES" | sed "$SED_DEL_COMMENTS" | while IFS="
+" read -r repo
+do
+    emerge --sync ${repo%% *}
+done
 
 ###############################################################################
 
