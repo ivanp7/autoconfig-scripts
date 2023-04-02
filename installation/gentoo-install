@@ -200,14 +200,24 @@ ____________
 emerge app-eselect/eselect-repository
 
 ____________
-echo "$CUSTOM_REPOSITORIES" | sed "$SED_DEL_COMMENTS" | while IFS="
+echo "$CUSTOM_REPOSITORIES_ENABLE" | sed "$SED_DEL_COMMENTS" | while IFS="
+" read -r repo
+do
+    eselect repository enable $repo
+done
+
+____________
+echo "$CUSTOM_REPOSITORIES_ADD" | sed "$SED_DEL_COMMENTS" | while IFS="
 " read -r repo
 do
     eselect repository add $repo
 done
 
 ____________
-echo "$CUSTOM_REPOSITORIES" | sed "$SED_DEL_COMMENTS" | while IFS="
+echo "
+$CUSTOM_REPOSITORIES_ENABLE
+$CUSTOM_REPOSITORIES_ADD
+" | sed "$SED_DEL_COMMENTS" | while IFS="
 " read -r repo
 do
     emerge --sync ${repo%% *}
