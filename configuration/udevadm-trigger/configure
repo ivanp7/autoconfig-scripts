@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+cat << '_EOF_' > /etc/local.d/udevadm-trigger.start
+#!/bin/sh
+
+udevadm trigger
+_EOF_
+
+chmod +x /etc/local.d/udevadm-trigger.start
+
