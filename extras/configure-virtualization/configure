@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+rc-update add qemu-binfmt default
+
+LIBVIRTD_CONF="/etc/libvirt/libvirtd.conf"
+sed -i 's/^#auth_unix_ro\s*=.*/auth_unix_ro = "none"/' "$LIBVIRTD_CONF"
+sed -i 's/^#auth_unix_rw\s*=.*/auth_unix_rw = "none"/' "$LIBVIRTD_CONF"
+sed -i 's/^#unix_sock_group\s*=.*/unix_sock_group = "libvirt"/' "$LIBVIRTD_CONF"
+sed -i 's/^#unix_sock_ro_perms\s*=.*/unix_sock_ro_perms = "0777"/' "$LIBVIRTD_CONF"
+sed -i 's/^#unix_sock_rw_perms\s*=.*/unix_sock_rw_perms = "0770"/' "$LIBVIRTD_CONF"
+
+rc-update add libvirtd default
+rc-update add libvirt-guests default
+
