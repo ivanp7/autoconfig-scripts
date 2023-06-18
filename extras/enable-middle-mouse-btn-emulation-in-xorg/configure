@@ -2,5 +2,5 @@
 
 cd -- "$(dirname -- "$0")"
 
-install -Dm 644 "files/conf" /etc/X11/xorg.conf.d/10-evdev.conf
+install -Dm 644 "files/conf" "/etc/X11/xorg.conf.d/10-evdev.conf"
 

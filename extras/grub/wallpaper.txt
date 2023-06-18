@@ -1,0 +1,4 @@
+1. copy the wallpaper image to "/boot/grub/wallpaper.$EXT"
+2. uncomment and set GRUB_BACKGROUND in "/etc/default/grub"
+3. grub-mkconfig -o /boot/grub/grub.cfg
+

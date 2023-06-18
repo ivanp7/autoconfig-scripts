@@ -1,0 +1,8 @@
+wheel (su)
+
+audio
+video
+
+kvm (virtual machines)
+libvirt (virtual machines)
+
