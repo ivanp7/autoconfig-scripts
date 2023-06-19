@@ -1,0 +1,5 @@
+#!/bin/sh
+
+emerge sec-keys/openpgp-keys-gentoo-release
+gpg --import /usr/share/openpgp-keys/gentoo-release.asc
+
