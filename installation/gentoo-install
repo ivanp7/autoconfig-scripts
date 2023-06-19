@@ -32,7 +32,7 @@ change_root () # change root and continue
     if [ "$PWD" != "/" ]
     then
         check_dir
-        PATH="/bin:/usr/bin" LDPATH="/lib:/lib64:/usr/lib:/usr/lib64" exec chroot ./ "./$THIS_SCRIPT"
+        PATH="/bin:/sbin:/usr/bin:/usr/sbin" LDPATH="/lib:/lib64:/usr/lib:/usr/lib64" exec chroot ./ "./$THIS_SCRIPT"
     fi
 }
 
@@ -185,9 +185,10 @@ then
     cp -v -- "$KERNEL_CONFIG_FILE" /usr/src/linux/.config
 elif [ "${KERNEL_DEFCONFIG_FILE:-}" ]
 then
-    export KCONFIG_CONFIG="/usr/src/linux/.config"
-    [ ! -f "$KCONFIG_CONFIG" ] || rm -- "$KCONFIG_CONFIG"
-    /usr/src/linux/scripts/kconfig/merge_config.sh "$KERNEL_DEFCONFIG_FILE"
+    cd /usr/src/linux
+    [ ! -f ".config" ] || rm -- ".config"
+    ./scripts/kconfig/merge_config.sh "$KERNEL_DEFCONFIG_FILE"
+    cd /
 else
     cd /usr/src/linux
     make menuconfig
@@ -203,6 +204,8 @@ cd /
 
 ____________
 emerge app-eselect/eselect-repository
+____________
+emerge dev-vcs/git
 
 ____________
 echo "$CUSTOM_REPOSITORIES_ENABLE" | sed "$SED_DEL_COMMENTS" | while IFS="
