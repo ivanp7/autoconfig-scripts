@@ -183,6 +183,11 @@ ____________
 if [ "${KERNEL_CONFIG_FILE:-}" ]
 then
     cp -v -- "$KERNEL_CONFIG_FILE" /usr/src/linux/.config
+elif [ "${KERNEL_DEFCONFIG_FILE:-}" ]
+then
+    export KCONFIG_CONFIG="/usr/src/linux/.config"
+    [ ! -f "$KCONFIG_CONFIG" ] || rm -- "$KCONFIG_CONFIG"
+    /usr/src/linux/scripts/kconfig/merge_config.sh "$KERNEL_DEFCONFIG_FILE"
 else
     cd /usr/src/linux
     make menuconfig
