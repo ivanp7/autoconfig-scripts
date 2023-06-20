@@ -2,5 +2,5 @@
 
 cd -- "$(dirname -- "$0")"
 
-install -Dm 644 "files/map" /usr/local/share/keymap-patches/alt-keys.map
+install -Dm 644 "files/map" /etc/keymaps.d/alt-keys.map
 

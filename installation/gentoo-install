@@ -239,7 +239,7 @@ echo "${PACKAGE_ACCEPT_KEYWORDS:-}" > "/etc/portage/package.accept_keywords/00in
 echo "${PACKAGE_LICENSE:-}"         > "/etc/portage/package.license"
 
 INSTALL_PACKAGES="$(echo "$INSTALL_PACKAGES" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
-emerge --keep-going --newuse --noreplace $INSTALL_PACKAGES
+emerge --keep-going --newuse --deep --with-bdeps=y --noreplace $INSTALL_PACKAGES
 
 ____________
 ADD_SERVICES_BOOT="$(echo "${ADD_SERVICES_BOOT:-}" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"

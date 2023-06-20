@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
 
-sed -i 's/^#TLP_ENABLE=/TLP_ENABLE=1/' /etc/tlp.conf
+sed -i 's/^#TLP_ENABLE=.*/TLP_ENABLE=1/' /etc/tlp.conf
 
