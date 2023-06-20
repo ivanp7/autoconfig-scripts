@@ -242,8 +242,15 @@ INSTALL_PACKAGES="$(echo "$INSTALL_PACKAGES" | sed "$SED_DEL_COMMENTS" | tr '\n'
 emerge --keep-going --newuse --noreplace $INSTALL_PACKAGES
 
 ____________
-ADD_SERVICES="$(echo "${ADD_SERVICES:-}" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
-for srv in $ADD_SERVICES
+ADD_SERVICES_BOOT="$(echo "${ADD_SERVICES_BOOT:-}" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
+for srv in $ADD_SERVICES_BOOT
+do
+    rc-update add $srv boot
+done
+
+____________
+ADD_SERVICES_DEFAULT="$(echo "${ADD_SERVICES_DEFAULT:-}" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
+for srv in $ADD_SERVICES_DEFAULT
 do
     rc-update add $srv default
 done
