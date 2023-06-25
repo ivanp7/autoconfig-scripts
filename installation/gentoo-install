@@ -74,7 +74,7 @@ change_root
 ###############################################################################
 
 ____________
-sed -i '/^COMMON_FLAGS="/ s/"/"-march=native /' /etc/portage/make.conf
+sed -i "/^COMMON_FLAGS=/d; /^CFLAGS=/d; /^CXXFLAGS=/d; /^FCFLAGS=/d; /^FFLAGS=/d" /etc/portage/make.conf
 
 ____________
 : ${MAKE_CONF_GENTOO_MIRRORS:?Error: no Gentoo mirrors specified}
@@ -82,6 +82,12 @@ ____________
 MAKE_CONF_USE="$(echo "$MAKE_CONF_USE" | sed "$SED_DEL_COMMENTS")"
 
 cat << _EOF_ >> /etc/portage/make.conf
+
+COMMON_FLAGS="$MAKE_CONF_COMMON_FLAGS"
+CFLAGS="$MAKE_CONF_CFLAGS"
+CXXFLAGS="$MAKE_CONF_CXXFLAGS"
+FCFLAGS="$MAKE_CONF_FCFLAGS"
+FFLAGS="$MAKE_CONF_FFLAGS"
 
 MAKEOPTS="$MAKE_CONF_MAKEOPTS"
 EMERGE_DEFAULT_OPTS="$MAKE_CONF_EMERGE_DEFAULT_OPTS"
