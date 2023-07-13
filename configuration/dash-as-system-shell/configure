@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd /bin
-ln -sf dash sh
-
