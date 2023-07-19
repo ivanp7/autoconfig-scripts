@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+sed -i "s/^#\?AllowSuspend\s\+.*/AllowSuspend=yes/" /etc/elogind/logind.conf
+sed -i "s/^#\?SuspendMode\s\+.*/SuspendMode=deep/" /etc/elogind/logind.conf
+
