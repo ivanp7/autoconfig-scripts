@@ -1,0 +1,8 @@
+DCP-L2540DNR: from brother-overlay repository
+    net-print/brother-genml1-bin -- printing
+    media-gfx/brother-scan4-bin  -- scanning
+
+services:
+    $ rc-update add cupsd default
+    $ rc-update add saned default
+
