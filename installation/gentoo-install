@@ -111,6 +111,11 @@ GENTOO_MIRRORS="$MAKE_CONF_GENTOO_MIRRORS"
 _EOF_
 
 ____________
+mkdir -p /etc/portage/env
+echo "$PORTAGE_ENV_DEBUGSYMS" > /etc/portage/env/debugsyms
+echo "$PORTAGE_ENV_INSTALLSOURCES" > /etc/portage/env/installsources
+
+____________
 mkdir -p /etc/portage/repos.conf
 cp -v /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 
@@ -240,10 +245,17 @@ done
 ###############################################################################
 
 ____________
+mkdir -p /etc/portage/package.env
+mkdir -p /etc/portage/package.use
+mkdir -p /etc/portage/package.accept_keywords
+
+echo "${PACKAGE_ENV:-}"             > "/etc/portage/package.env/00install"
 echo "${PACKAGE_USE:-}"             > "/etc/portage/package.use/00install"
 echo "${PACKAGE_ACCEPT_KEYWORDS:-}" > "/etc/portage/package.accept_keywords/00install"
+
 echo "${PACKAGE_LICENSE:-}"         > "/etc/portage/package.license"
 
+____________
 INSTALL_PACKAGES="$(echo "$INSTALL_PACKAGES" | sed "$SED_DEL_COMMENTS" | tr '\n' ' ')"
 emerge --keep-going --newuse --deep --with-bdeps=y --noreplace $INSTALL_PACKAGES
 
