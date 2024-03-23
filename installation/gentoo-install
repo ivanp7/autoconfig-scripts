@@ -191,6 +191,9 @@ ____________
 eselect kernel set 1
 
 ____________
+emerge sys-kernel/installkernel
+
+____________
 if [ "${KERNEL_CONFIG_FILE:-}" ]
 then
     cp -v -- "$KERNEL_CONFIG_FILE" /usr/src/linux/.config
