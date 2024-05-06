@@ -1,3 +1,10 @@
+Requirements
+------------
+
+A fresh system prepared for install. All steps from the Gentoo Handbook
+prior to [Installing the Gentoo installation files/Installing a stage file](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Installing_a_stage_file)
+must have been done.
+
 Instruction
 -----------
 
