@@ -15,6 +15,9 @@ to the root partition of the newly installed system along with the stage3 archiv
 
 3. Run `gentoo-install` as root.
 
-4. If `gentoo-install` fails, solve the problem and re-run the script. It is safe to do so
-because the script modifies itself to remove successfully completed steps.
+4. If `gentoo-install` fails, solve the problem and re-run the script.
+It is safe to do so because the script is idempotent:
+it modifies itself to remove successfully completed steps
+(this guarantee is only valid while everything is mounted,
+because the mounting step is done early in the script and is getting removed from it).
 
