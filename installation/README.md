@@ -1,6 +1,13 @@
 Instruction
 -----------
 
+0. Download `gentoo-install` and `gentoo-install.conf`:
+
+```sh
+wget 'https://raw.githubusercontent.com/ivanp7/autoconfig-scripts/gentoo/installation/gentoo-install'
+wget 'https://gist.githubusercontent.com/ivanp7/32739a5cebd2a0f6b1bfbdcd04fb775e/raw/gentoo-install.conf'
+```
+
 1. Copy `gentoo-install`, `gentoo-install.conf` (and, optionally, kernel configuration: `.config` or `defconfig`)
 to the root partition of the newly installed system along with the stage3 archive.
 
