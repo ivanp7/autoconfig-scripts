@@ -1,7 +1,7 @@
 Instruction
 -----------
 
-0. Download `gentoo-install` and `gentoo-install.conf`:
+0. Download `gentoo-install` and [`gentoo-install.conf`](https://gist.github.com/ivanp7/32739a5cebd2a0f6b1bfbdcd04fb775e):
 
 ```sh
 wget 'https://raw.githubusercontent.com/ivanp7/autoconfig-scripts/gentoo/installation/gentoo-install'
