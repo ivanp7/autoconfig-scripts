@@ -18,13 +18,26 @@ then
     exit 2
 fi
 
-SED_DEL_COMMENTS='s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d'
-
 ###############################################################################
+
+SED_DEL_COMMENTS='s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d'
 
 check_dir ()
 {
     [ "$PWD" = "/mnt/gentoo" ]
+}
+
+mount_root_filesystems ()
+{
+    check_dir
+
+    mount --onlyonce --types proc /proc ./proc
+    mount --onlyonce --rbind /sys ./sys
+    mount --onlyonce --make-rslave ./sys
+    mount --onlyonce --rbind /dev ./dev
+    mount --onlyonce --make-rslave ./dev
+    mount --onlyonce --bind /run ./run
+    mount --onlyonce --make-slave ./run
 }
 
 change_root () # change root and continue
@@ -36,7 +49,12 @@ change_root () # change root and continue
     fi
 }
 
-check_dir ### _MODECMD_
+###############################################################################
+
+mount_root_filesystems
+# change_root #
+
+###############################################################################
 
 REMOVE_FROM=$((4+$LINENO)); ____________ () # remove lines from $REMOVE_FROM up to checkpoint
 { sed -i "$REMOVE_FROM,/^\s*____________\s*\$/d" "$THIS_SCRIPT"; }
@@ -52,23 +70,8 @@ ____________
 cp -Lv /etc/resolv.conf ./etc/
 
 ____________
-mount --types proc /proc ./proc
-____________
-mount --rbind /sys ./sys
-____________
-mount --make-rslave ./sys
-____________
-mount --rbind /dev ./dev
-____________
-mount --make-rslave ./dev
-____________
-mount --bind /run ./run
-____________
-mount --make-slave ./run
-
-____________
 # switch the script into the chroot mode
-sed -i 's/^check_dir ### _MODECMD_$/change_root ### _MODECMD_/' "$THIS_SCRIPT"
+sed -i 's/^# change_root #$/change_root/' "$THIS_SCRIPT"
 change_root
 
 ###############################################################################
