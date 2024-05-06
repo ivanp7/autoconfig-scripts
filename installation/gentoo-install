@@ -209,6 +209,8 @@ else
     cd /
 fi
 
+[ -f "/usr/src/linux/.config" ] # check whether the configuration was created
+
 ____________
 cd /usr/src/linux
 make -j$(nproc) && make modules_install && make install
