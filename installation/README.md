@@ -9,7 +9,7 @@ wget 'https://gist.githubusercontent.com/ivanp7/32739a5cebd2a0f6b1bfbdcd04fb775e
 ```
 
 1. Copy `gentoo-install`, `gentoo-install.conf` (and, optionally, kernel configuration: `.config` or `defconfig`)
-to the root partition of the newly installed system along with the stage3 archive.
+to the root partition of the newly installed system along with the [stage3 archive](https://www.gentoo.org/downloads/mirrors/).
 
 2. Edit `gentoo-install.conf` in compliance with the system requirements.
 
