@@ -20,39 +20,42 @@ fi
 
 ###############################################################################
 
+MNT_GENTOO='/mnt/gentoo'
+
 SED_DEL_COMMENTS='s/#.*//; s/\s\+/ /g; s/^\s\+//; s/\s\+$//; /^$/d'
 
-check_dir ()
+mount_filesystems ()
 {
-    [ "$PWD" = "/mnt/gentoo" ]
-}
+    if [ "${1:-}" = "chrooted" ]
+    then
+        [ "$PWD" = "/" ]
 
-mount_root_filesystems ()
-{
-    check_dir
+        mountpoint /proc
+        mountpoint /sys
+        mountpoint /dev
+        mountpoint /run
+    else
+        [ "$PWD" = "${MNT_GENTOO}" ]
 
-    mount --onlyonce --types proc /proc ./proc
-    mount --onlyonce --rbind /sys ./sys
-    mount --onlyonce --make-rslave ./sys
-    mount --onlyonce --rbind /dev ./dev
-    mount --onlyonce --make-rslave ./dev
-    mount --onlyonce --bind /run ./run
-    mount --onlyonce --make-slave ./run
+        mountpoint -q ./proc || { mount --types proc /proc ./proc; }
+        mountpoint -q ./sys  || { mount --rbind /sys ./sys && mount --make-rslave ./sys; }
+        mountpoint -q ./dev  || { mount --rbind /dev ./dev && mount --make-rslave ./dev; }
+        mountpoint -q ./run  || { mount --bind /run  ./run && mount --make-slave  ./run; }
+    fi
 }
 
 change_root () # change root and continue
 {
-    if [ "$PWD" != "/" ]
+    if [ "${1:-}" != "chrooted" ]
     then
-        check_dir
-        PATH="/bin:/sbin:/usr/bin:/usr/sbin" LDPATH="/lib:/lib64:/usr/lib:/usr/lib64" exec chroot ./ "./$THIS_SCRIPT"
+        PATH="/bin:/sbin:/usr/bin:/usr/sbin" LDPATH="/lib:/lib64:/usr/lib:/usr/lib64" exec chroot ./ "./$THIS_SCRIPT" chrooted
     fi
 }
 
 ###############################################################################
 
-mount_root_filesystems
-# change_root #
+mount_filesystems ${1:-}
+# # # change_root ${1:-}
 
 ###############################################################################
 
@@ -71,7 +74,7 @@ cp -Lv /etc/resolv.conf ./etc/
 
 ____________
 # switch the script into the chroot mode
-sed -i 's/^# change_root #$/change_root/' "$THIS_SCRIPT"
+sed -i 's/^# # # change_root /change_root /' "$THIS_SCRIPT"
 change_root
 
 ###############################################################################
