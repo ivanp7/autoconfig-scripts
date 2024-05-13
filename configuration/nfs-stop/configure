@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd -- "$(dirname -- "$0")"
+
+install -m 755 -t /etc/local.d/ "files/nfs.stop"
+

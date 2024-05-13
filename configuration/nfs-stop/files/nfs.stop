@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/bin/umount -a -f -t nfs,nfs4
+
