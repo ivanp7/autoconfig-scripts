@@ -265,10 +265,14 @@ ____________
 mkdir -p /etc/portage/package.env
 mkdir -p /etc/portage/package.use
 mkdir -p /etc/portage/package.accept_keywords
+mkdir -p /etc/portage/package.mask
+mkdir -p /etc/portage/package.unmask
 
 echo "${PACKAGE_ENV:-}"             > "/etc/portage/package.env/00install"
 echo "${PACKAGE_USE:-}"             > "/etc/portage/package.use/00install"
 echo "${PACKAGE_ACCEPT_KEYWORDS:-}" > "/etc/portage/package.accept_keywords/00install"
+echo "${PACKAGE_MASK:-}"            > "/etc/portage/package.mask/00install"
+echo "${PACKAGE_UNMASK:-}"          > "/etc/portage/package.unmask/00install"
 
 echo "${PACKAGE_LICENSE:-}"         > "/etc/portage/package.license"
 
