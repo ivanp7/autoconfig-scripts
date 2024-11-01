@@ -1,8 +1,21 @@
-DCP-L2540DNR: from brother-overlay repository
-    net-print/brother-genml1-bin -- printing
-    media-gfx/brother-scan4-bin  -- scanning
+CUPS interface: localhost:631/
+
+packages for DCP-L2540DN:
+    net-print/brother-dcpl2540dn-bin -- driver for printing (mine-gentoo)
+    media-gfx/brother-dcpl2540dn-bin -- driver for scanning (brother-overlay)
+
+    net-print/cups-meta -- printing dependency
+
+groups:
+    lp -- printing
+    lpadmin -- editing printers
+    scanner -- scanning
 
 services:
-    $ rc-update add cupsd default
-    $ rc-update add saned default
+    rc-update add cupsd default -- printing
+    rc-update add saned default -- scanning
+
+ * Configure scanner using one of the following commands:
+ * - using hostname:   /usr/local/Brother/sane/brsaneconfig4 -a name=DCP-L2540DN model=DCP-L2540DN nodename=<hostname>
+ * - using IP address: /usr/local/Brother/sane/brsaneconfig4 -a name=DCP-L2540DN model=DCP-L2540DN ip=<IP address>
 
