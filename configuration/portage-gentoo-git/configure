@@ -1,0 +1,15 @@
+#!/bin/sh
+set -f
+
+cd -- "$(dirname -- "$0")"
+./check && exit
+
+eselect repository disable gentoo
+eselect repository enable gentoo
+
+./check
+
+mv /var/db/repos/gentoo /var/db/repos/.gentoo.old
+emaint sync -r gentoo
+rm -r /var/db/repos/.gentoo.old
+

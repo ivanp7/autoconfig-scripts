@@ -1,0 +1,4 @@
+#!/bin/sh
+
+portageq repos_config / | grep -Fx "sync-uri = https://github.com/gentoo-mirror/gentoo.git"
+
